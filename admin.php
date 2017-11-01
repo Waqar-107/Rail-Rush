@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/login_cs.css" rel="stylesheet">
+    <link href="css/admin.css" rel="stylesheet">
 </head>
 
 
@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <form action="">
                         <div class="form-group">
-                            <input type="email" name="" class="form-control" placeholder="email">
+                            <input type="text" name="" class="form-control" placeholder="user_id">
                         </div>
 
                         <div class="form-group" style="margin-top: 10px">
@@ -36,9 +36,7 @@
                             <input type="submit" name="" class="btn btn-success btn-lg btn-block" value="login">
                         </div>
 
-                        <!--forget password and sign-up-->
-                        <a class="su" href="sign_up.html">sign up</a>
-
+                        <!--forget password-->
                         <a class="fp" href="#" id="forgot_password">forgot password</a>
                         <script>
                             document.getElementById("forgot_password").onclick=function () {
