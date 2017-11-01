@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <form action="">
                         <div class="form-group">
-                            <input type="email" name="" class="form-control" placeholder="email">
+                            <input type="text" name="" class="form-control" placeholder="user_id">
                         </div>
 
                         <div class="form-group" style="margin-top: 10px">
