@@ -31,18 +31,7 @@ a.fp{
     vertical-align: bottom;
 }
 
-a.su{
-    font-size: 15px;
-    float: left;
-    color: white;
-    vertical-align: bottom;
-}
-
 a.fp:hover{
-    text-decoration: underline;
-}
-
-a.su:hover{
     text-decoration: underline;
 }
 
