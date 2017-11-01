@@ -1,0 +1,47 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url("../images/NorthBenningtonTrainStation.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+}
+
+.panel{
+    border: 0px;
+    background: rgba(0,0,0,0.5);
+    color: #ffff;
+    text-align: center;
+    padding-top: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 30px;
+    margin-top: 130px;
+}
+
+.panel:hover{
+    background: rgba(0,0,0,0.7);
+}
+
+a.fp{
+    font-size: 15px;
+    float: right;
+    color: white;
+    vertical-align: bottom;
+}
+
+a.su{
+    font-size: 15px;
+    float: left;
+    color: white;
+    vertical-align: bottom;
+}
+
+a.fp:hover{
+    text-decoration: underline;
+}
+
+a.su:hover{
+    text-decoration: underline;
+}
