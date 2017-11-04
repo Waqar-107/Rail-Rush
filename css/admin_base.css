@@ -1,0 +1,45 @@
+body{
+    height: 100%;
+    background-color: whitesmoke;
+}
+
+.parallax {
+    background-image: url("../images/b3.jpg");
+    min-height: 350px;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card {
+    width: 250px;
+    height: 180px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card:hover {
+    box-shadow: 10px 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    height: 150px;
+    background-color: rgba(2, 169, 224, 1);
+}
+
+/*fi is the class for title of the cards*/
+.fi {
+    font-size: 15px;
+    font-family: "Comic Sans MS";
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.navbar-light {
+    background-color: #2f3436;
+}
