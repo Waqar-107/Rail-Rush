@@ -1,39 +1,37 @@
 <?php
 
-    if(isset($_POST['submit']))
-    {
-        $fname=$_POST['fname'];
-        $lname=$_POST['lname'];
-        $phone=$_POST['phone'];
-        $mail=$_POST['mail'];
-        $pass1=$_POST['password'];
-        $pass2=$_POST['password2'];
+if (isset($_POST['submit'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $phone = $_POST['phone'];
+    $mail = $_POST['mail'];
+    $pass1 = $_POST['password'];
+    $pass2 = $_POST['password2'];
 
-        if(empty($fname) || empty($lname) || empty($phone) || empty($mail) || empty($pass1) || empty($pass2))
-        {
-            echo '<script language="javascript">';
-            echo 'alert("please fill all of the informations!!!")';
-            echo '</script>';
-        }
+    if (empty($fname) || empty($lname) || empty($phone) || empty($mail) || empty($pass1) || empty($pass2)) {
+        echo '<script language="javascript">';
+        echo 'alert("please fill all of the informations!!!")';
+        echo '</script>';
+    } else {
+        if ($pass1 == $pass2) {
 
-        else
-        {
-            if($pass1==$pass2)
-            {
+            $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user id is 007. Use the id to log in and buy tickets\r\n- X-Railways";
+            $msg = wordwrap($msg, 70, "\r\n");
+
+            if (mail($mail, "user id", $msg)) {
                 echo '<script language="javascript">';
                 echo 'alert("registered succesfully, an user id has been sent to your mail")';
                 echo '</script>';
-            }
 
-            else
-            {
-                echo '<script language="javascript">';
-                echo 'alert("password does not match")';
-                echo '</script>';
             }
-
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert("password does not match")';
+            echo '</script>';
         }
+
     }
+}
 
 ?>
 
@@ -78,15 +76,18 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control" placeholder="password">
+                            <input type="password" name="password" id="password" class="form-control"
+                                   placeholder="password">
                         </div>
 
                         <div class="form-group">
-                            <input type="password" name="password2" id="password2" class="form-control" placeholder="confirm password">
+                            <input type="password" name="password2" id="password2" class="form-control"
+                                   placeholder="confirm password">
                         </div>
 
                         <div class="form-group" style="margin-top: 50px">
-                            <input type="submit" name="submit" id="submit" class="btn btn-success btn-lg btn-block" value="login">
+                            <input type="submit" name="submit" id="submit" class="btn btn-success btn-lg btn-block"
+                                   value="create">
                         </div>
 
                     </form>
