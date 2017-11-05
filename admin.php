@@ -32,7 +32,21 @@
 
         else
         {
-            //redirect to home
+            //get password from database
+            $pass_db="107";
+
+            //password matched, redirect to home
+            if($pass==$pass_db)
+            {
+                header('Location: admin_base.php');
+            }
+
+            else
+            {
+                echo '<script language="javascript">';
+                echo 'alert("incorrect password")';
+                echo '</script>';
+            }
         }
     }
 
@@ -78,12 +92,7 @@
                         </div>
 
                         <!--forget password-->
-                        <a class="fp" href="#" id="forgot_password">forgot password</a>
-                        <script>
-                            document.getElementById("forgot_password").onclick=function () {
-                                alert("password has been sent to your mail!")
-                            }
-                        </script>
+                        <a class="fp" href="#" id="forgot_password" name="forgot_password">forgot password</a>
                         <!--forget password and sign-up-->
 
                     </form>
