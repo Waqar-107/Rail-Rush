@@ -1,6 +1,7 @@
 <?php
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']))
+{
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $phone = $_POST['phone'];
@@ -8,14 +9,53 @@ if (isset($_POST['submit'])) {
     $pass1 = $_POST['password'];
     $pass2 = $_POST['password2'];
 
-    if (empty($fname) || empty($lname) || empty($phone) || empty($mail) || empty($pass1) || empty($pass2)) {
+    if (empty($fname) || empty($lname) || empty($phone) || empty($mail) || empty($pass1) || empty($pass2))
+    {
         echo '<script language="javascript">';
         echo 'alert("please fill all of the informations!!!")';
         echo '</script>';
-    } else {
-        if ($pass1 == $pass2) {
+    }
 
-            $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user id is 007. Use the id to log in and buy tickets\r\n- X-Railways";
+    else
+    {
+        if ($pass1 == $pass2)
+        {
+            //---------------------------------------------------------------connect to the database
+            $server = "localhost";
+            $username = "root";
+            $password = "1505107";
+            $dbname = "phpmyadmin";
+
+            //create connection
+            $conn = mysqli_connect($server, $username, $password, $dbname);
+
+            //check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            //---------------------------------------------------------------connect to the database
+
+            //---------------------------------------------------------------get an user id
+            $sql="SELECT MAX(PASSENGER_ID) FROM PASSENGER";
+            $result=$conn->query($sql) or die($conn->error);
+            $row=$result->fetch_assoc();
+
+            //---------------------------------------------------------------update database
+            $newId=$row['MAX(PASSENGER_ID)']+1;
+
+            $sql="INSERT INTO PASSENGER(PASSENGER_ID,FIRST_NAME,LAST_NAME,EMAIL_ID,P_PASSWORD) VALUES('$newId','$fname','$lname','$mail','$pass1')";
+
+            if ($conn->query($sql) === TRUE)
+            {
+                echo "New record created successfully";
+            }
+            else
+            {
+                echo $pass1,"  ",$mail,"  ";
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+
+            $msg = "Dear " . $fname . "\r\nwelcome aboard!! Your user id is ".$newId.". Use the id to log in and buy tickets\r\n- X-Railways";
             $msg = wordwrap($msg, 70, "\r\n");
 
             if (mail($mail, "user id", $msg))
@@ -25,7 +65,10 @@ if (isset($_POST['submit'])) {
                 echo '</script>';
 
             }
-        } else {
+        }
+
+        else
+        {
             echo '<script language="javascript">';
             echo 'alert("password does not match")';
             echo '</script>';

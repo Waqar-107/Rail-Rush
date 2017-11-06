@@ -67,6 +67,8 @@
                 echo '</script>';
             }
         }
+
+        $conn->close();
     }
 
 ?>

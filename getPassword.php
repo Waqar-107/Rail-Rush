@@ -122,7 +122,7 @@ if(isset($_POST['submit']))
         }
     }
 }
-
+$conn->close();
 ?>
 
 

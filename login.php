@@ -63,6 +63,8 @@ if(isset($_POST['submit']))
             echo '</script>';
         }
     }
+
+    $conn->close();
 }
 
 ?>
