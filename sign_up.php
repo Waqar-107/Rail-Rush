@@ -18,7 +18,8 @@ if (isset($_POST['submit'])) {
             $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user id is 007. Use the id to log in and buy tickets\r\n- X-Railways";
             $msg = wordwrap($msg, 70, "\r\n");
 
-            if (mail($mail, "user id", $msg)) {
+            if (mail($mail, "user id", $msg))
+            {
                 echo '<script language="javascript">';
                 echo 'alert("registered succesfully, an user id has been sent to your mail")';
                 echo '</script>';

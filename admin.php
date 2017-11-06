@@ -32,8 +32,27 @@
 
         else
         {
+            //---------------------------------------------------------------connect to the database
+            $server = "localhost";
+            $username = "root";
+            $password = "1505107";
+            $dbname = "phpmyadmin";
+
+            //create connection
+            $conn = mysqli_connect($server, $username, $password, $dbname);
+
+            //check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            //---------------------------------------------------------------connect to the database
+
             //get password from database
-            $pass_db="107";
+            $sql="SELECT a_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
+            $result = $conn->query($sql) or die($conn->error);
+
+            $row=$result->fetch_assoc();
+            $pass_db=$row['a_PASSWORD'];
 
             //password matched, redirect to home
             if($pass==$pass_db)
@@ -92,7 +111,7 @@
                         </div>
 
                         <!--forget password-->
-                        <a class="fp" href="#" id="forgot_password" name="forgot_password">forgot password</a>
+                        <a class="fp" href="getPassword.php" id="forgot_password" name="forgot_password">forgot password</a>
                         <!--forget password and sign-up-->
 
                     </form>

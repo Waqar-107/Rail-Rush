@@ -5,6 +5,21 @@ if(isset($_POST['submit']))
     $id=$_POST['id'];
     $pass=$_POST['pass'];
 
+    //---------------------------------------------------------------connect to the database
+    $server = "localhost";
+    $username = "root";
+    $password = "1505107";
+    $dbname = "phpmyadmin";
+
+    //create connection
+    $conn = mysqli_connect($server, $username, $password, $dbname);
+
+    //check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    //---------------------------------------------------------------connect to the database
+
     if(empty($id) || empty($pass))
     {
         if (empty($id) && empty($pass))
@@ -32,7 +47,21 @@ if(isset($_POST['submit']))
 
     else
     {
-        //redirect to home
+        //---------------------------------------------------------------get password using id
+        $sql="SELECT P_PASSWORD FROM PASSENGER WHERE PASSENGER_ID=$id";
+        $result = $conn->query($sql) or die($conn->error);
+        $row=$result->fetch_assoc();
+        if($pass==$row['P_PASSWORD'])
+        {
+            header('Location: user_home.php');
+        }
+
+        else
+        {
+            echo '<script language="javascript">';
+            echo 'alert("incorrect password!!!")';
+            echo '</script>';
+        }
     }
 }
 
@@ -80,12 +109,7 @@ if(isset($_POST['submit']))
                         <!--forget password and sign-up-->
                         <a class="su" href="sign_up.php">sign up</a>
 
-                        <a class="fp" href="#" id="forgot_password">forgot password</a>
-                        <script>
-                            document.getElementById("forgot_password").onclick=function () {
-                                alert("password has been sent to your mail!")
-                            }
-                        </script>
+                        <a class="fp" href="getPassword.php">forgot password</a>
                         <!--forget password and sign-up-->
 
                     </form>

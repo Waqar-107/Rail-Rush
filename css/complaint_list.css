@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url("../images/b3.jpg");
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+}
+
+.navbar-light {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.table-dark{
+    background-color: rgba(0,0,0,0.5);
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    color: white;
+    margin-top: 10%;
+    overflow-x: hidden;
+}
+
+a{
+    color: white;
+}
+
+a:hover{
+    color: white;
+}
