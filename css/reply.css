@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url("../images/b3.jpg");
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+}
+
+.navbar-light {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.rp {
+    font-family: "Comic Sans MS";
+    color: white;
+    font-size: 20px;
+    font-stretch: semi-expanded;
+}
+
+.btn-success {
+    background-color: #02a9e0;
+}
+
+.btn-success:hover {
+    background-color: dodgerblue;
+}
+
+#main_panel{
+    background-color: rgba(0,0,0,0.5);
+
+    padding: 0;
+    margin: 0;
+
+    top:0;
+    left:0;
+
+    height:100%;
+    width:100%;
+}
