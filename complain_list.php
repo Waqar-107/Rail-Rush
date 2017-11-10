@@ -41,7 +41,8 @@ if ($result->num_rows > 0) {
         else
             $text=substr($text,0,25)."...(more)";
 
-        echo "<><td>".$row["COMPLAIN_ID"]."</td><td>".$row["TRAIN_ID"]."</td><td> ".$row["COMPLAINANT_ID"]."</td><td><a href='reply.php'>".$text."</a></td></tr>";
+        $linkToReply="reply.php?data=".$row['COMPLAIN_ID'];
+        echo "<><td>".$row["COMPLAIN_ID"]."</td><td>".$row["TRAIN_ID"]."</td><td> ".$row["COMPLAINANT_ID"]."</td><td><a href=$linkToReply>".$text."</a></td></tr>";
     }
 
     echo "</tbody>

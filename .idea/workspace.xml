@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b607b2c9-2dda-4f34-bf6d-7a2e592aac20" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/Gruntfile.js" afterPath="$PROJECT_DIR$/bootstrap/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/complain_list.php" afterPath="$PROJECT_DIR$/complain_list.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/reply.js" afterPath="$PROJECT_DIR$/js/reply.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reply.php" afterPath="$PROJECT_DIR$/reply.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,11 +16,41 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="admin_base.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin_base.php">
+      <file leaf-file-name="complain_list.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/complain_list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="146" column="21" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="152" selection-end-column="6" />
+            <state relative-caret-position="425">
+              <caret line="20" column="29" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="20" selection-end-column="29" />
+              <folding>
+                <marker date="1510322926051" expanded="true" signature="572:594" ph="SELECT * FRO... COMPLAIN" />
+                <marker date="1510322926051" expanded="true" signature="713:936" ph="..." />
+                <marker date="1510322926051" expanded="true" signature="725:924" ph="..." />
+                <marker date="1510322926051" expanded="true" signature="734:911" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reply.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reply.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="114" column="66" lean-forward="true" selection-start-line="114" selection-start-column="66" selection-end-line="114" selection-end-column="66" />
+              <folding>
+                <marker date="1510324657119" expanded="true" signature="950:991" ph="SELECT * FRO... COMPLAIN" />
+                <marker date="1510324657119" expanded="true" signature="950:1003" ph="SELECT * FRO... COMPLAIN" />
+                <marker date="1510324657119" expanded="true" signature="2205:2224" ph="..." />
+                <marker date="1510324657119" expanded="true" signature="2960:3002" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reply.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/reply.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="8" column="59" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -63,9 +93,7 @@
         <option value="$PROJECT_DIR$/js/showDate.js" />
         <option value="$PROJECT_DIR$/admin_base.html" />
         <option value="$PROJECT_DIR$/css/admin_base.css" />
-        <option value="$PROJECT_DIR$/js/reply.js" />
         <option value="$PROJECT_DIR$/reply.html" />
-        <option value="$PROJECT_DIR$/reply.php" />
         <option value="$PROJECT_DIR$/css/reply.css" />
         <option value="$PROJECT_DIR$/user_home.html" />
         <option value="$PROJECT_DIR$/css/getPassword.css" />
@@ -82,6 +110,9 @@
         <option value="$PROJECT_DIR$/base.html" />
         <option value="$PROJECT_DIR$/css/base.css" />
         <option value="$PROJECT_DIR$/base.php" />
+        <option value="$PROJECT_DIR$/complain_list.php" />
+        <option value="$PROJECT_DIR$/js/reply.js" />
+        <option value="$PROJECT_DIR$/reply.php" />
       </list>
     </option>
   </component>
@@ -137,6 +168,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rail-Rush" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Rail-Rush" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -163,7 +208,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Node.js.reply.js">
+    <configuration default="false" name="reply.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="project" path-to-js-file="reply.js" working-dir="$PROJECT_DIR$/js">
+      <method />
+    </configuration>
     <configuration default="true" type="CodeceptionConfigurationType" factoryName="Codeception">
       <PhpTestRunnerSettings />
       <method />
@@ -231,6 +279,14 @@
       <recursive>false</recursive>
       <method />
     </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Node.js.reply.js" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Node.js.reply.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -259,18 +315,18 @@
       <workItem from="1510232518911" duration="2782000" />
       <workItem from="1510245346901" duration="226000" />
       <workItem from="1510245747661" duration="7847000" />
-      <workItem from="1510313035981" duration="7502000" />
+      <workItem from="1510313035981" duration="10938000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88148000" />
+    <option name="totallyTimeSpent" value="91584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13323572" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -307,8 +363,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1509950949637" expanded="true" signature="1035:1054" ph="..." />
-            <marker date="1509950949637" expanded="true" signature="1790:1832" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="950:991" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="950:1003" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="2205:2224" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="2960:3002" ph="..." />
           </folding>
         </state>
       </provider>
@@ -318,8 +376,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1509950949637" expanded="true" signature="1035:1054" ph="..." />
-            <marker date="1509950949637" expanded="true" signature="1790:1832" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="950:991" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="950:1003" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="2205:2224" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="2960:3002" ph="..." />
           </folding>
         </state>
       </provider>
@@ -343,8 +403,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1509950949637" expanded="true" signature="1035:1054" ph="..." />
-            <marker date="1509950949637" expanded="true" signature="1790:1832" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="950:991" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="950:1003" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="2205:2224" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="2960:3002" ph="..." />
           </folding>
         </state>
       </provider>
@@ -578,13 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/reply.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="673" lean-forward="false" selection-start-line="5" selection-start-column="673" selection-end-line="5" selection-end-column="673" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/reply.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="775">
@@ -642,19 +697,6 @@
             <marker date="1509996970798" expanded="true" signature="1325:1378" ph="SELECT P_PAS... PASSENGER" />
             <marker date="1509996970798" expanded="true" signature="1825:1844" ph="..." />
             <marker date="1509996970798" expanded="true" signature="2092:2105" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/complain_list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1050">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1509958074808" expanded="true" signature="572:594" ph="SELECT * FRO... COMPLAIN" />
-            <marker date="1509958074808" expanded="true" signature="713:936" ph="..." />
-            <marker date="1509958074808" expanded="true" signature="725:924" ph="..." />
-            <marker date="1509958074808" expanded="true" signature="734:911" ph="..." />
           </folding>
         </state>
       </provider>
@@ -724,17 +766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reply.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="106" column="69" lean-forward="false" selection-start-line="106" selection-start-column="69" selection-end-line="106" selection-end-column="69" />
-          <folding>
-            <marker date="1509950949637" expanded="true" signature="1035:1054" ph="..." />
-            <marker date="1509950949637" expanded="true" signature="1790:1832" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/base.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5125">
@@ -745,9 +776,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin_base.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="146" column="21" lean-forward="false" selection-start-line="144" selection-start-column="0" selection-end-line="152" selection-end-column="6" />
+        <state relative-caret-position="206">
+          <caret line="144" column="36" lean-forward="true" selection-start-line="144" selection-start-column="36" selection-end-line="144" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/complain_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="20" column="29" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="20" selection-end-column="29" />
+          <folding>
+            <marker date="1510322926051" expanded="true" signature="572:594" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510322926051" expanded="true" signature="713:936" ph="..." />
+            <marker date="1510322926051" expanded="true" signature="725:924" ph="..." />
+            <marker date="1510322926051" expanded="true" signature="734:911" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/reply.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="59" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="59" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reply.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="114" column="66" lean-forward="true" selection-start-line="114" selection-start-column="66" selection-end-line="114" selection-end-column="66" />
+          <folding>
+            <marker date="1510324657119" expanded="true" signature="950:991" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="950:1003" ph="SELECT * FRO... COMPLAIN" />
+            <marker date="1510324657119" expanded="true" signature="2205:2224" ph="..." />
+            <marker date="1510324657119" expanded="true" signature="2960:3002" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
