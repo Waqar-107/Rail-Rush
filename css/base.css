@@ -1,0 +1,64 @@
+#myContainer{
+    margin: 0;
+    padding: 0;
+    background: url("../images/base_top2.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: sans-serif;
+}
+
+.navbar.navbar-default{
+    background-color: #2f3436;
+    font-size: 20px;
+}
+
+
+.navbar li{
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+
+a,a:hover{
+    color: white;
+}
+
+h3:hover{
+  text-decoration: underline;
+}
+
+#map{
+    margin-top: 20px;
+    margin-bottom: 100px;
+    height: 350px;
+    width: 100%;
+}
+
+.card {
+    width: 250px;
+    height: 180px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.2s;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card:hover {
+    box-shadow: 10px 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    height: 150px;
+    background-color: rgba(2, 169, 224, 1);
+}
+
+/*fi is the class for title of the cards*/
+.fi {
+    font-size: 15px;
+    font-family: "Comic Sans MS";
+    color: white;
+    margin-top: 10px;
+    text-align: center;
+}
