@@ -1,15 +1,16 @@
 <?php
 
-    if(isset($_SESSION['user_in']))
+    session_start();
+    if(empty($_SESSION['user_id']))
     {
         header('location: base.php');
     }
 
     //---------------------------------------------------------------get the complain id from previous page
-    $complain_id;
+    $complaint_id;
     $complaint;
     if (isset($_GET["data"])) {
-        $complain_id = $_GET["data"];
+        $complaint_id = $_GET["data"];
     }
     //---------------------------------------------------------------get the complain id from previous page
 
@@ -31,10 +32,11 @@
 
 
     //---------------------------------------------------------------get the whole row of complain
-    $sql = "SELECT * FROM COMPLAINT WHERE COMPLAIN_ID=$complain_id";
+    $sql = "SELECT * FROM COMPLAINT WHERE COMPLAINT_ID=$complaint_id";
 
     $result = oci_parse($conn,$sql);
     oci_execute($result);
+    $row=oci_fetch_assoc($result);
 
 
     $complaint = $row['MESSAGE'];$complainant=$row['COMPLAINANT'];
@@ -58,21 +60,41 @@
             $final_reply = wordwrap($final_reply, 70, "\r\n");
 
             //database query to get email-id
-            $sql="SELECT EMAIL_ID FROM PASSENGERS WHERE PASSENGER_ID=$complainant";
+            $sql="SELECT EMAIL_ID FROM PASSENGER WHERE PASSENGER_ID=$complainant";
             $result = oci_parse($conn,$sql);
             oci_execute($result);
 
             $row=oci_fetch_assoc($result);
             $mail=$row['EMAIL_ID'];
 
-            if (mail($mail, "reply to your complain", $final_reply)) {
-                echo '<script language="javascript">';
-                echo 'alert("MAIL SENT!")';
-                echo '</script>';
+            $f=0;
+            if (mail($mail, "reply to your complain", $final_reply))
+            {
+                $f=1;
+            }
 
-            } else {
+            else
+            {
                 echo '<script language="javascript">';
                 echo 'alert("SORRY!! SOMETHING WENT WRONG, PLEASE TRY AGAIN :(")';
+                echo '</script>';
+            }
+
+            //update the complaint table
+            $userId=$_SESSION['user_id'];echo $userId."\r\n";echo $final_reply."\r\n".$complaint_id."\r\n";
+            $i=1;
+
+            $sql="UPDATE COMPLAINT 
+                  SET RESPONDENT='$userId', REPLY='$final_reply', STATUS='$i'
+                  WHERE COMPLAINT_ID='$complaint_id'";
+            $result = oci_parse($conn,$sql);
+
+            if(oci_execute($result) && $f)
+            {
+                oci_commit($conn);oci_close($conn);
+                echo '<script language="javascript">';
+                echo 'alert("MAIL SENT!");';
+                echo 'location="complain_list.php";';
                 echo '</script>';
             }
 
@@ -121,7 +143,7 @@
         <div class="row">
             <div class="col-md-2">
                 <p class="rp" id="complaint_id">complain id: </p>
-                <script type="text/javascript">var id = "<?= $complain_id ?>";
+                <script type="text/javascript">var id = "<?= $complaint_id ?>";
                     document.getElementById("complaint_id").innerHTML = "complain id: " + id;
                 </script>
             </div>

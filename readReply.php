@@ -1,15 +1,16 @@
 <?php
 
-    if(isset($_SESSION['user_in']))
+    session_start();
+    if(empty($_SESSION['user_in']))
     {
         header('location: base.php');
     }
 
     //---------------------------------------------------------------get the complain id from previous page
-    $complain_id;
+    $complaint_id;
     $complaint;
     if (isset($_GET["data"])) {
-        $complain_id = $_GET["data"];
+        $complaint_id = $_GET["data"];
     }
     //---------------------------------------------------------------get the complain id from previous page
 
@@ -31,13 +32,15 @@
 
 
     //---------------------------------------------------------------get the whole row of complain
-    $sql = "SELECT * FROM COMPLAINT WHERE COMPLAIN_ID=$complain_id";
+    $sql = "SELECT * FROM COMPLAINT WHERE COMPLAINT_ID=$complaint_id";
 
     $result = oci_parse($conn,$sql);
     oci_execute($result);
-
+    $row=oci_fetch_assoc($result);
 
     $complaint = $row['MESSAGE'];$complainant=$row['COMPLAINANT'];
+    $reply=$row['REPLY'];
+
     //---------------------------------------------------------------get the whole row of complain
 
 ?>
@@ -48,7 +51,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>reply</title>
+    <title>readReply</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/reply.css" rel="stylesheet">
@@ -81,9 +84,9 @@
         <!--COMPLAIN ID-->
         <div class="row">
             <div class="col-md-2">
-                <p class="rp" id="complaint_id">complain id: </p>
-                <script type="text/javascript">var id = "<?= $complain_id ?>";
-                    document.getElementById("complaint_id").innerHTML = "complain id: " + id;
+                <p class="rpEx" id="complaint_id">complain id: </p>
+                <script type="text/javascript">var id = "<?= $complaint_id ?>";
+                    document.getElementById("complaint_id").innerHTML = "complaint id: " + id;
                 </script>
             </div>
         </div>
@@ -92,13 +95,26 @@
         <!--COMPLAIN OF THE COMPLAINANT-->
         <div class="row">
             <div class="col-md-12">
-                <p class="rp" id="message">complaint: </p>
+                <p class="rpEx" id="message">complaint: </p>
                 <script type="text/javascript">var text = "<?= $complaint ?>";
                     document.getElementById("message").innerHTML = "complaint: " + text;
                 </script>
             </div>
         </div>
         <!--COMPLAIN OF THE COMPLAINANT-->
+
+        <!--reply-->
+        <div class="row">
+            <div class="col-md-12">
+                <p class="rpEx" id="reply">reply: </p>
+                <script type="text/javascript">var rep = "<?= $reply ?>";
+                    rep = rep.replace(/@/gi,"\n");
+                    document.getElementById("reply").innerHTML = "reply: " + rep;
+                </script>
+            </div>
+        </div>
+        <!--reply-->
+
     </div>
 
 

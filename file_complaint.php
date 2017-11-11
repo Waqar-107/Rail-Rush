@@ -26,17 +26,20 @@
     if (isset($_POST['submit']))
     {
         $complain = $_POST['complain'];
-        if (empty($complain))
+        $trainNo=$_POST['trainNo'];
+        $day=$_POST['date'];
+
+        if (empty($complain) || empty($trainNo) || empty($day))
         {
             echo '<script language="javascript">';
-            echo 'alert("MESSAGE IS EMPTY")';
+            echo 'alert("FIELDS CANNOT BE EMPTY")';
             echo '</script>';
         }
 
         else
         {
             //get the complain id
-            $sql="SELECT MAX('COMPLAINT_ID') FROM COMPLAINT";
+            $sql="SELECT MAX(COMPLAINT_ID) FROM COMPLAINT";
             $result=oci_parse($conn,$sql);
 
             if (oci_execute($result))
@@ -44,15 +47,24 @@
                 $row=oci_fetch_assoc($result);
 
                 $complainant=$_SESSION['user_id'];
-                $newId=$row["MAX('COMPLAINT_ID')"]+1;
-                $sql="INSERT INTO COMPLAINT(COMPLAINT_ID,COMPLAINANT,MESSAGE) VALUES('$newId','$complainant','$complain')";
+                $newId=$row['MAX(COMPLAINT_ID)']+1;
 
-                echo '<script language="javascript">';
-                echo 'alert("THANKS FOR THE FEEDBACK!")';
-                echo '</script>';
+                $sql="INSERT INTO COMPLAINT(COMPLAINT_ID,COMPLAINANT,TRAIN_ID,MESSAGE,TRIP_DATE) VALUES('$newId','$complainant','$trainNo','$complain',TO_DATE('$day','DD/MM/YYYY'))";
+                $result=oci_parse($conn,$sql);
 
-                header('Location: base.php');
+                if(oci_execute($result))
+                {
+                    oci_commit($conn);oci_close($conn);
+                    echo '<script language="javascript">';
+                    echo 'alert("THANKS FOR THE FEEDBACK.");';
+                    echo 'location="base.php";';
+                    echo '</script>';
+                }
 
+                else
+                {
+                    echo oci_error($conn);
+                }
             }
 
             else
@@ -114,6 +126,18 @@
         <div class="row">
             <div class="col-md-12">
                 <form action="" method="post" style="word-wrap: break-word">
+
+                    <div class="form-group">
+                        <input type="date" id="date" name="date" class="form-group" style="padding-left: 5px" placeholder="in dd/mm/yyyy format">
+                    </div>
+
+                    <!--train number-->
+                    <div class="form-group">
+                        <textarea id="trainNo" name="trainNo" class="form-control" rows="2"
+                                  placeholder="train no."></textarea>
+                    </div>
+                    <!--train number-->
+
                     <!--complain-->
                     <div class="form-group">
                         <textarea id="complain" name="complain" class="form-control" rows="15"
@@ -127,6 +151,7 @@
                                value="send" style="margin-bottom: 75px">
                     </div>
                     <!--SEND BUTTON-->
+
                 </form>
             </div>
         </div>

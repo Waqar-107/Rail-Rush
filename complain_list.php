@@ -1,6 +1,7 @@
 <?php
 
-    if(isset($_SESSION['user_in']))
+    session_start();
+    if(empty($_SESSION['user_in']))
     {
         header('location: base.php');
     }
@@ -24,10 +25,9 @@
     //---------------------------------------------------------------get the whole table of complain
     $sql = "SELECT * FROM COMPLAINT";
     $result = oci_parse($conn,$sql);
-    oci_execute($result);
 
 
-    if (odbc_num_rows($result))
+    if (oci_execute($result))
     {
 
         echo "<table class=\"table table-hover table-dark\">
@@ -39,6 +39,7 @@
             <th scope=\"col\">Complaint</th>
             <th scope=\"col\">Respondent</th>
             <th scope=\"col\">Reply</th>
+            <th scope=\"col\">Trip Date</th>
         </tr>
         </thead>
         <tbody>";
@@ -46,30 +47,34 @@
         while ($row = oci_fetch_assoc($result))
         {
             $status=$row['STATUS'];
+            $tripDate=$row['TRIP_DATE'];
 
             if($status)
             {
+                $text = $row['MESSAGE'];
+                $text=substr($text, 0, 50);
+
                 $rep = $row['REPLY'];
                 if (strlen($rep) < 20)
                     $rep = $rep . "...(more)";
                 else
                     $rep = substr($rep, 0, 20) . "...(more)";
 
-                $linkToReadReply = "readReply.php?data=" . $row['COMPLAIN_ID'];
-                echo "<tr><td>" . $row["COMPLAIN_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td>"."</td>Replied<td>".$row["RESPONDENT"]."</td><td><a href=$linkToReadReply>"."</a></td></tr>";
+                $linkToReadReply = "readReply.php?data=" . $row['COMPLAINT_ID'];
+                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td>".$text."</td>Replied<td>".$row["RESPONDENT"]."</td><td><a href=$linkToReadReply>".$rep."</a></td><td>".$tripDate."</td></tr>";
 
             }
 
             else
             {
                 $text = $row['MESSAGE'];
-                if (strlen($text) < 25)
+                if (strlen($text) < 20)
                     $text = $text . "...(more)";
                 else
-                    $text = substr($text, 0, 25) . "...(more)";
+                    $text = substr($text, 0, 20) . "...(more)";
 
-                $linkToReply = "reply.php?data=" . $row['COMPLAIN_ID'];
-                echo "<tr><td>" . $row["COMPLAIN_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT_ID"] . "</td><td><a href=$linkToReply>" . $text . "</a></td><td>null</td><td>null</td></tr>";
+                $linkToReply = "reply.php?data=" . $row['COMPLAINT_ID'];
+                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td><a href=$linkToReply>" . $text . "</a></td><td>null</td><td>null</td><td>".$tripDate."</td></tr>";
 
             }
 

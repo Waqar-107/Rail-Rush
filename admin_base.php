@@ -66,7 +66,7 @@
 
                 <div class="card-body">
                     <img src="images/complain.png" class="rounded mx-auto d-block" style="margin-top: 15px">
-                    <p class="fi">complains</p>
+                    <p class="fi">complaints</p>
                 </div>
             </div>
         </div>
