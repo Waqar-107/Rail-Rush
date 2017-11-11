@@ -1,8 +1,9 @@
 <?php
 
-    if(isset($_SESSION['user_in']))
+    session_start();
+    if(isset($_SESSION["user_in"]))
     {
-        header('Location: asmin_base,php');
+        header('Location: admin_base.php');
     }
 
     if(isset($_POST['submit']))
@@ -63,7 +64,6 @@
             //password matched, redirect to home
             if($pass==$pass_db)
             {
-                session_start();
                 $_SESSION['user_in']=true;
                 $_SESSION['user_id']=$id;
 
@@ -76,9 +76,9 @@
                 echo 'alert("INCORRECT PASSWORD")';
                 echo '</script>';
             }
-        }
 
-        oci_close($conn);
+            oci_close($conn);
+        }
     }
 
 ?>

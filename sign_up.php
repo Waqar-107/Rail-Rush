@@ -1,6 +1,7 @@
 <?php
 
-if(isset($_SESSION['user_in']))
+session_start();
+if(isset($_SESSION['user_id']))
 {
     header('Location: base.php');
 }
@@ -17,7 +18,7 @@ if (isset($_POST['submit']))
     if (empty($fname) || empty($lname) || empty($phone) || empty($mail) || empty($pass1) || empty($pass2))
     {
         echo '<script language="javascript">';
-        echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
+        echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!");';
         echo '</script>';
     }
 
@@ -46,15 +47,17 @@ if (isset($_POST['submit']))
             $result=oci_parse($conn,$sql);
             oci_execute($result);
 
+            $green=true;
             while($row=oci_fetch_assoc($result))
             {
                 if($mail==$row['EMAIL_ID'] || $phone==$row['PHONE'])
                 {
+                    $green=false;session_unset();
                     echo '<script language="javascript">';
-                    echo 'alert("ACCOUNT EXISTS WITH SAME EMAIL ID OR PHONE NO.!!!")';
+                    echo 'alert("ACCOUNT EXISTS WITH SAME EMAIL ID OR PHONE NO.!!!");';
                     echo '</script>';
 
-                    break;
+
                 }
             }
 
@@ -62,49 +65,46 @@ if (isset($_POST['submit']))
 
 
             //---------------------------------------------------------------get an user id
-            $sql="SELECT MAX(PASSENGER_ID) FROM PASSENGER";
-            $result=oci_parse($conn,$sql);
-            oci_execute($result);
-            $row=oci_fetch_assoc($result);
-            //---------------------------------------------------------------update database
-            $newId=$row['MAX(PASSENGER_ID)']+1;
-
-            $sql="INSERT INTO PASSENGER(PASSENGER_ID,FIRST_NAME,LAST_NAME,EMAIL_ID,PHONE,P_PASSWORD) VALUES('$newId','$fname','$lname','$mail','$phone','$pass1')";
-            $result=oci_parse($conn,$sql);
-
-            if (oci_execute($result))
+            if($green)
             {
-                oci_commit();
-                oci_close($conn);
+                $sql = "SELECT MAX(PASSENGER_ID) FROM PASSENGER";
+                $result = oci_parse($conn, $sql);
+                oci_execute($result);
+                $row = oci_fetch_assoc($result);
+                //---------------------------------------------------------------update database
+                $newId = $row['MAX(PASSENGER_ID)'] + 1;
 
-                $msg = "Dear " . $fname . "\r\nwelcome aboard!! Your user id is ".$newId.". Use the id to log in and buy tickets\r\n- X-Railways";
-                $msg = wordwrap($msg, 70, "\r\n");
+                $sql = "INSERT INTO PASSENGER(PASSENGER_ID,FIRST_NAME,LAST_NAME,EMAIL_ID,PHONE,P_PASSWORD) VALUES('$newId','$fname','$lname','$mail','$phone','$pass1')";
+                $result = oci_parse($conn, $sql);
 
-                if (mail($mail, "user id", $msg))
-                {
+                if (oci_execute($result)) {
+                    oci_commit($conn);
+                    oci_close($conn);
+
+                    $_SESSION["user_in"] = true;
+                    $_SESSION["user_id"] = $newId;
+
+                    $msg = "Dear " . $fname . "\r\nwelcome aboard!! Your user id is " . $newId . ". Use the id to log in and buy tickets\r\n- X-Railways";
+                    $msg = wordwrap($msg, 70, "\r\n");
+
+                    if (mail($mail, "user id", $msg)) {
+                        echo '<script language="javascript">';
+                        echo 'alert("REGISTERED SUCCESSFULLY, AN USER ID HAS BEEN SENT TO YOUR MAIL.");';
+                        echo 'location="base.php";';
+                        echo '</script>';
+                    }
+                } else {
                     echo '<script language="javascript">';
-                    echo 'alert("REGISTERED SUCCESSFULLY, AN USER ID HAS BEEN SENT TO YOUR MAIL.")';
+                    echo 'alert("SOMETHING WENT WRONG")';
                     echo '</script>';
-
-                    session_start();
-                    $_SESSION['user_in']=true;
-                    $_SESSION['user_id']=$newId;
                 }
-
-                header('Location: base.php');
-            }
-
-            else
-            {
-                echo "SOMETHING WENT WRONG!";
-                header('Location: sign_up.php');
             }
         }
 
         else
         {
             echo '<script language="javascript">';
-            echo 'alert("PASSWORD DOES NOT MATCH!!!")';
+            echo 'alert("PASSWORD DOES NOT MATCH!!!");';
             echo '</script>';
         }
 

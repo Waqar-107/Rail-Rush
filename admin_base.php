@@ -1,6 +1,7 @@
 <?php
 
-    if(!isset($_SESSION['user_in']))
+    session_start();
+    if(empty($_SESSION['user_id']))
     {
         header('Location: admin.php');
     }
@@ -61,7 +62,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
+            <div class="card" onclick="window.location.href='complain_list.php';">
 
                 <div class="card-body">
                     <img src="images/complain.png" class="rounded mx-auto d-block" style="margin-top: 15px">

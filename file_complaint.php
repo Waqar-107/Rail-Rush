@@ -1,17 +1,10 @@
 <?php
 
-    if(isset($_SESSION['user_in']))
+    session_start();
+    if(empty($_SESSION['user_id']))
     {
-        header('location: base.php');
+        header('Location: login.php');
     }
-
-    //---------------------------------------------------------------get the complain id from previous page
-    $complain_id;
-    $complaint;
-    if (isset($_GET["data"])) {
-        $complain_id = $_GET["data"];
-    }
-    //---------------------------------------------------------------get the complain id from previous page
 
 
     //---------------------------------------------------------------connect to the database
@@ -23,54 +16,47 @@
     $conn = oci_connect('HR', 'hr', 'localhost/orcl');
 
     //check connection
-    if(!$conn)
+    if (!$conn)
     {
         echo 'connection error';
     }
     //---------------------------------------------------------------connect to the database
 
 
-    //---------------------------------------------------------------get the whole row of complain
-    $sql = "SELECT * FROM COMPLAINT WHERE COMPLAIN_ID=$complain_id";
-
-    $result = oci_parse($conn,$sql);
-    oci_execute($result);
-
-
-    $complaint = $row['MESSAGE'];$complainant=$row['COMPLAINANT'];
-    //---------------------------------------------------------------get the whole row of complain
-
     if (isset($_POST['submit']))
     {
-        $reply = $_POST['reply'];
-        if (empty($reply))
+        $complain = $_POST['complain'];
+        if (empty($complain))
         {
             echo '<script language="javascript">';
-            echo 'alert("message is empty")';
+            echo 'alert("MESSAGE IS EMPTY")';
             echo '</script>';
         }
 
         else
         {
-            $final_reply = str_replace("\n", "\r\n", $reply);
+            //get the complain id
+            $sql="SELECT MAX('COMPLAINT_ID') FROM COMPLAINT";
+            $result=oci_parse($conn,$sql);
 
-            //email the reply
-            $final_reply = wordwrap($final_reply, 70, "\r\n");
+            if (oci_execute($result))
+            {
+                $row=oci_fetch_assoc($result);
 
-            //database query to get email-id
-            $sql="SELECT EMAIL_ID FROM PASSENGERS WHERE PASSENGER_ID=$complainant";
-            $result = oci_parse($conn,$sql);
-            oci_execute($result);
+                $complainant=$_SESSION['user_id'];
+                $newId=$row["MAX('COMPLAINT_ID')"]+1;
+                $sql="INSERT INTO COMPLAINT(COMPLAINT_ID,COMPLAINANT,MESSAGE) VALUES('$newId','$complainant','$complain')";
 
-            $row=oci_fetch_assoc($result);
-            $mail=$row['EMAIL_ID'];
-
-            if (mail($mail, "reply to your complain", $final_reply)) {
                 echo '<script language="javascript">';
-                echo 'alert("MAIL SENT!")';
+                echo 'alert("THANKS FOR THE FEEDBACK!")';
                 echo '</script>';
 
-            } else {
+                header('Location: base.php');
+
+            }
+
+            else
+            {
                 echo '<script language="javascript">';
                 echo 'alert("SORRY!! SOMETHING WENT WRONG, PLEASE TRY AGAIN :(")';
                 echo '</script>';
@@ -117,24 +103,10 @@
         </div>
         <!--NAVBAR-->
 
-        <!--COMPLAIN ID-->
-        <div class="row">
-            <div class="col-md-2">
-                <p class="rp" id="complaint_id">complain id: </p>
-                <script type="text/javascript">var id = "<?= $complain_id ?>";
-                    document.getElementById("complaint_id").innerHTML = "complain id: " + id;
-                </script>
-            </div>
-        </div>
-        <!--COMPLAIN ID-->
-
         <!--COMPLAIN OF THE COMPLAINANT-->
         <div class="row">
             <div class="col-md-12">
                 <p class="rp" id="message">complaint: </p>
-                <script type="text/javascript">var text = "<?= $complaint ?>";
-                    document.getElementById("message").innerHTML = "complaint: " + text;
-                </script>
             </div>
         </div>
         <!--COMPLAIN OF THE COMPLAINANT-->
@@ -142,11 +114,12 @@
         <div class="row">
             <div class="col-md-12">
                 <form action="" method="post" style="word-wrap: break-word">
-                    <!--REPLY OF ADMIN-->
+                    <!--complain-->
                     <div class="form-group">
-                        <textarea id="reply" name="reply" class="form-control" rows="15" placeholder="reply"></textarea>
+                        <textarea id="complain" name="complain" class="form-control" rows="15"
+                                  placeholder="feedback"></textarea>
                     </div>
-                    <!--REPLY OF ADMIN-->
+                    <!--complain-->
 
                     <!--SEND BUTTON-->
                     <div class="form-group" style="margin-top: 50px">

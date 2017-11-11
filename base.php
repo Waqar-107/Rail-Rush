@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +21,7 @@
 <div id="myContainer" class="container-fluid" style="color: whitesmoke;height: 400px">
     <?php
 
-    if (isset($_SESSION['user_in']))
+    if (isset($_SESSION['user_id']))
     { ?>
 
         <a href="destruction.php"><h3
@@ -54,7 +58,7 @@
             </li>
 
             <li>
-                <a class="nav-link" href="#">Admin</a>
+                <a class="nav-link" href="admin.php">Admin</a>
             </li>
 
             <li>
@@ -94,7 +98,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
+            <div class="card" onclick='window.location.href="file_complaint.php"'>
 
                 <div class="card-body">
                     <img src="images/mail.png" class="rounded mx-auto d-block" style="margin-top: 15px">

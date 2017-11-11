@@ -40,45 +40,6 @@
     $complaint = $row['MESSAGE'];$complainant=$row['COMPLAINANT'];
     //---------------------------------------------------------------get the whole row of complain
 
-    if (isset($_POST['submit']))
-    {
-        $reply = $_POST['reply'];
-        if (empty($reply))
-        {
-            echo '<script language="javascript">';
-            echo 'alert("message is empty")';
-            echo '</script>';
-        }
-
-        else
-        {
-            $final_reply = str_replace("\n", "\r\n", $reply);
-
-            //email the reply
-            $final_reply = wordwrap($final_reply, 70, "\r\n");
-
-            //database query to get email-id
-            $sql="SELECT EMAIL_ID FROM PASSENGERS WHERE PASSENGER_ID=$complainant";
-            $result = oci_parse($conn,$sql);
-            oci_execute($result);
-
-            $row=oci_fetch_assoc($result);
-            $mail=$row['EMAIL_ID'];
-
-            if (mail($mail, "reply to your complain", $final_reply)) {
-                echo '<script language="javascript">';
-                echo 'alert("MAIL SENT!")';
-                echo '</script>';
-
-            } else {
-                echo '<script language="javascript">';
-                echo 'alert("SORRY!! SOMETHING WENT WRONG, PLEASE TRY AGAIN :(")';
-                echo '</script>';
-            }
-
-        }
-    }
-
 ?>
 
 
@@ -138,25 +99,6 @@
             </div>
         </div>
         <!--COMPLAIN OF THE COMPLAINANT-->
-
-        <div class="row">
-            <div class="col-md-12">
-                <form action="" method="post" style="word-wrap: break-word">
-                    <!--REPLY OF ADMIN-->
-                    <div class="form-group">
-                        <textarea id="reply" name="reply" class="form-control" rows="15" placeholder="reply"></textarea>
-                    </div>
-                    <!--REPLY OF ADMIN-->
-
-                    <!--SEND BUTTON-->
-                    <div class="form-group" style="margin-top: 50px">
-                        <input type="submit" name="submit" id="submit" class="btn btn-success btn-lg btn-block"
-                               value="send" style="margin-bottom: 75px">
-                    </div>
-                    <!--SEND BUTTON-->
-                </form>
-            </div>
-        </div>
     </div>
 
 

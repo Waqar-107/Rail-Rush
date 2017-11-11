@@ -1,27 +1,40 @@
 <?php
 
+session_start();
+if(isset($_SESSION['user_id']))
+{
+    header('Location: base.php');
+}
+
 if(isset($_POST['submit']))
 {
     $id=$_POST['id'];
 
-    if($_POST['admin'])
+    if(isset($_POST['admin']) && empty($_POST['user']))
         $category="admin";
 
-    else
+    else if(isset($_POST['user']) && empty($_POST['admin']))
         $category="user";
 
+    else
+    {
+        echo '<script language="javascript">';
+        echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
+        echo '</script>';
+    }
+
     //---------------------------------------------------------------connect to the database
-    $server = "localhost";
-    $username = "root";
-    $password = "1505107";
-    $dbname = "phpmyadmin";
+    $server = "localhost/orcl";
+    $username = "HR";
+    $password = "hr";
 
     //create connection
-    $conn = mysqli_connect($server, $username, $password, $dbname);
+    $conn = oci_connect('HR', 'hr', 'localhost/orcl');
 
     //check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if(!$conn)
+    {
+        echo 'connection error';
     }
     //---------------------------------------------------------------connect to the database
 
@@ -58,20 +71,22 @@ if(isset($_POST['submit']))
         if($category=="user")
         {
             $sql="SELECT EMAIL_ID,FIRST_NAME,P_PASSWORD FROM PASSENGER WHERE PASSENGER_ID=$id";
-            $result = $conn->query($sql) or die($conn->error);
-            $row=$result->fetch_assoc();
+            $result = oci_parse($conn,$sql);
+            oci_execute($result);
+            $row=oci_fetch_assoc($result);
 
             $fname=$row['FIRST_NAME'];
             $pass=$row['P_PASSWORD'];
             $mail=$row['EMAIL_ID'];
 
-            $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user password is ".$pass." Use the id to log in and buy tickets\r\n- X-Railways";
+            $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user password is '".$pass."'. Use the id to log in and buy tickets\r\n- X-Railways";
             $msg = wordwrap($msg, 70, "\r\n");
 
             if (mail($mail, "user id", $msg))
             {
                 echo '<script language="javascript">';
-                echo 'alert("password has been sent to your mail")';
+                echo 'alert("THE PASSWORD HAS BEEN SENT TO YOUR MAIL.");';
+                echo 'location="base.php";';
                 echo '</script>';
 
             }
@@ -87,21 +102,23 @@ if(isset($_POST['submit']))
 
         else if($category=="admin")
         {
-            $sql="SELECT EMAIL_ID,FIRST_NAME,a_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
-            $result = $conn->query($sql) or die($conn->error);
-            $row=$result->fetch_assoc();
+            $sql="SELECT EMAIL_ID,FIRST_NAME,A_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
+            $result =oci_parse($conn,$sql);
+            oci_execute($result);
+            $row=oci_fetch_assoc($result);
 
             $fname=$row['FIRST_NAME'];
-            $pass=$row['a_PASSWORD'];
+            $pass=$row['A_PASSWORD'];
             $mail=$row['EMAIL_ID'];
 
-            $msg = "Dear " . $fname . "\r\n Your user password is ".$pass." As a responsible officer, it is not expected from you to forget your password.\r\n- X-Railways";
+            $msg = "Dear " . $fname . "\r\n Your user password is '".$pass."'. As a responsible officer, it is not expected from you to forget your password.\r\n- X-Railways";
             $msg = wordwrap($msg, 70, "\r\n");
 
             if (mail($mail, "password", $msg))
             {
                 echo '<script language="javascript">';
-                echo 'alert("password has been sent to your mail")';
+                echo 'alert("THE PASSWORD HAS BEEN SENT TO YOUR MAIL.");';
+                echo 'location="base.php";';
                 echo '</script>';
 
             }
@@ -121,8 +138,10 @@ if(isset($_POST['submit']))
             echo '</script>';
         }
     }
+
+    oci_close($conn);
 }
-$conn->close();
+
 ?>
 
 

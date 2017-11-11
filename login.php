@@ -1,9 +1,11 @@
 <?php
 
-if(isset($_SESSION['user_in']))
+session_start();
+if(isset($_SESSION['user_id']))
 {
-    header('location: base.php');
+    header('Location: base.php');
 }
+
 
 if(isset($_POST['submit']))
 {
@@ -15,7 +17,7 @@ if(isset($_POST['submit']))
         if (empty($id) && empty($pass))
         {
             echo '<script language="javascript">';
-            echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
+            echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!");';
             echo '</script>';
         }
 
@@ -23,14 +25,14 @@ if(isset($_POST['submit']))
         else if(empty($id) )
         {
             echo '<script language="javascript">';
-            echo 'alert("ENTER USER ID !!!")';
+            echo 'alert("ENTER USER ID !!!");';
             echo '</script>';
         }
 
         else if(empty($pass))
         {
             echo '<script language="javascript">';
-            echo 'alert("ENTER PASSWORD!!!")';
+            echo 'alert("ENTER PASSWORD!!!");';
             echo '</script>';
         }
     }
@@ -60,22 +62,24 @@ if(isset($_POST['submit']))
 
         if($pass==$row['P_PASSWORD'])
         {
-            session_start();
-            $_SESSION['user_in']=true;
-            $_SESSION['user_id']=$id;
+            if(empty($_SESSION['user_id']))
+            {
+                $_SESSION['user_in']=true;
+                $_SESSION['user_id']=$id;
+            }
 
-            header('Location: base.php');
+            echo '<script language="javascript">location.href="base.php";</script>';
         }
 
         else
         {
             echo '<script language="javascript">';
-            echo 'alert("INCORRECT PASSWORD!!!")';
+            echo 'alert("INCORRECT PASSWORD!!!");';
             echo '</script>';
         }
-    }
 
-    oci_close($conn);
+        oci_close($conn);
+    }
 }
 
 ?>
