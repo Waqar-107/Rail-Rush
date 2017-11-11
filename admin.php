@@ -1,5 +1,10 @@
 <?php
 
+    if(isset($_SESSION['user_in']))
+    {
+        header('Location: asmin_base,php');
+    }
+
     if(isset($_POST['submit']))
     {
         $id=$_POST['id'];
@@ -10,7 +15,7 @@
             if (empty($id) && empty($pass))
             {
                 echo '<script language="javascript">';
-                echo 'alert("please fill all of the informations!!!")';
+                echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
                 echo '</script>';
             }
 
@@ -18,14 +23,14 @@
             else if(empty($id) )
             {
                 echo '<script language="javascript">';
-                echo 'alert("enter user id")';
+                echo 'alert("ENTER USER ID!!!")';
                 echo '</script>';
             }
 
             else if(empty($pass))
             {
                 echo '<script language="javascript">';
-                echo 'alert("enter password")';
+                echo 'alert("ENTER PASSWORD")';
                 echo '</script>';
             }
         }
@@ -33,42 +38,47 @@
         else
         {
             //---------------------------------------------------------------connect to the database
-            $server = "localhost";
-            $username = "root";
-            $password = "1505107";
-            $dbname = "phpmyadmin";
+            $server = "localhost/orcl";
+            $username = "HR";
+            $password = "hr";
 
             //create connection
-            $conn = mysqli_connect($server, $username, $password, $dbname);
+            $conn = oci_connect('HR', 'hr', 'localhost/orcl');
 
             //check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
+            if(!$conn)
+            {
+                echo 'connection error';
             }
             //---------------------------------------------------------------connect to the database
 
             //get password from database
-            $sql="SELECT a_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
-            $result = $conn->query($sql) or die($conn->error);
+            $sql="SELECT A_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
+            $result = oci_parse($conn,$sql);
+            oci_execute($result);
+            $row=oci_fetch_assoc($result);
 
-            $row=$result->fetch_assoc();
-            $pass_db=$row['a_PASSWORD'];
+            $pass_db=$row['A_PASSWORD'];
 
             //password matched, redirect to home
             if($pass==$pass_db)
             {
+                session_start();
+                $_SESSION['user_in']=true;
+                $_SESSION['user_id']=$id;
+
                 header('Location: admin_base.php');
             }
 
             else
             {
                 echo '<script language="javascript">';
-                echo 'alert("incorrect password")';
+                echo 'alert("INCORRECT PASSWORD")';
                 echo '</script>';
             }
         }
 
-        $conn->close();
+        oci_close($conn);
     }
 
 ?>

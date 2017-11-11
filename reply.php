@@ -1,68 +1,71 @@
 <?php
 
-    //---------------------------------------------------------------get the complain id from previous page
-    $complain_id;$complaint;
-    if(isset($_GET["data"]))
+    if(isset($_SESSION['user_in']))
     {
-        $complain_id=$_GET["data"];
+        header('location: base.php');
+    }
+
+    //---------------------------------------------------------------get the complain id from previous page
+    $complain_id;
+    $complaint;
+    if (isset($_GET["data"])) {
+        $complain_id = $_GET["data"];
     }
     //---------------------------------------------------------------get the complain id from previous page
 
 
     //---------------------------------------------------------------connect to the database
-    $server = "localhost";
-    $username = "root";
-    $password = "1505107";
-    $dbname = "phpmyadmin";
+    $server = "localhost/orcl";
+    $username = "HR";
+    $password = "hr";
 
     //create connection
-    $conn = mysqli_connect($server, $username, $password, $dbname);
+    $conn = oci_connect('HR', 'hr', 'localhost/orcl');
 
     //check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    if(!$conn)
+    {
+        echo 'connection error';
     }
     //---------------------------------------------------------------connect to the database
 
 
     //---------------------------------------------------------------get the whole row of complain
     $sql = "SELECT * FROM COMPLAIN WHERE COMPLAIN_ID=$complain_id";
-    $result = $conn->query($sql);
-    $row=$result->fetch_assoc();
 
-    $complaint=$row['MESSAGE'];
+    $result = oci_parse($conn,$sql);
+    oci_execute($result);
+
+
+    $complaint = $row['MESSAGE'];$complainant=$row['COMPLAINANT'];
     //---------------------------------------------------------------get the whole row of complain
 
-    if(isset($_POST['submit']))
-    {
-        $reply=$_POST['reply'];
-        if(empty($reply))
-        {
+    if (isset($_POST['submit'])) {
+        $reply = $_POST['reply'];
+        if (empty($reply)) {
             echo '<script language="javascript">';
             echo 'alert("message is empty")';
             echo '</script>';
-        }
-
-        else
-        {
-            $final_reply = str_replace("\n","\r\n",$reply);
+        } else {
+            $final_reply = str_replace("\n", "\r\n", $reply);
 
             //email the reply
             $final_reply = wordwrap($final_reply, 70, "\r\n");
 
             //database query to get email-id
-            $mail;
+            $sql="SELECT EMAIL_ID FROM PASSENGERS WHERE PASSENGER_ID=$complainant";
+            $result = oci_parse($conn,$sql);
+            oci_execute($result);
 
-            if (mail($mail, "reply to your complain", $final_reply))
-            {
+            $row=oci_fetch_assoc($result);
+            $mail=$row['EMAIL_ID'];
+
+            if (mail($mail, "reply to your complain", $final_reply)) {
                 echo '<script language="javascript">';
                 echo 'alert("message sent!")';
                 echo '</script>';
 
-            }
-
-            else
-            {
+            } else {
                 echo '<script language="javascript">';
                 echo 'alert("sorry! something went wrong. please try again.")';
                 echo '</script>';
@@ -72,7 +75,6 @@
     }
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -85,7 +87,6 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/reply.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
-    <script src="js/reply.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -98,6 +99,9 @@
         <div class="row" style="margin-bottom: 10%">
             <nav class="navbar fixed-top navbar-light">
                 <img src="images/trainLogo.png" style="margin-left: 10px">
+                <a href="destruction.php"
+                   style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 150px">log out</a>
+
                 <p id="tt"
                    style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
                     date</p>
@@ -113,7 +117,7 @@
             <div class="col-md-2">
                 <p class="rp" id="complaint_id">complain id: </p>
                 <script type="text/javascript">var id = "<?= $complain_id ?>";
-                    document.getElementById("complaint_id").innerHTML ="complain id: "+id ;
+                    document.getElementById("complaint_id").innerHTML = "complain id: " + id;
                 </script>
             </div>
         </div>
@@ -124,7 +128,7 @@
             <div class="col-md-12">
                 <p class="rp" id="message">complaint: </p>
                 <script type="text/javascript">var text = "<?= $complaint ?>";
-                    document.getElementById("message").innerHTML ="complaint: "+text ;
+                    document.getElementById("message").innerHTML = "complaint: " + text;
                 </script>
             </div>
         </div>

@@ -1,3 +1,12 @@
+<?php
+
+    if(!isset($_SESSION['user_in']))
+    {
+        header('Location: admin.php');
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +26,7 @@
 <div class="container-fluid">
     <nav class="navbar fixed-top navbar-light">
         <img src="images/trainLogo.png" style="margin-left: 10px">
+        <a href="destruction.php" style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 150px">log out</a>
         <p id="tt" style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
             date</p>
         <script type="text/javascript">

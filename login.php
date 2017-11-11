@@ -1,31 +1,21 @@
 <?php
 
+if(isset($_SESSION['user_in']))
+{
+    header('location: base.php');
+}
+
 if(isset($_POST['submit']))
 {
     $id=$_POST['id'];
     $pass=$_POST['pass'];
-
-    //---------------------------------------------------------------connect to the database
-    $server = "localhost";
-    $username = "root";
-    $password = "1505107";
-    $dbname = "phpmyadmin";
-
-    //create connection
-    $conn = mysqli_connect($server, $username, $password, $dbname);
-
-    //check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    //---------------------------------------------------------------connect to the database
 
     if(empty($id) || empty($pass))
     {
         if (empty($id) && empty($pass))
         {
             echo '<script language="javascript">';
-            echo 'alert("please fill all of the informations!!!")';
+            echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
             echo '</script>';
         }
 
@@ -33,38 +23,59 @@ if(isset($_POST['submit']))
         else if(empty($id) )
         {
             echo '<script language="javascript">';
-            echo 'alert("enter user id")';
+            echo 'alert("ENTER USER ID !!!")';
             echo '</script>';
         }
 
         else if(empty($pass))
         {
             echo '<script language="javascript">';
-            echo 'alert("enter password")';
+            echo 'alert("ENTER PASSWORD!!!")';
             echo '</script>';
         }
     }
 
     else
     {
+        //---------------------------------------------------------------connect to the database
+        $server = "localhost/orcl";
+        $username = "HR";
+        $password = "hr";
+
+        //create connection
+        $conn = oci_connect('HR', 'hr', 'localhost/orcl');
+
+        //check connection
+        if(!$conn)
+        {
+            echo 'connection error';
+        }
+        //---------------------------------------------------------------connect to the database
+
         //---------------------------------------------------------------get password using id
         $sql="SELECT P_PASSWORD FROM PASSENGER WHERE PASSENGER_ID=$id";
-        $result = $conn->query($sql) or die($conn->error);
-        $row=$result->fetch_assoc();
+        $result = oci_parse($conn,$sql);
+        oci_execute($result);
+        $row=oci_fetch_assoc($result);
+
         if($pass==$row['P_PASSWORD'])
         {
-            header('Location: user_home.php');
+            session_start();
+            $_SESSION['user_in']=true;
+            $_SESSION['user_id']=$id;
+
+            header('Location: base.php');
         }
 
         else
         {
             echo '<script language="javascript">';
-            echo 'alert("incorrect password!!!")';
+            echo 'alert("INCORRECT PASSWORD!!!")';
             echo '</script>';
         }
     }
 
-    $conn->close();
+    oci_close($conn);
 }
 
 ?>

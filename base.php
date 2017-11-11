@@ -15,9 +15,30 @@
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
 <div id="myContainer" class="container-fluid" style="color: whitesmoke;height: 400px">
-    <a href="login.php"><h3
-                style="color: black;font-family: 'Comic Sans MS';float: right;margin-top: 15px;margin-right: 15px">
-            login/signup</h3></a>
+    <?php
+
+    if (isset($_SESSION['user_in']))
+    { ?>
+
+        <a href="destruction.php"><h3
+                    style="color: black;font-family: 'Comic Sans MS';float: right;margin-top: 15px;margin-right: 15px">
+                logout</h3></a>
+
+    <?php
+    }
+
+    else
+    {
+        ?>
+
+        <a href="login.php"><h3
+                    style="color: black;font-family: 'Comic Sans MS';float: right;margin-top: 15px;margin-right: 15px">
+                login/signup</h3></a>
+
+        <?php
+    }
+    ?>
+
 </div>
 
 <nav class="navbar sticky-top navbar-expand-md navbar-default justify-content-center">
