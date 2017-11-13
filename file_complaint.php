@@ -85,7 +85,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>reply</title>
+    <title>file_complaint</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/reply.css" rel="stylesheet">
@@ -94,7 +94,7 @@
 
 <body>
 
-<div id="main_panel" class="container-fluid">
+<div class="container-fluid">
 
     <div class="container" style="margin-top: auto">
 

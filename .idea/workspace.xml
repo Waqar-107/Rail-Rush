@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b607b2c9-2dda-4f34-bf6d-7a2e592aac20" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin_base.php" afterPath="$PROJECT_DIR$/admin_base.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/complain_list.php" afterPath="$PROJECT_DIR$/complain_list.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/complaint_list.css" afterPath="$PROJECT_DIR$/css/complaint_list.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/reply.css" afterPath="$PROJECT_DIR$/css/reply.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/file_complaint.php" afterPath="$PROJECT_DIR$/file_complaint.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readReply.php" afterPath="$PROJECT_DIR$/readReply.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reply.php" afterPath="$PROJECT_DIR$/reply.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,39 +18,27 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="readReply.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="readReply.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/readReply.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="110" column="50" lean-forward="false" selection-start-line="110" selection-start-column="50" selection-end-line="110" selection-end-column="50" />
+            <state relative-caret-position="275">
+              <caret line="62" column="5" lean-forward="false" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
               <folding>
-                <marker date="1510422527017" expanded="true" signature="984:1027" ph="SELECT * FRO... COMPLAINT" />
-                <marker date="1510422527017" expanded="true" signature="1381:1400" ph="..." />
-                <marker date="1510422527017" expanded="true" signature="2092:2121" ph="..." />
-                <marker date="1510422527017" expanded="true" signature="2236:2278" ph="..." />
+                <marker date="1510575851357" expanded="true" signature="984:1027" ph="SELECT * FRO... COMPLAINT" />
+                <marker date="1510575851357" expanded="true" signature="1381:1400" ph="..." />
+                <marker date="1510575851357" expanded="true" signature="2076:2105" ph="..." />
+                <marker date="1510575851357" expanded="true" signature="2220:2262" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="reply.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/reply.php">
+      <file leaf-file-name="reply.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/reply.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="84" column="17" lean-forward="false" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
-              <folding>
-                <marker date="1510422817928" expanded="true" signature="984:1027" ph="SELECT * FRO... COMPLAIN" />
-                <marker date="1510422817928" expanded="true" signature="984:1040" ph="SELECT * FRO... COMPLAIN" />
-                <marker date="1510422817928" expanded="true" signature="1802:1829" ph="SELECT EMAIL... PASSEN" />
-                <marker date="1510422817928" expanded="true" signature="1802:1852" ph="SELECT EMAIL... PASSENGERS" />
-                <marker date="1510422817928" expanded="true" signature="1802:1853" ph="SELECT EMAIL... PASSENGERS" />
-                <marker date="1510422817928" expanded="true" signature="2569:2586" ph="UPDATE COMPL... " />
-                <marker date="1510422817928" expanded="true" signature="2569:2702" ph="UPDATE COMPL... " />
-                <marker date="1510422817928" expanded="true" signature="2569:2717" ph="UPDATE COMPL... " />
-                <marker date="1510422817928" expanded="true" signature="2575:2586" ph="INSERT INTO COMPLAINANT... " />
-                <marker date="1510422817928" expanded="true" signature="3139:3158" ph="..." />
-                <marker date="1510422817928" expanded="true" signature="3990:4032" ph="..." />
-              </folding>
+            <state relative-caret-position="225">
+              <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -115,12 +101,13 @@
         <option value="$PROJECT_DIR$/getPassword.php" />
         <option value="$PROJECT_DIR$/base.php" />
         <option value="$PROJECT_DIR$/admin.php" />
-        <option value="$PROJECT_DIR$/file_complaint.php" />
         <option value="$PROJECT_DIR$/admin_base.php" />
         <option value="$PROJECT_DIR$/complain_list.php" />
+        <option value="$PROJECT_DIR$/reply.php" />
+        <option value="$PROJECT_DIR$/css/complaint_list.css" />
         <option value="$PROJECT_DIR$/css/reply.css" />
         <option value="$PROJECT_DIR$/readReply.php" />
-        <option value="$PROJECT_DIR$/reply.php" />
+        <option value="$PROJECT_DIR$/file_complaint.php" />
       </list>
     </option>
   </component>
@@ -153,7 +140,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -182,6 +168,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -312,20 +299,22 @@
       <workItem from="1510313035981" duration="10938000" />
       <workItem from="1510384953832" duration="34301000" />
       <workItem from="1510422798464" duration="23000" />
+      <workItem from="1510574849783" duration="1659000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125908000" />
+    <option name="totallyTimeSpent" value="127567000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14714494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15300146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47160885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -337,7 +326,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47160885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -373,13 +361,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/css/reply.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="32" column="22" lean-forward="false" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reply.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -858,21 +839,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/file_complaint.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="58" column="56" lean-forward="false" selection-start-line="58" selection-start-column="56" selection-end-line="58" selection-end-column="56" />
-          <folding>
-            <marker date="1510413254370" expanded="true" signature="984:1023" ph="SELECT MAX('... COMPLAINT" />
-            <marker date="1510413254370" expanded="true" signature="1296:1453" ph="INSERT INTO COMPLAINT... " />
-            <marker date="1510413254370" expanded="true" signature="1296:1454" ph="INSERT INTO COMPLAINT... " />
-            <marker date="1510413254370" expanded="true" signature="2242:2261" ph="..." />
-            <marker date="1510413254370" expanded="true" signature="2949:2978" ph="..." />
-            <marker date="1510413254370" expanded="true" signature="3093:3135" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sign_up.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -902,26 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/reply.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="33" column="17" lean-forward="false" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readReply.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="110" column="50" lean-forward="false" selection-start-line="110" selection-start-column="50" selection-end-line="110" selection-end-column="50" />
-          <folding>
-            <marker date="1510422527017" expanded="true" signature="984:1027" ph="SELECT * FRO... COMPLAINT" />
-            <marker date="1510422527017" expanded="true" signature="1381:1400" ph="..." />
-            <marker date="1510422527017" expanded="true" signature="2092:2121" ph="..." />
-            <marker date="1510422527017" expanded="true" signature="2236:2278" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/reply.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -938,6 +884,53 @@
             <marker date="1510422817928" expanded="true" signature="2575:2586" ph="INSERT INTO COMPLAINANT... " />
             <marker date="1510422817928" expanded="true" signature="3139:3158" ph="..." />
             <marker date="1510422817928" expanded="true" signature="3990:4032" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/complaint_list.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file_complaint.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="87" column="25" lean-forward="false" selection-start-line="87" selection-start-column="25" selection-end-line="87" selection-end-column="25" />
+          <folding>
+            <element signature="e#32#114#0#PHP" expanded="false" />
+            <element signature="e#394#450#0#PHP" expanded="false" />
+            <element signature="e#550#2196#0#PHP" expanded="false" />
+            <marker date="1510576512721" expanded="true" signature="984:1023" ph="SELECT MAX('... COMPLAINT" />
+            <marker date="1510576512721" expanded="true" signature="1296:1453" ph="INSERT INTO COMPLAINT... " />
+            <marker date="1510576512721" expanded="true" signature="1296:1454" ph="INSERT INTO COMPLAINT... " />
+            <marker date="1510576512721" expanded="true" signature="2242:2261" ph="..." />
+            <marker date="1510576512721" expanded="true" signature="2942:2971" ph="..." />
+            <marker date="1510576512721" expanded="true" signature="3086:3128" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/reply.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readReply.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="62" column="5" lean-forward="false" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
+          <folding>
+            <marker date="1510575851357" expanded="true" signature="984:1027" ph="SELECT * FRO... COMPLAINT" />
+            <marker date="1510575851357" expanded="true" signature="1381:1400" ph="..." />
+            <marker date="1510575851357" expanded="true" signature="2076:2105" ph="..." />
+            <marker date="1510575851357" expanded="true" signature="2220:2262" ph="..." />
           </folding>
         </state>
       </provider>

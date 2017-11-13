@@ -60,7 +60,7 @@
 
 <body>
 
-<div id="main_panel" class="container-fluid">
+<div class="container-fluid">
 
     <div class="container" style="margin-top: auto">
 
