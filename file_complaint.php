@@ -13,7 +13,7 @@
     $password = "hr";
 
     //create connection
-    $conn = oci_connect('HR', 'hr', 'localhost/orcl');
+    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
     //check connection
     if (!$conn)
@@ -41,6 +41,7 @@
             //get the complain id
             $sql="SELECT MAX(COMPLAINT_ID) FROM COMPLAINT";
             $result=oci_parse($conn,$sql);
+            $complain=str_replace("\r\n","@",$complain);
 
             if (oci_execute($result))
             {

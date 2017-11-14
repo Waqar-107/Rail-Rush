@@ -21,7 +21,7 @@
     $password = "hr";
 
     //create connection
-    $conn = oci_connect('HR', 'hr', 'localhost/orcl');
+    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
     //check connection
     if(!$conn)
@@ -97,6 +97,7 @@
             <div class="col-md-12">
                 <p class="rpEx" id="message">complaint: </p>
                 <script type="text/javascript">var text = "<?= $complaint ?>";
+                    text = text.replace(/@/gi,"\n");
                     document.getElementById("message").innerHTML = "complaint: " + text;
                 </script>
             </div>

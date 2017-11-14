@@ -21,7 +21,7 @@
     $password = "hr";
 
     //create connection
-    $conn = oci_connect('HR', 'hr', 'localhost/orcl');
+    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
     //check connection
     if(!$conn)
@@ -81,6 +81,7 @@
             }
 
             //update the complaint table
+            $final_reply=str_replace("\r\n","@",$final_reply);
             $userId=$_SESSION['user_id'];echo $userId."\r\n";echo $final_reply."\r\n".$complaint_id."\r\n";
             $i=1;
 

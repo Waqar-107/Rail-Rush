@@ -44,7 +44,7 @@
             $password = "hr";
 
             //create connection
-            $conn = oci_connect('HR', 'hr', 'localhost/orcl');
+            $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
             //check connection
             if(!$conn)
