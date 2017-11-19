@@ -122,7 +122,7 @@
         <div class="col-md-4">
             <div class="card">
 
-                <div class="card-body">
+                <div class="card-body" onclick="window.location.href='fuel_all.php';">
                     <img src="images/fuel.png" class="rounded mx-auto d-block" style="margin-top: 15px">
                     <p class="fi">fuel</p>
                 </div>

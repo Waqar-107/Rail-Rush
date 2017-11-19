@@ -3,7 +3,7 @@ body {
     padding: 0;
     background:
 
-            linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),
+            linear-gradient(rgba(0,0,0,0.4),rgba(255,255,255,0.4)),
             url("../images/b3.jpg");
 
     background-size: cover;
@@ -31,4 +31,17 @@ a{
 
 a:hover{
     color: white;
+}
+
+#manualSearch{
+    font-size: 25px;
+    font-family: "Comic Sans MS";
+    color: white;
+}
+
+.btn-success{
+    background-color: #02a9e0;
+}
+.btn-success:hover{
+    background-color: dodgerblue;
 }

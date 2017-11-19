@@ -6,6 +6,41 @@
         header('location: base.php');
     }
 
+    //------------------------------------------------------------------------------custom search
+    echo '<div class="container-fluid" style="margin-top: 100px" id="manualSearch">
+            <div class="row">
+                <div class="col-md-2"><p>search by:</p></div>
+                
+                <div class="col-md-2">
+                    <form action="" method="post">
+                        <div class="form-group" style="float: left">
+                            <label><input type="text" name="date" id="date" placeholder="dd/mm/yyyy"></label>
+                        </div>
+                     </form>
+                </div>
+                
+                <div class="col-md-1"></div>
+                
+                <div class="col-md-2">
+                    <form action="" method="post">
+                        <div class="form-group" style="float: left">
+                            <label><input type="text" name="trainId" id="trainId" placeholder="train id"></label>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <form action="" method="post">
+                        <input type="submit" name="goToFuelDetail" id="goToFuelDetail" class="btn btn-success btn-lg btn-block"
+                                       value="search">
+                    </form>
+                </div>
+            </div>
+            
+          </div>';
+    //------------------------------------------------------------------------------custom search
+
     //---------------------------------------------------------------connect to the database
     $server = "localhost/orcl";
     $username = "HR";
@@ -59,6 +94,24 @@
     //---------------------------------------------------------------get the whole table of complain
 
     oci_close($conn);
+
+    if(isset($_POST['goToFuelDetail']))
+    {
+        $date=$_POST['date'];
+        $trainId=$_POST['trainId'];
+
+        if(empty($date) && empty($train_id))
+        {
+            echo '<script language="javascript">';
+            echo 'alert("FILL AT LEAST ONE OF THE CRITERIAS!!!");';
+            echo '</script>';
+        }
+
+        else
+        {
+            //echo '<script language="javascript">location.href="fuel_detailed.php?type=1&";</script>';
+        }
+    }
 ?>
 
 
@@ -91,6 +144,8 @@
     </div>
     <!--NAVBAR-->
 </div>
+
+
 
 </body>
 </html>
