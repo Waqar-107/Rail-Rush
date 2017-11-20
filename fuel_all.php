@@ -58,7 +58,8 @@
 
 
     //---------------------------------------------------------------get the whole table of complain
-    $sql = "SELECT * FROM FUEL";
+    $sql = "SELECT TO_CHAR(REFUELING_DATE,'DD/MM/YYYY') \"REFUELING_DATE\",TRAIN_ID,EMPLOYEE_ID,QUANTITY,FCOST
+            FROM FUEL";
     $result = oci_parse($conn,$sql);
 
 
@@ -85,7 +86,9 @@
             $cost=$row['FCOST'];
             $date=$row['REFUELING_DATE'];
 
-            echo '<tr><td><a href="#">'.$date.'</a></td><td><a href="#">'.$train_id.'</a></td><td>'.$refueledBy.'</td><td>'.$quantity.'</td><td>'.$cost.'</td></tr>';
+            $sendToTrain="fuel_detailed.php?type=2&type2=2&data=".$train_id;
+            $sendToDate="fuel_detailed.php?type=2&type2=1&data=".$date;
+            echo "<tr><td><a href=$sendToDate>".$date."</a></td><td><a href=$sendToTrain>".$train_id."</a></td><td>".$refueledBy."</td><td>".$quantity."</td><td>".$cost."</td></tr>";
         }
 
         echo "</tbody>
