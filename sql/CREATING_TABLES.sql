@@ -46,6 +46,14 @@ CREATE TABLE COMPLAINT
 /*------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------*/
+/*TABLE TO STORE REFUELING HISTORY*/
+CREATE TABLE FUEL
+(
+	REFUELING_DATE DATE DEFAULT SYSDATE,
+	EMPLOYEE_ID INTEGER NOT NULL,
+	TRAIN_ID INTEGER NOT NULL,
+	QUANTITY FLOAT NOT NULL,
+	FCOST FLOAT NOT NULL
+);
 /*------------------------------------------------------------------------------------------------------------------*/
-
 
