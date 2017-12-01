@@ -24,10 +24,6 @@ if(isset($_POST['submit']))
     }
 
     //---------------------------------------------------------------connect to the database
-    $server = "localhost/orcl";
-    $username = "HR";
-    $password = "hr";
-
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 

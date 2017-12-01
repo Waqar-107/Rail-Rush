@@ -17,10 +17,6 @@
 
 
     //---------------------------------------------------------------connect to the database
-    $server = "localhost/orcl";
-    $username = "HR";
-    $password = "hr";
-
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
@@ -32,10 +28,12 @@
     //---------------------------------------------------------------connect to the database
 
 
-    //---------------------------------------------------------------type 1
-    if($type==2) {
+    //---------------------------------------------------------------type 2
+    if($type==2)
+    {
         //group by date
-        if ($type2 == 1) {
+        if ($type2 == 1)
+        {
             $sql = "SELECT TRAIN_ID,EMPLOYEE_ID,QUANTITY,FCOST 
                     FROM FUEL
                     WHERE REFUELING_DATE=TO_DATE('$data','DD/MM/YYYY')";
@@ -66,7 +64,9 @@
                 echo "</tbody>
                  </table>";
             }
-        } else {
+        }
+        else
+        {
             $sql = "SELECT TO_CHAR(REFUELING_DATE,'DD/MM/YYYY')\"REFUELING_DATE\" ,EMPLOYEE_ID,QUANTITY,FCOST 
                     FROM FUEL
                     WHERE TRAIN_ID='$data'";
@@ -100,7 +100,14 @@
         }
 
     }
+    //---------------------------------------------------------------type 2
+
     //---------------------------------------------------------------type 1
+    else
+    {
+
+    }
+    //---------------------------------------------------------------type 2
 
 ?>
 

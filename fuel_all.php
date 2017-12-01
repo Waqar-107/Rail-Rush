@@ -7,45 +7,51 @@
     }
 
     //------------------------------------------------------------------------------custom search
-    echo '<div class="container-fluid" style="margin-top: 100px" id="manualSearch">
-            <div class="row">
-                <div class="col-md-2"><p>search by:</p></div>
-                
-                <div class="col-md-2">
-                    <form action="" method="post">
-                        <div class="form-group" style="float: left">
-                            <label><input type="text" name="date" id="date" placeholder="dd/mm/yyyy"></label>
-                        </div>
-                     </form>
+    /*echo '<div class="container-fluid" style="margin-top: 100px" id="manualSearch">
+            <form action="" method="post">
+                        
+                <div class="form-group" style="float: left">
+                   <label><input type="text" name="sdate" id="sdate" placeholder="dd/mm/yyyy" style="width: 100%"></label>
                 </div>
-                
-                <div class="col-md-1"></div>
-                
-                <div class="col-md-2">
-                    <form action="" method="post">
-                        <div class="form-group" style="float: left">
-                            <label><input type="text" name="trainId" id="trainId" placeholder="train id"></label>
-                        </div>
-                    </form>
+                 
+                <div style="width: 100px;height: 100px"></div>
+                                 
+                <div class="form-group" style="float: left">
+                   <label><input type="text" name="strainId" id="strainId" placeholder="train id" style="width: 100%"></label>
                 </div>
-                
-                <div class="col-md-1"></div>
-                <div class="col-md-2">
-                    <form action="" method="post">
-                        <input type="submit" name="goToFuelDetail" id="goToFuelDetail" class="btn btn-success btn-lg btn-block"
-                                       value="search">
-                    </form>
+                    
+                <div>
+                     <input type="submit" name="goToFuelDetail" id="goToFuelDetail" class="btn btn-success btn-lg btn-block"
+                                       value="search"
                 </div>
-            </div>
+            </form>
             
           </div>';
     //------------------------------------------------------------------------------custom search
 
-    //---------------------------------------------------------------connect to the database
-    $server = "localhost/orcl";
-    $username = "HR";
-    $password = "hr";
+    //------------------------------------------------------------------------------custom search
+    if(isset($_POST['goToFuelDetail']))
+    {
+        $date=$_POST['sdate'];
+        $trainId=$_POST['strainId'];
 
+        if(empty($date) && empty($train_id))
+        {
+            echo '<script language="javascript">';
+            echo 'alert("FILL AT LEAST ONE OF THE CRITERIAS!!!");';
+            echo '</script>';
+        }
+
+        else
+        {
+            echo '<script language="JavaScript">location.href="base.php";</script>';
+            //echo '<script language="javascript">location.href="fuel_detailed.php?type=1&";</script>';
+        }
+    }*/
+    //------------------------------------------------------------------------------custom search
+
+
+    //---------------------------------------------------------------connect to the database
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
@@ -59,7 +65,8 @@
 
     //---------------------------------------------------------------get the whole table of complain
     $sql = "SELECT TO_CHAR(REFUELING_DATE,'DD/MM/YYYY') \"REFUELING_DATE\",TRAIN_ID,EMPLOYEE_ID,QUANTITY,FCOST
-            FROM FUEL";
+            FROM FUEL
+            ORDER BY REFUELING_DATE";
     $result = oci_parse($conn,$sql);
 
 
@@ -98,23 +105,6 @@
 
     oci_close($conn);
 
-    if(isset($_POST['goToFuelDetail']))
-    {
-        $date=$_POST['date'];
-        $trainId=$_POST['trainId'];
-
-        if(empty($date) && empty($train_id))
-        {
-            echo '<script language="javascript">';
-            echo 'alert("FILL AT LEAST ONE OF THE CRITERIAS!!!");';
-            echo '</script>';
-        }
-
-        else
-        {
-            //echo '<script language="javascript">location.href="fuel_detailed.php?type=1&";</script>';
-        }
-    }
 ?>
 
 

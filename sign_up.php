@@ -27,10 +27,6 @@ if (isset($_POST['submit']))
         if ($pass1 == $pass2)
         {
             //---------------------------------------------------------------connect to the database
-            $server = "localhost/orcl";
-            $username = "HR";
-            $password = "hr";
-
             //create connection
             $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
             //check connection

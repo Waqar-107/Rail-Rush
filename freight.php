@@ -17,24 +17,22 @@
     }
     //---------------------------------------------------------------connect to the database
 
+    //---------------------------------------------------------------get the whole table of freight
+    $sql='SELECT * FROM FREIGHT';
+    $result=oci_parse($conn,$sql);
 
-    //---------------------------------------------------------------get the whole table of complain
-    $sql = "SELECT * FROM COMPLAINT";
-    $result = oci_parse($conn,$sql);
-
-
-    if (oci_execute($result))
+    if(oci_execute($result))
     {
-
         echo "<table class=\"table table-hover table-dark\">
         <thead>
         <tr>
-            <th scope=\"col\">Complain Id</th>
+            <th scope=\"col\">Freight Id</th>
             <th scope=\"col\">Train Id</th>
-            <th scope=\"col\">Complainant</th>
-            <th scope=\"col\">Complaint</th>
-            <th scope=\"col\">Respondent</th>
-            <th scope=\"col\">Reply</th>
+            <th scope=\"col\">Trailer Id</th>
+            <th scope=\"col\">Company</th>
+            <th scope=\"col\">Weight</th>
+            <th scope=\"col\">Inside</th>
+            <th scope=\"col\">Delivered</th>
             <th scope=\"col\">Trip Date</th>
         </tr>
         </thead>
@@ -42,63 +40,37 @@
 
         while ($row = oci_fetch_assoc($result))
         {
-            $status=$row['STATUS'];
+            if($row['DELIVERY_STATUS']==1)
+                $status='yes';
+            else
+                $status='no';
+
             $tripDate=$row['TRIP_DATE'];
 
-            if($status)
-            {
-                $text = $row['MESSAGE'];
-                $text=substr($text, 0, 50);
-
-                $rep = $row['REPLY'];
-                if (strlen($rep) < 20)
-                    $rep = $rep . "...(more)";
-                else
-                    $rep = substr($rep, 0, 20) . "...(more)";
-
-                $linkToReadReply = "readReply.php?data=" . $row['COMPLAINT_ID'];
-                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td>".$text."</td>Replied<td>".$row["RESPONDENT"]."</td><td><a href=$linkToReadReply>".$rep."</a></td><td>".$tripDate."</td></tr>";
-
-            }
-
-            else
-            {
-                $text = $row['MESSAGE'];
-                if (strlen($text) < 20)
-                    $text = $text . "...(more)";
-                else
-                    $text = substr($text, 0, 20) . "...(more)";
-
-                $linkToReply = "reply.php?data=" . $row['COMPLAINT_ID'];
-                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td><a href=$linkToReply>" . $text . "</a></td><td>null</td><td>null</td><td>".$tripDate."</td></tr>";
-
-            }
-
-
+            echo '<tr><td>'.$row['FREIGHT_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRAILER_ID'].
+                '</td><td>'.$row['COMPANY_NAME'].'</td><td>'.$row['WEIGHT'].'</td><td>'.$row['INSIDE'].
+                '</td><td>'.$status.'</td><td>'.$row['TRIP_DATE'].'</td></tr>';
         }
 
         echo "</tbody>
     </table>";
     }
-    //---------------------------------------------------------------get the whole table of complain
+    //---------------------------------------------------------------get the whole table of freight
 
     oci_close($conn);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
-
 <head>
     <meta charset="UTF-8">
-    <title>list of complain</title>
+    <title>freight_list</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/complaint_list.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
 </head>
-
 
 <body>
 
@@ -121,6 +93,13 @@
     <!--NAVBAR-->
 </div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+            <img src="images/add.png"/>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

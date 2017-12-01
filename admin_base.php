@@ -52,7 +52,7 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
+            <div class="card" onclick="window.location.href='freight.php'">
 
                 <div class="card-body">
                     <img src="images/freight.png" class="rounded mx-auto d-block" style="margin-top: 15px">

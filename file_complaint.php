@@ -8,10 +8,6 @@
 
 
     //---------------------------------------------------------------connect to the database
-    $server = "localhost/orcl";
-    $username = "HR";
-    $password = "hr";
-
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
@@ -129,7 +125,7 @@
                 <form action="" method="post" style="word-wrap: break-word">
 
                     <div class="form-group">
-                        <input type="date" id="date" name="date" class="form-group" style="padding-left: 5px" placeholder="in dd/mm/yyyy format">
+                        <input type="text" id="date" name="date" class="form-group" style="padding-left: 5px" placeholder="in dd/mm/yyyy format">
                     </div>
 
                     <!--train number-->
