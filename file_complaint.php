@@ -46,7 +46,7 @@
                 $complainant=$_SESSION['user_id'];
                 $newId=$row['MAX(COMPLAINT_ID)']+1;
 
-                $sql="INSERT INTO COMPLAINT(COMPLAINT_ID,COMPLAINANT,TRAIN_ID,MESSAGE,TRIP_DATE) VALUES('$newId','$complainant','$trainNo','$complain',TO_DATE('$day','DD/MM/YYYY'))";
+                $sql="INSERT INTO COMPLAINT(COMPLAINT_ID,COMPLAINANT,TRAIN_ID,MESSAGE,TRIP_DATE) VALUES('$newId','$complainant','$trainNo','$complain',TO_DATE('$day','YYYY-MM-DD'))";
                 $result=oci_parse($conn,$sql);
 
                 if(oci_execute($result))
@@ -125,7 +125,7 @@
                 <form action="" method="post" style="word-wrap: break-word">
 
                     <div class="form-group">
-                        <input type="text" id="date" name="date" class="form-group" style="padding-left: 5px" placeholder="in dd/mm/yyyy format">
+                        <input type="date" id="date" name="date" class="form-group" style="padding-left: 5px" placeholder="in dd/mm/yyyy format">
                     </div>
 
                     <!--train number-->

@@ -6,6 +6,19 @@
         header('location: base.php');
     }
 
+    //---------------------------------------------------------------add new entry
+    echo '<div class="container-fluid" style="margin-top: 100px">
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="addFreight.php">
+                    <img src="images/add.png"/> add</a>
+                </div>
+             
+            </div>
+          </div>';
+    //---------------------------------------------------------------add new entry
+
+
     //---------------------------------------------------------------connect to the database
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
@@ -23,7 +36,7 @@
 
     if(oci_execute($result))
     {
-        echo "<table class=\"table table-hover table-dark\">
+        echo "<table class=\"table table-hover table-dark\" style='margin-top: 50px'>
         <thead>
         <tr>
             <th scope=\"col\">Freight Id</th>
@@ -47,7 +60,7 @@
 
             $tripDate=$row['TRIP_DATE'];
 
-            echo '<tr><td>'.$row['FREIGHT_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRAILER_ID'].
+            echo '<tr><td>'.$row['FREIGHT_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRAILER_NO'].
                 '</td><td>'.$row['COMPANY_NAME'].'</td><td>'.$row['WEIGHT'].'</td><td>'.$row['INSIDE'].
                 '</td><td>'.$status.'</td><td>'.$row['TRIP_DATE'].'</td></tr>';
         }
@@ -91,14 +104,6 @@
         </nav>
     </div>
     <!--NAVBAR-->
-</div>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-1">
-            <img src="images/add.png"/>
-        </div>
-    </div>
 </div>
 
 </body>
