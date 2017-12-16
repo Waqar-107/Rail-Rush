@@ -62,6 +62,7 @@
             {
                 $_SESSION['user_in']=true;
                 $_SESSION['user_id']=$id;
+                $_SESSION['type']=1;
 
                 header('Location: admin_base.php');
             }

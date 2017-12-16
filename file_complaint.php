@@ -6,6 +6,12 @@
         header('Location: login.php');
     }
 
+    //if not admin, send to base
+    if($_SESSION['type']==1)
+    {
+        header('Location: base.php');
+    }
+
 
     //---------------------------------------------------------------connect to the database
     //create connection

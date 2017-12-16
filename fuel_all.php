@@ -6,6 +6,12 @@
         header('location: base.php');
     }
 
+    //if not admin, send to base
+    if($_SESSION['type']==2)
+    {
+        header('Location: base.php');
+    }
+
     //------------------------------------------------------------------------------custom search
     /*echo '<div class="container-fluid" style="margin-top: 100px" id="manualSearch">
             <form action="" method="post">

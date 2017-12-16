@@ -78,6 +78,7 @@ if (isset($_POST['submit']))
 
                     $_SESSION["user_in"] = true;
                     $_SESSION["user_id"] = $newId;
+                    $_SESSION["type"]=2;
 
                     $msg = "Dear " . $fname . "\r\nwelcome aboard!! Your user id is " . $newId . ". Use the id to log in and buy tickets\r\n- X-Railways";
                     $msg = wordwrap($msg, 70, "\r\n");

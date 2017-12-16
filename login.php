@@ -62,6 +62,7 @@ if(isset($_POST['submit']))
             {
                 $_SESSION['user_in']=true;
                 $_SESSION['user_id']=$id;
+                $_SESSION['type']=2;
             }
 
             echo '<script language="javascript">location.href="base.php";</script>';

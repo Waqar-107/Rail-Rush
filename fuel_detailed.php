@@ -6,6 +6,12 @@
         header('location: base.php');
     }
 
+    //if not admin, send to base
+    if($_SESSION['type']==2)
+    {
+        header('Location: base.php');
+    }
+
     //---------------------------------------------------------------get the complain id from previous page
     if (isset($_GET["type"]))
     {

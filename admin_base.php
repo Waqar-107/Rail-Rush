@@ -6,6 +6,12 @@
         header('Location: admin.php');
     }
 
+    //if not admin, send to base
+    if($_SESSION['type']==2)
+    {
+        header('Location: base.php');
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +97,7 @@
         <div class="col-md-4">
             <div class="card">
 
-                <div class="card-body">
+                <div class="card-body" onclick="window.location.href='trains.php';">
                     <img src="images/train.png" class="rounded mx-auto d-block"
                          style="margin-top: 15px">
                     <p class="fi">trains</p>

@@ -6,6 +6,12 @@
         header('Location: base.php');
     }
 
+    //if not admin, send to base
+    if($_SESSION['type']==2)
+    {
+            header('Location: base.php');
+    }
+
     if (isset($_POST['submit']))
     {
         $trainNo = $_POST['trainNo'];
