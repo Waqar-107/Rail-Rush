@@ -218,3 +218,47 @@ INSERT INTO FUEL (REFUELING_DATE,EMPLOYEE_ID,TRAIN_ID,QUANTITY,FCOST) VALUES (TO
 
 /*------------------------------------------------------------------------------------------------------------------*/
 
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*ADMIN INFO IN EMPLOYEES*/
+INSERT INTO EMPLOYEE 
+VALUES(1,'Waqar','Hassan Khan','waqar.hassan866@gmail.com','201505107',TO_DATE('15-08-2015','DD-MM-YYYY'),35000,'ADMIN');
+INSERT INTO EMPLOYEE 
+VALUES(2,'Tom','Marvolo Riddle','1505107.whk@ugrad.cse.buet.ac.bd','201505101',TO_DATE('15-08-2015','DD-MM-YYYY'),35000,'ADMIN');
+INSERT INTO EMPLOYEE 
+VALUES(3,'Severus','Snape','anfuad@yahoo.com','201505102',TO_DATE('15-08-2015','DD-MM-YYYY'),35000,'ADMIN');
+INSERT INTO EMPLOYEE 
+VALUES(4,'Ron','Weasly','kowshid@gmail.com','201505103',TO_DATE('15-08-2015','DD-MM-YYYY'),35000,'ADMIN');
+INSERT INTO EMPLOYEE 
+VALUES(5,'Draco','Malfoy','farhan.tanvir.utshaw@gmail.com','201505104',TO_DATE('15-08-2015','DD-MM-YYYY'),35000,'ADMIN');
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*DRIVER INFO IN EMPLOYEE*/
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (12,'Chiquita','Erica','Cras.pellentesque@tellusSuspendisse.co.uk','726247194',TO_DATE('29/07/2015','DD/MM/YYYY'),26526,'DRIVER');
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (10,'Octavius','Wade','sollicitudin@commodoat.co.uk','275841592',TO_DATE('29/07/2015','DD/MM/YYYY'),25075,'DRIVER');
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (11,'Shelly','Dacey','id.sapien@nuncrisus.org','715945786',TO_DATE('29/07/2015','DD/MM/YYYY'),25919,'DRIVER');
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (6,'Jaquelyn','Raymond','id.risus@amet.edu','974786759',TO_DATE('29/07/2015','DD/MM/YYYY'),29402,'DRIVER');
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (7,'MacKensie','Tarik','dolor@velvulputateeu.com','964277712',TO_DATE('29/07/2015','DD/MM/YYYY'),28056,'DRIVER');
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (8,'Tobias','Jordan','dolor.sit.amet@in.edu','237493799',TO_DATE('29/07/2015','DD/MM/YYYY'),25969,'DRIVER');
+INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SALARY,JOB_TYPE) VALUES (9,'Robin','Vincent','eget.venenatis.a@malesuadavel.edu','423119395',TO_DATE('29/07/2015','DD/MM/YYYY'),26599,'DRIVER');
+
+/*------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*TRAIN INFO*/
+INSERT INTO TRAIN VALUES(115,'PAHARIKA EXPRESS',9,10,120,90,90,0);
+INSERT INTO TRAIN VALUES(115,'SUBARNA EXPRESS',10,10,120,90,90,0);
+INSERT INTO TRAIN VALUES(110,'HULK EXPRESS',11,15,0,0,0,15);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*INSERT FARES*/
+INSERT INTO FARE VALUES(1,'CHITTAGONG','DHAKA',110,4,700);
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
