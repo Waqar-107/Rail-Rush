@@ -1,20 +1,4 @@
 /*------------------------------------------------------------------------------------------------------------------*/
-/*CREATE TABLE FOR THE USERS/PASSENGERS*/
-
-CREATE TABLE PASSENGER
-(
-
-	PASSENGER_ID INTEGER CONSTRAINT PASSENGER_PK PRIMARY KEY, 
-	FIRST_NAME VARCHAR2(60) NOT NULL,
-	LAST_NAME VARCHAR2(60) NOT NULL,
-	EMAIL_ID VARCHAR2(60) NOT NULL ,
-	PHONE VARCHAR2(11) NOT NULL,
-	P_PASSWORD VARCHAR(25) NOT NULL
-);
-/*------------------------------------------------------------------------------------------------------------------*/
-
-
-/*------------------------------------------------------------------------------------------------------------------*/
 /*CREATE TABLE FOR ADMINS*/
 
 CREATE TABLE ADMIN
@@ -26,6 +10,20 @@ CREATE TABLE ADMIN
 	EMAIL_ID VARCHAR2(60) NOT NULL ,
 	PHONE VARCHAR2(11) NOT NULL,
 	A_PASSWORD VARCHAR(50) NOT NULL
+);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*BOOKING*/
+CREATE TABLE BOOKING
+(
+	BOOKING_ID INTEGER CONSTRAINT BOOKING_PK PRIMARY KEY, 
+	PASSENGER_ID INTEGER NOT NULL,
+	BDATE DATE NOT NULL,
+	SEAT_NO VARCHAR2(10) NOT NULL,
+	TRAIN_ID VARCHAR2(20) NOT NULL,
+	TRIP_ID VARCHAR2(20) NOT NULL
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
@@ -45,6 +43,53 @@ CREATE TABLE COMPLAINT
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*EMPLOYEE DETAILS*/
+CREATE TABLE EMPLOYEE
+(
+	EMPLOYEE_ID INTEGER CONSTRAINT EMPLOYEE_PK PRIMARY KEY,
+	FIRST_NAME VARCHAR2(25) NOT NULL,
+	LAST_NAME VARCHAR2(25) NOT NULL,
+	EMAIL VARCHAR2(60),
+	PHONE VARCHAR2(15),
+	JOIN_DATE DATE NOT NULL,
+	SALARY FLOAT NOT NULL,
+	JOB_TYPE VARCHAR2(30) NOT NULL
+)
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*FARE LIST*/
+CREATE TABLE FARE
+(
+	FARE_ID INTEGER CONSTRAINT FARE_PK PRIMARY KEY,
+	STARTING VARCHAR2(30) NOT NULL,
+	FINISHING VARCHAR2(30) NOT NULL,
+	TRAIN_ID INTEGER NOT NULL,
+	STYPE INTEGER NOT NULL,
+	PRICE FLOAT NOT NULL
+)
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*FREIGHT HISTORY*/
+CREATE TABLE FREIGHT
+(
+	FREIGHT_ID INTEGER CONSTRAINT FREIGHT_PK PRIMARY KEY,
+	TRAIN_ID INTEGER NOT NULL,
+	TRAILER_NO INTEGER NOT NULL,
+	COMPANY_NAME VARCHAR2(50) NOT NULL,
+	WEIGHT FLOAT NOT NULL,
+	INSIDE VARCHAR2(25) NOT NULL,
+	DELIVERY_STATUS INTEGER DEFAULT 0,
+	TRIP_DATE DATE NOT NULL
+);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
 /*------------------------------------------------------------------------------------------------------------------*/
 /*TABLE TO STORE REFUELING HISTORY*/
 CREATE TABLE FUEL
@@ -57,3 +102,75 @@ CREATE TABLE FUEL
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*CREATE TABLE FOR THE USERS/PASSENGERS*/
+
+CREATE TABLE PASSENGER
+(
+
+	PASSENGER_ID INTEGER CONSTRAINT PASSENGER_PK PRIMARY KEY, 
+	FIRST_NAME VARCHAR2(60) NOT NULL,
+	LAST_NAME VARCHAR2(60) NOT NULL,
+	EMAIL_ID VARCHAR2(60) NOT NULL ,
+	PHONE VARCHAR2(11) NOT NULL,
+	P_PASSWORD VARCHAR(25) NOT NULL
+);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*REVENUE*/
+CREATE TABLE REVENUE
+(
+	TRAIN_ID INTEGER CONSTRAINT REVENUE_PK PRIMARY KEY,
+	SPENT FLOAT,
+	EARNED FLOAT
+);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*TENDER*/
+CREATE TABLE TENDER
+(
+	TENDER_ID INTEGER CONSTRAINT TENDER_PK PRIMARY KEY,
+	ADMIN_ID INTEGER NOT NULL,
+	COMPANY VARCHAR2(60) NOT NULL,
+	TDATE DATE NOT NULL,
+	COSTING INTEGER NOT NULL,
+	WORK_DESCRIPTION VARCHAR2(250) NOT NULL
+);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*PARTIAL TRAIN-DETAIL*/
+CREATE TABLE TRAIN
+(
+	TRAIN_ID INTEGER CONSTRAINT TRAIN_PK PRIMARY KEY,
+	TRAIN_NAME VARCHAR2(50) NOT NULL,
+	EMPLOYEE_ID INTEGER NOT NULL,
+	COMPARTMENT INTEGER NOT NULL,
+	FIRST_CLASS INTEGER,
+	SECOND_CLASS INTEGER,
+	THIRD_CLASS INTEGER,
+	CARGO INTEGER
+)
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+CREATE TABLE TRIP
+(
+	TRIP_ID INTEGER CONSTRAINT TRIP_PK PRIMARY KEY,
+	TRAIN_ID INTEGER NOT NULL,
+	TRIP_DATE DATE NOT NULL,
+	STARTING VARCHAR2(60) NOT NULL,
+	DESTINATION VARCHAR2(60) NOT NULL
+)
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------*/
