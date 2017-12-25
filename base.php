@@ -62,11 +62,11 @@
             </li>
 
             <li>
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="#">F.A.Q</a>
             </li>
 
             <li>
-                <a class="nav-link" href="#"><img src="images/ticket.png" style="margin-right: 5px">Book Now</a>
+                <a class="nav-link" href="bookNow.php"><img src="images/ticket.png" style="margin-right: 5px">Book Now</a>
             </li>
 
         </ul>

@@ -1,0 +1,63 @@
+.navbar-light {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background:
+
+            linear-gradient(rgba(255,255,255,0.8),rgba(255,255,255,0.8)),
+            url("../images/b1.jpg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+}
+
+.FormInput
+{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 100%;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    text-align: center;
+}
+
+#headings
+{
+    font-family: "Comic Sans MS";
+    font-size: 25px;
+    text-align: center;
+}
+
+.btn-success {
+    background-color: #02a9e0;
+    border: hidden;
+}
+
+.btn-success:hover {
+    background-color: dodgerblue;
+    border: hidden;
+}
+
+
+input[type=date]
+{
+    height: 50px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 60%;
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    outline: none;
+    border: 0;
+    border-radius: 3px;
+    padding: 0 3px;
+}
+
+

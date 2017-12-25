@@ -1,0 +1,134 @@
+<?php
+
+session_start();
+if (empty($_SESSION['user_in']) || $_SESSION['type'] != 2) {
+    header('location: base.php');
+}
+
+//---------------------------------------------------------------connect to the database
+//create connection
+$conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
+
+//check connection
+if (!$conn) {
+    echo 'connection error';
+}
+//---------------------------------------------------------------connect to the database
+
+//get the starting or arrivals from the database
+$sql = "SELECT DISTINCT(STARTING) FROM  TRIP ORDER BY STARTING";
+$result = oci_parse($conn, $sql);
+$arr = array();
+
+//SAVE THEM IN ARRAY
+if (oci_execute($result)) {
+    while ($row = oci_fetch_assoc($result))
+    {
+        array_push($arr, $row['STARTING']);
+    }
+}
+
+
+if (isset($_POST['submit']))
+{
+    if (empty($_POST['mdate']) || empty($_POST['mstart']) || empty($_POST['mfinish']))
+    {
+        echo '<script language="javascript">';
+        echo 'alert("FIELDS CANNOT BE EMPTY !!!")';
+        echo '</script>';
+    }
+
+    else
+    {
+        $trip_date = $_POST['mdate'];
+        $starting = $_POST['mstart'];
+        $dest = $_POST['mfinish'];
+        $link = 'getSpecTravel.php?date=' . $trip_date . '&start=' . $arr[$starting-1] . '&end=' . $arr[$dest-1];
+        $flink='location='.$link;
+        header("Location: $link");
+    }
+}
+
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>bookNow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bookNow.css" rel="stylesheet">
+    <script src="js/showDate.js" type="text/javascript"></script>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="container">
+    <!--NAVBAR-->
+    <div class="row" style="margin-bottom: 10%">
+        <nav class="navbar fixed-top navbar-light">
+            <img src="images/trainLogo.png" style="margin-left: 10px">
+            <a href="destruction.php"
+               style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">log out</a>
+            <p id="tt"
+               style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
+                date</p>
+            <script type="text/javascript">
+                dateShower()
+            </script>
+        </nav>
+    </div>
+    <!--NAVBAR-->
+</div>
+
+
+<div class="container-fluid">
+    <form method="post">
+        <div class="row" id="headings">
+
+            <div class="col-md-4">Date</div>
+            <div class="col-md-4">Departure</div>
+            <div class="col-md-4">Arrival</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <input type="date" class="form-control" id="mdate" name="mdate" placeholder="First name" value="Mark" required>
+            </div>
+            <div class="col-md-4 mb-3">
+                <select class="form-control" name="mstart" id="mstart">
+                    <?php
+                        for($i=0;$i<count($arr);$i++)
+                        {
+                            echo '<option value='.($i+1).'>'.$arr[$i].'</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <select class="form-control" name="mfinish" id="mfinish">
+                    <?php
+                    for($i=0;$i<count($arr);$i++)
+                    {
+                        echo '<option value='.($i+1).'>'.$arr[$i].'</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <button class="btn btn-success btn-lg btn-block" type="submit" id="submit" name="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
