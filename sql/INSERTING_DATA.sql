@@ -248,16 +248,30 @@ INSERT INTO EMPLOYEE (EMPLOYEE_ID,FIRST_NAME,LAST_NAME,EMAIL,PHONE,JOIN_DATE,SAL
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*TRAIN INFO*/
-INSERT INTO TRAIN VALUES(115,'PAHARIKA EXPRESS',9,10,120,90,90,0);
-INSERT INTO TRAIN VALUES(115,'SUBARNA EXPRESS',10,10,120,90,90,0);
-INSERT INTO TRAIN VALUES(110,'HULK EXPRESS',11,15,0,0,0,15);
+INSERT INTO TRAIN VALUES(110,'HULK EXPRESS',6,'CHITTAGONG','DHAKA',15,0,0,0,15);
+INSERT INTO TRAIN VALUES(111,'SUNDARBAN EXPRESS',7,'DHAKA','KHULNA',10,120,90,90,0);
+INSERT INTO TRAIN VALUES(112,'SUBARNA EXPRESS',8,'CHITTAGONG','DHAKA',10,120,90,90,0);
+INSERT INTO TRAIN VALUES(113,'EKOTA EXPRESS',9,'DINAJPUR','DHAKA',10,120,90,90,0);
+INSERT INTO TRAIN VALUES(114,'SILK CITY EXPRESS',10,'DHAKA','RAJSHAHI',10,120,90,90,0);
+INSERT INTO TRAIN VALUES(115,'EGAROSINDHUR',11,'DHAKA','KISHOREGANJ',10,120,90,90,0);
+INSERT INTO TRAIN VALUES(116,'TURNA EXPRESS',12,'CHITTAGONG','DHAKA',10,120,90,90,0);
 /*------------------------------------------------------------------------------------------------------------------*/
+
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*INSERT FARES*/
 INSERT INTO FARE VALUES(1,'CHITTAGONG','DHAKA',110,4,700);
+INSERT INTO FARE VALUES(2,'CHITTAGONG','DHAKA',115,1,500);
+INSERT INTO FARE VALUES(3,'CHITTAGONG','DHAKA',115,2,400);
+INSERT INTO FARE VALUES(4,'CHITTAGONG','DHAKA',115,3,300);
 /*------------------------------------------------------------------------------------------------------------------*/
+
+
 /*------------------------------------------------------------------------------------------------------------------*/
+/*INSERT INTO TRIP*/
+INSERT INTO TRIP VALUES(1,116,TO_DATE('25-12-2017','DD-MM-YYYY'),'DHAKA','CHITTAGONG');
+INSERT INTO TRIP VALUES(3,111,TO_DATE('25-12-2017','DD-MM-YYYY'),'DHAKA','KHULNA');
+INSERT INTO TRIP VALUES(5,114,TO_DATE('25-12-2017','DD-MM-YYYY'),'DHAKA','RAJSHAHI');
 /*------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------------------*/
 
