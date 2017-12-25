@@ -1,142 +1,131 @@
 <?php
 
-session_start();
-if(isset($_SESSION['user_id']))
-{
-    header('Location: base.php');
-}
-
-if(isset($_POST['submit']))
-{
-    $id=$_POST['id'];
-
-    if(isset($_POST['admin']) && empty($_POST['user']))
-        $category="admin";
-
-    else if(isset($_POST['user']) && empty($_POST['admin']))
-        $category="user";
-
-    else
+    session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+    if(isset($_SESSION['user_id']))
     {
-        echo '<script language="javascript">';
-        echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
-        echo '</script>';
+        header('Location: base.php');
     }
 
-    //---------------------------------------------------------------connect to the database
-    //create connection
-    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
-
-    //check connection
-    if(!$conn)
+    if(isset($_POST['submit']))
     {
-        echo 'connection error';
-    }
-    //---------------------------------------------------------------connect to the database
+        $id=$_POST['id'];
 
-    if(empty($id) || empty($category))
-    {
-        if (empty($id) && empty($category))
+        if(isset($_POST['admin']) && empty($_POST['user']))
+            $category="admin";
+
+        else if(isset($_POST['user']) && empty($_POST['admin']))
+            $category="user";
+
+        else
         {
-            echo '<script language="javascript">';
-            echo 'alert("please fill all of the informations!!!")';
-            echo '</script>';
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("fill everything correctly","","error");';
+            echo '}, 50);</script>';
         }
 
+        //---------------------------------------------------------------connect to the database
+        //create connection
+        $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
-        else if(empty($id) )
+        //check connection
+        if(!$conn)
         {
-            echo '<script language="javascript">';
-            echo 'alert("enter user id")';
-            echo '</script>';
+            echo 'connection error';
         }
+        //---------------------------------------------------------------connect to the database
 
-        else if(empty($category))
+        if(empty($id) || empty($category))
         {
-            echo '<script language="javascript">';
-            echo 'alert("enter category")';
-            echo '</script>';
-        }
-    }
-
-    else
-    {
-        //---------------------------------------------------------------get password using id
-        $category=strtolower($category);
-
-        if($category=="user")
-        {
-            $sql="SELECT EMAIL_ID,FIRST_NAME,P_PASSWORD FROM PASSENGER WHERE PASSENGER_ID=$id";
-            $result = oci_parse($conn,$sql);
-            oci_execute($result);
-            $row=oci_fetch_assoc($result);
-
-            $fname=$row['FIRST_NAME'];
-            $pass=$row['P_PASSWORD'];
-            $mail=$row['EMAIL_ID'];
-
-            $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user password is '".$pass."'. Use the id to log in and buy tickets\r\n- X-Railways";
-            $msg = wordwrap($msg, 70, "\r\n");
-
-            if (mail($mail, "user id", $msg))
-            {
-                echo '<script language="javascript">';
-                echo 'alert("THE PASSWORD HAS BEEN SENT TO YOUR MAIL.");';
-                echo 'location="base.php";';
-                echo '</script>';
-
-            }
-
-            else
-            {
-                echo '<script language="javascript">';
-                echo 'alert("something went wrong, please try again!")';
-                echo '</script>';
-            }
-
-        }
-
-        else if($category=="admin")
-        {
-            $sql="SELECT EMAIL_ID,FIRST_NAME,A_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
-            $result =oci_parse($conn,$sql);
-            oci_execute($result);
-            $row=oci_fetch_assoc($result);
-
-            $fname=$row['FIRST_NAME'];
-            $pass=$row['A_PASSWORD'];
-            $mail=$row['EMAIL_ID'];
-
-            $msg = "Dear " . $fname . "\r\n Your user password is '".$pass."'. As a responsible officer, it is not expected from you to forget your password.\r\n- X-Railways";
-            $msg = wordwrap($msg, 70, "\r\n");
-
-            if (mail($mail, "password", $msg))
-            {
-                echo '<script language="javascript">';
-                echo 'alert("THE PASSWORD HAS BEEN SENT TO YOUR MAIL.");';
-                echo 'location="base.php";';
-                echo '</script>';
-
-            }
-
-            else
-            {
-                echo '<script language="javascript">';
-                echo 'alert("something went wrong, please try again!")';
-                echo '</script>';
-            }
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("fill everything correctly","","error");';
+            echo '}, 50);</script>';
         }
 
         else
         {
-            echo '<script language="javascript">';
-            echo 'alert("invalid category")';
-            echo '</script>';
-        }
-    }
+            //---------------------------------------------------------------get password using id
+            $category=strtolower($category);
 
-    oci_close($conn);
-}
+            if($category=="user")
+            {
+                $sql="SELECT EMAIL_ID,FIRST_NAME,P_PASSWORD FROM PASSENGER WHERE PASSENGER_ID=$id";
+                $result = oci_parse($conn,$sql);
+                oci_execute($result);
+                $row=oci_fetch_assoc($result);
+
+                $fname=$row['FIRST_NAME'];
+                $pass=$row['P_PASSWORD'];
+                $mail=$row['EMAIL_ID'];
+
+                $msg = "Dear " . $fname . "\r\n welcome aboard!! Your user password is '".$pass."'. Use the id to log in and buy tickets\r\n- X-Railways";
+                $msg = wordwrap($msg, 70, "\r\n");
+
+                if (mail($mail, "user id", $msg))
+                {
+                    echo '<script>
+                    setTimeout(function() {
+                        swal({
+                            title: "password has been sent to your mail",
+                            text: "eat nuts to not to forget passwords",
+                            type: "success"
+                        }, function() {
+                            window.location = "freight.php";
+                        });
+                    }, 50);
+                </script>';
+                }
+
+                else
+                {
+                    echo '<script language="javascript">';
+                    echo 'alert("something went wrong, please try again!")';
+                    echo '</script>';
+                }
+
+            }
+
+            else if($category=="admin")
+            {
+                $sql="SELECT EMAIL_ID,FIRST_NAME,A_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
+                $result =oci_parse($conn,$sql);
+                oci_execute($result);
+                $row=oci_fetch_assoc($result);
+
+                $fname=$row['FIRST_NAME'];
+                $pass=$row['A_PASSWORD'];
+                $mail=$row['EMAIL_ID'];
+
+                $msg = "Dear " . $fname . "\r\n Your user password is '".$pass."'. As a responsible officer, it is not expected from you to forget your password.\r\n- X-Railways";
+                $msg = wordwrap($msg, 70, "\r\n");
+
+                if (mail($mail, "password", $msg))
+                {
+                    echo '<script language="javascript">';
+                    echo 'alert("THE PASSWORD HAS BEEN SENT TO YOUR MAIL.");';
+                    echo 'location="base.php";';
+                    echo '</script>';
+
+                }
+
+                else
+                {
+                    echo '<script type="text/javascript">';
+                    echo 'setTimeout(function () { swal("sorry something went wrong","","error");';
+                    echo '}, 50);</script>';
+                }
+            }
+
+            else
+            {
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("fill everything correctly","","error");';
+                echo '}, 50);</script>';
+            }
+        }
+
+        oci_close($conn);
+    }
 
 ?>
 
@@ -150,6 +139,7 @@ if(isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/getPassword.css" rel="stylesheet">
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body>

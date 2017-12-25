@@ -1,6 +1,8 @@
 <?php
 
     session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+
     if (empty($_SESSION['user_id']))
     {
         header('Location: base.php');
@@ -23,9 +25,9 @@
 
     if (empty($trainNo) || empty($tno) || empty($company) || empty($weight) || empty($inside) || empty($trip_date))
     {
-        echo '<script language="javascript">';
-        echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!");';
-        echo '</script>';
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("what\'s the hurry??","fill everything first","error");';
+        echo '}, 50);</script>';
     }
 
     else
@@ -52,18 +54,24 @@
 
         if(oci_execute($result))
         {
-            echo '<script language="javascript">';
-            echo 'alert("freight added.");';
-            echo 'location="freight.php";';
-            echo '</script>';
+            echo '<script>
+            setTimeout(function() {
+                swal({
+                    title: "freight added",
+                    text: "that\'s heavy :(",
+                    type: "success"
+                }, function() {
+                    window.location = "freight.php";
+                });
+            }, 50);
+        </script>';
         }
 
         else
         {
-            echo '<script language="javascript">';
-            echo 'alert("something went wrong :(");';
-            echo 'location="addfreight.php";';
-            echo '</script>';
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("sorry something went wrong","probably database connection problem :(","error");';
+            echo '}, 50);</script>';
         }
     }
 }
@@ -77,6 +85,7 @@
     <title>add freight</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
     <link href="css/addFreight.css" rel="stylesheet">
     <script type="text/javascript" src="js/showDate.js"></script>
 </head>
@@ -85,7 +94,7 @@
 <div class="container-fluid">
     <nav class="navbar fixed-top navbar-light">
         <img src="images/trainLogo.png" style="margin-left: 10px">
-        <a href="destruction.php" style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
+        <a href="destruction.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white";>log out</a>
         <p id="tt" style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
             date</p>
         <script type="text/javascript">

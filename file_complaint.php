@@ -1,6 +1,8 @@
 <?php
 
     session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+
     if(empty($_SESSION['user_id']))
     {
         header('Location: login.php');
@@ -33,9 +35,9 @@
 
         if (empty($complain) || empty($trainNo) || empty($day))
         {
-            echo '<script language="javascript">';
-            echo 'alert("FIELDS CANNOT BE EMPTY")';
-            echo '</script>';
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("fields cannot be empty","give proper feedback so that we can improve :)","error");';
+            echo '}, 50);</script>';
         }
 
         else
@@ -58,10 +60,17 @@
                 if(oci_execute($result))
                 {
                     oci_commit($conn);oci_close($conn);
-                    echo '<script language="javascript">';
-                    echo 'alert("THANKS FOR THE FEEDBACK.");';
-                    echo 'location="base.php";';
-                    echo '</script>';
+                    echo '<script>
+                    setTimeout(function() {
+                        swal({
+                            title: "complaint successfully registered",
+                            text: "look for our owl!!!",
+                            type: "success"
+                        }, function() {
+                            window.location = "base.php";
+                        });
+                    }, 50);
+                </script>';
                 }
 
                 else
@@ -72,9 +81,9 @@
 
             else
             {
-                echo '<script language="javascript">';
-                echo 'alert("SORRY!! SOMETHING WENT WRONG, PLEASE TRY AGAIN :(")';
-                echo '</script>';
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("sorry!! something went wrong","maybe it\'s our database","warning");';
+                echo '}, 50);</script>';
             }
 
         }
@@ -93,6 +102,7 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/reply.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body>

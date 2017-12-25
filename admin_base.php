@@ -33,7 +33,7 @@
 <div class="container-fluid">
     <nav class="navbar fixed-top navbar-light">
         <img src="images/trainLogo.png" style="margin-left: 10px">
-        <a href="destruction.php" style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
+        <a href="destruction.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">log out</a>
         <p id="tt" style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
             date</p>
         <script type="text/javascript">

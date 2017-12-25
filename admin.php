@@ -1,6 +1,8 @@
 <?php
 
     session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+
     if(isset($_SESSION["user_in"]))
     {
         header('Location: admin_base.php');
@@ -13,27 +15,9 @@
 
         if(empty($id) || empty($pass))
         {
-            if (empty($id) && empty($pass))
-            {
-                echo '<script language="javascript">';
-                echo 'alert("PLEASE FILL ALL THE INFORMATIONS!!!")';
-                echo '</script>';
-            }
-
-
-            else if(empty($id) )
-            {
-                echo '<script language="javascript">';
-                echo 'alert("ENTER USER ID!!!")';
-                echo '</script>';
-            }
-
-            else if(empty($pass))
-            {
-                echo '<script language="javascript">';
-                echo 'alert("ENTER PASSWORD")';
-                echo '</script>';
-            }
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("fill everything up","i open at the close","error");';
+            echo '}, 50);</script>';
         }
 
         else
@@ -69,9 +53,9 @@
 
             else
             {
-                echo '<script language="javascript">';
-                echo 'alert("INCORRECT PASSWORD")';
-                echo '</script>';
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("incorrect password","it\'s bad to play with anothers account ;)","error");';
+                echo '}, 50);</script>';
             }
 
             oci_close($conn);
@@ -91,6 +75,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/admin.css" rel="stylesheet">
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 

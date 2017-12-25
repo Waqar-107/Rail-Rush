@@ -1,5 +1,7 @@
 <?php
     session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+
     if(empty($_SESSION['user_id']))
     {
         header('location: base.php');
@@ -33,9 +35,9 @@
     {
         if(empty($_POST['newFare']))
         {
-            echo '<script language="javascript">';
-            echo 'alert("FILL THE UPDATE FIELD!!!");';
-            echo '</script>';
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("fill the update field","","error");';
+            echo '}, 50);</script>';
         }
 
         else
@@ -48,17 +50,24 @@
             $result=oci_parse($conn,$sql);
             if(oci_execute($result))
             {
-                echo '<script language="javascript">';
-                echo 'alert("UPDATED!!!");';
-                echo 'location="fare.php";';
-                echo '</script>';
+                echo '<script>
+                            setTimeout(function() {
+                                swal({
+                                    title: "successfully updated",
+                                    text: "",
+                                    type: "success"
+                                }, function() {
+                                    window.location = "fare.php";
+                                });
+                            }, 50);
+                            </script>';
             }
 
             else
             {
-                echo '<script language="javascript">';
-                echo 'alert("SORRY SOMETHING WENT WRONG :(");';
-                echo '</script>';
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("sorry something went wrong","probably database connection problem :(","error");';
+                echo '}, 50);</script>';
             }
         }
     }
@@ -77,6 +86,7 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/reply.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body>

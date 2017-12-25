@@ -1,6 +1,8 @@
 <?php
 
     session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+
     if (empty($_SESSION['user_in']) || $_SESSION['type'] != 2)
     {
         header('location: base.php');
@@ -40,9 +42,9 @@
 
         if($dest==$starting)
         {
-            echo '<script language="javascript">';
-            echo 'alert("same departure and arrival place selected!!!")';
-            echo '</script>';
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("same departure and arrival place selected","we provide a graph without self loop ;) ","error");';
+            echo '}, 50);</script>';
         }
 
         else
@@ -63,8 +65,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/bookNow.css" rel="stylesheet">
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
-    <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 <body>

@@ -1,6 +1,9 @@
 <?php
 
     session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
+
+
     if(empty($_SESSION['user_id']))
     {
         header('location: base.php');
@@ -49,9 +52,9 @@
         $reply = $_POST['reply'];
         if (empty($reply))
         {
-            echo '<script language="javascript">';
-            echo 'alert("message is empty")';
-            echo '</script>';
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("message field is empty","mind filling me in!!!","error");';
+            echo '}, 50);</script>';
         }
 
         else
@@ -77,9 +80,9 @@
 
             else
             {
-                echo '<script language="javascript">';
-                echo 'alert("SORRY!! SOMETHING WENT WRONG, PLEASE TRY AGAIN :(")';
-                echo '</script>';
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("sorry something is wrong!!","probably the database is broken :(","error");';
+                echo '}, 50);</script>';
             }
 
             //update the complaint table
@@ -95,10 +98,17 @@
             if(oci_execute($result) && $f)
             {
                 oci_commit($conn);oci_close($conn);
-                echo '<script language="javascript">';
-                echo 'alert("MAIL SENT!");';
-                echo 'location="complain_list.php";';
-                echo '</script>';
+                echo '<script>
+                setTimeout(function() {
+                    swal({
+                        title: "reply registered in the databse",
+                        text: "",
+                        type: "success"
+                    }, function() {
+                        window.location = "complain_list.php";
+                    });
+                }, 50);
+            </script>';
             }
 
         }
@@ -116,6 +126,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/reply.css" rel="stylesheet">
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
 </head>
 
