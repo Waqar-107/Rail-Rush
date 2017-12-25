@@ -1,55 +1,58 @@
 <?php
 
-session_start();
-if (empty($_SESSION['user_in']) || $_SESSION['type'] != 2) {
-    header('location: base.php');
-}
-
-//---------------------------------------------------------------connect to the database
-//create connection
-$conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
-
-//check connection
-if (!$conn) {
-    echo 'connection error';
-}
-//---------------------------------------------------------------connect to the database
-
-//get the starting or arrivals from the database
-$sql = "SELECT DISTINCT(STARTING) FROM  TRIP ORDER BY STARTING";
-$result = oci_parse($conn, $sql);
-$arr = array();
-
-//SAVE THEM IN ARRAY
-if (oci_execute($result)) {
-    while ($row = oci_fetch_assoc($result))
+    session_start();
+    if (empty($_SESSION['user_in']) || $_SESSION['type'] != 2)
     {
-        array_push($arr, $row['STARTING']);
-    }
-}
-
-
-if (isset($_POST['submit']))
-{
-    if (empty($_POST['mdate']) || empty($_POST['mstart']) || empty($_POST['mfinish']))
-    {
-        echo '<script language="javascript">';
-        echo 'alert("FIELDS CANNOT BE EMPTY !!!")';
-        echo '</script>';
+        header('location: base.php');
     }
 
-    else
+    //---------------------------------------------------------------connect to the database
+    //create connection
+    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
+
+    //check connection
+    if (!$conn) {
+        echo 'connection error';
+    }
+    //---------------------------------------------------------------connect to the database
+
+    //get the starting or arrivals from the database
+    $sql = "SELECT DISTINCT(STARTING) FROM  TRIP ORDER BY STARTING";
+    $result = oci_parse($conn, $sql);
+    $arr = array();
+
+    //SAVE THEM IN ARRAY
+    if (oci_execute($result))
     {
+        while ($row = oci_fetch_assoc($result))
+        {
+            array_push($arr, $row['STARTING']);
+        }
+    }
+
+
+    if (isset($_POST['submit']))
+    {
+
         $trip_date = $_POST['mdate'];
         $starting = $_POST['mstart'];
         $dest = $_POST['mfinish'];
-        $link = 'getSpecTravel.php?date=' . $trip_date . '&start=' . $arr[$starting-1] . '&end=' . $arr[$dest-1];
-        $flink='location='.$link;
-        header("Location: $link");
+
+        if($dest==$starting)
+        {
+            echo '<script language="javascript">';
+            echo 'alert("same departure and arrival place selected!!!")';
+            echo '</script>';
+        }
+
+        else
+        {
+            $link = 'getSpecTravel.php?date=' . $trip_date . '&start=' . $arr[$starting-1] . '&end=' . $arr[$dest-1];
+            header("Location: $link");
+        }
     }
-}
 
-
+    oci_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -96,7 +99,7 @@ if (isset($_POST['submit']))
 
         <div class="row">
             <div class="col-md-4 mb-3">
-                <input type="date" class="form-control" id="mdate" name="mdate" placeholder="First name" value="Mark" required>
+                <input type="date" class="form-control" id="mdate" name="mdate"  required>
             </div>
             <div class="col-md-4 mb-3">
                 <select class="form-control" name="mstart" id="mstart">
