@@ -9,7 +9,7 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="createFare.php">
+                            <a href="fare_create.php">
                             <img src="images/add.png"/> add new fare</a>
                         </div>
                      
@@ -29,11 +29,12 @@
     }
     //---------------------------------------------------------------connect to the database
 
-    //---------------------------------------------------------------get the whole table of freight
+    //---------------------------------------------------------------get the whole table of fare
     $sql='SELECT F.FARE_ID,T.TRAIN_NAME,F.STARTING,F.FINISHING ,F.STYPE,F.PRICE
           FROM FARE F
           JOIN  TRAIN T
-          ON T.TRAIN_ID=F.TRAIN_ID';
+          ON T.TRAIN_ID=F.TRAIN_ID
+          ORDER BY T.TRAIN_NAME';
     $result=oci_parse($conn,$sql);
 
     if(oci_execute($result))
@@ -65,7 +66,7 @@
             else
                 $stype="cargo";
 
-            $linktoupdate="updateFare.php?data=" . $row['FARE_ID'];
+            $linktoupdate="fare_update.php?data=" . $row['FARE_ID'];
 
             echo "<tr><td>".$row['FARE_ID']."</td><td>".$row['TRAIN_NAME']."</td><td>".$row['STARTING'].
                 "</td><td>".$row['FINISHING']."</td><td>".$stype."</td><td><a href=$linktoupdate>".$row['PRICE']."</a></td></tr>";
@@ -98,7 +99,7 @@
         <nav class="navbar fixed-top navbar-light">
             <img src="images/trainLogo.png" style="margin-left: 10px">
             <a href="destruction.php"
-               style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
+               style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">log out</a>
             <p id="tt"
                style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
                 date</p>

@@ -14,9 +14,30 @@
             header('Location: base.php');
     }
 
+    //---------------------------------------------------------------connect to the database
+    //create connection
+    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
+    //check connection
+    if (!$conn)
+    {
+        echo 'connection error';
+    }
+    //---------------------------------------------------------------connect to the database
+
+    //make the train options
+    $sql="SELECT TRAIN_ID FROM TRAIN WHERE CARGO>0";
+    $result=oci_parse($conn,$sql);
+    oci_execute($result);
+    $trains=array();
+    while ($row=oci_fetch_assoc($result))
+    {
+        array_push($trains,$row['TRAIN_ID']);
+        echo $row['TRAIN_ID'];
+    }
+
     if (isset($_POST['submit']))
     {
-        $trainNo = $_POST['trainNo'];
+        $trainNo = $trains[$_POST['trainNo']-1];
         $tno = $_POST['tno'];
         $company = $_POST['company'];
         $weight = $_POST['weight'];
@@ -32,16 +53,6 @@
 
     else
     {
-        //---------------------------------------------------------------connect to the database
-        //create connection
-        $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
-        //check connection
-        if (!$conn)
-        {
-            echo 'connection error';
-        }
-        //---------------------------------------------------------------connect to the database
-
         $sql="SELECT NVL(MAX(FREIGHT_ID),0) FROM FREIGHT";
         $result=oci_parse($conn,$sql);
         oci_execute($result);
@@ -113,7 +124,15 @@
                     <form action="" method="post">
 
                         <div class="form-group">
-                            <input type="text" name="trainNo" id="trainNo" class="form-control" placeholder="train no.">
+                            <select class="form-control" name="trainNo" id="trainNo" >
+                                <option value="0">train no</option>
+                                <?php
+                                for($i=0;$i<count($trains);$i++)
+                                {
+                                    echo '<option value='.($i+1).'>'.$trains[$i].'</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
 
                         <div class="form-group">

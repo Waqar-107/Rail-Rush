@@ -31,6 +31,19 @@
     }
     //---------------------------------------------------------------connect to the database
 
+    $sql="SELECT  T.TRAIN_NAME,F.STARTING,F.FINISHING,F.PRICE
+          FROM FARE F
+          JOIN TRAIN T
+          ON F.TRAIN_ID=T.TRAIN_ID
+          WHERE FARE_ID='$fare_id'";
+
+    $result=oci_parse($conn,$sql);
+    oci_execute($result);
+
+    $row=oci_fetch_assoc($result);
+    $place=$row['STARTING'].'-'.$row['FINISHING'];
+    $cprice=$row['PRICE'];$trname=$row['TRAIN_NAME'];
+
     if(isset($_POST['submit']))
     {
         if(empty($_POST['newFare']))
@@ -100,7 +113,7 @@
             <nav class="navbar fixed-top navbar-light">
                 <img src="images/trainLogo.png" style="margin-left: 10px">
                 <a href="destruction.php"
-                   style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
+                   style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">log out</a>
 
                 <p id="tt"
                    style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
@@ -115,13 +128,46 @@
         <!--FARE ID-->
         <div class="row">
             <div class="col-md-2">
-                <p class="rpEx" id="fare_id">fare id: </p>
+                <p class="rpEx" id="fare_id">Fare id: </p>
                 <script type="text/javascript">var id = "<?= $fare_id ?>";
-                    document.getElementById("fare_id").innerHTML = "fare id: " + id;
+                    document.getElementById("fare_id").innerHTML = "Fare id: " + id;
                 </script>
             </div>
         </div>
         <!--FARE ID-->
+
+        <!--Train name-->
+        <div class="row">
+            <div class="col-md-12">
+                <p class="rpEx" id="trname">Train Name: </p>
+                <script type="text/javascript">var id = "<?= $trname ?>";
+                    document.getElementById("trname").innerHTML = "Train Name: " + id;
+                </script>
+            </div>
+        </div>
+        <!--Train name-->
+
+        <!--start-fin-->
+        <div class="row">
+            <div class="col-md-12">
+                <p class="rpEx" id="sf">Route: </p>
+                <script type="text/javascript">var id = "<?= $place ?>";
+                    document.getElementById("sf").innerHTML = "Route: " + id;
+                </script>
+            </div>
+        </div>
+        <!--start-fin-->
+
+        <!--curr fare-->
+        <div class="row">
+            <div class="col-md-12">
+                <p class="rpEx" id="cf">Current Fare: </p>
+                <script type="text/javascript">var id = "<?= $cprice ?>";
+                    document.getElementById("cf").innerHTML = "Current Fare: " + id;
+                </script>
+            </div>
+        </div>
+        <!--curr fare-->
 
         <div class="row">
             <div class="col-md-12">
