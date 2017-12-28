@@ -140,6 +140,7 @@
         <div class="row" style="margin-bottom: 10%">
             <nav class="navbar fixed-top navbar-light">
                 <img src="images/trainLogo.png" style="margin-left: 10px">
+                <a href="admin_base.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">Home</a>
                 <a href="destruction.php"
                    style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
 
@@ -155,7 +156,7 @@
 
         <!--COMPLAIN ID-->
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-12">
                 <p class="rp" id="complaint_id">complain id: </p>
                 <script type="text/javascript">var id = "<?= $complaint_id ?>";
                     document.getElementById("complaint_id").innerHTML = "complain id: " + id;
