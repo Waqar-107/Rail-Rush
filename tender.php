@@ -1,7 +1,6 @@
 <?PHP
 
     session_start();
-    echo '<script src="js/plotly-latest.min.js" type="text/javascript"></script>';
 
     //---------------------------------------------------------------connect to the database
     //create connection
@@ -58,10 +57,10 @@
         {
             $tid=$row['TENDER_ID'];
 
-            if($_SESSION['type']==1)
-                $link='tenderIndividual.php?tenderId='.$tid;
-            else
+            if(empty($_SESSION['user_in']))
                 $link='tenderOffer.php?tenderId='.$tid;
+            else
+                $link='tenderIndividual.php?tenderId='.$tid;
 
             echo '<tr><td><a href='.$link.'>'.$tid.'</a></td><td>'.$row['DESCRIPTION'].'</td><td>'.$row['EXP_TIME'].'</td></tr>';
         }
@@ -91,7 +90,6 @@
     <nav class="navbar fixed-top navbar-light">
         <img src="images/trainLogo.png" style="margin-left: 10px">
         <a href="admin_base.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">Home</a>
-        <a href="destruction.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white";>log out</a>
         <p id="tt" style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
             date</p>
         <script type="text/javascript">

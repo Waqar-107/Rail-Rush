@@ -3,49 +3,49 @@
     session_start();
     echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
 
-    if(isset($_POST['submit']))
+    $tid=$_GET['tenderId'];
+    //---------------------------------------------------------------connect to the database
+    //create connection
+    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
+    //check connection
+    if(!$conn)
     {
-        $tid=$_GET['tenderId'];
+        echo 'connection error';
+    }
+    //---------------------------------------------------------------connect to the database
+
+    //check if date is valid
+    $ans;$xtid;
+    $sql="BEGIN
+             :ans:=VALID_TENDER(:tid);
+          END;";
+    $result=oci_parse($conn,$sql);
+
+    oci_bind_by_name($result,":tid",$xtid,32);
+    oci_bind_by_name($result,":ans",$ans,32);
+    $xtid=$tid;$ans=null;oci_execute($result);
+
+    if($ans==0)
+    {
+        echo '<script>
+                     setTimeout(function() {
+                      swal({
+                         title: "deadline expired!!!",
+                         text: "wait till the next tender launches",
+                         type: "error"
+                         }, function() {
+                         window.location = "base.php";
+                      });
+                    }, 50);
+                 </script>';
+    }
+
+    if(isset($_POST['submit']) && $ans)
+    {
         $com=$_POST['cname'];
         $e1=$_POST['e1'];$p1=$_POST['p1'];
         $e2=$_POST['e2'];$p2=$_POST['p2'];
         $cost=$_POST['costing'];
-
-        //---------------------------------------------------------------connect to the database
-        //create connection
-        $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
-        //check connection
-        if(!$conn)
-        {
-            echo 'connection error';
-        }
-        //---------------------------------------------------------------connect to the database
-
-        //check if date is valid
-        $ans;
-        $sql="BEGIN
-                :ans:=VALID_TENDER(:tid);
-              END;";
-        $result=oci_parse($conn,$sql);
-
-        oci_bind_by_name($result,":tid",$tid,32);
-        oci_bind_by_name($result,":ans",$ans,32);
-        $ans=null;
-
-        if($ans==0)
-        {
-            echo '<script>
-                 setTimeout(function() {
-                  swal({
-                     title: "deadline expired!!!",
-                     text: "wait till the next tender launches",
-                     type: "error"
-                     }, function() {
-                     window.location = "base.php";
-                  });
-                }, 50);
-             </script>';
-        }
 
         //check if same company has proposed tenders for the id
         $sql="SELECT TENDER_ID FROM TENDER_OFFER WHERE TENDER_ID='$tid' AND COMPANY='$com'";
@@ -123,7 +123,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <div class="panel panel-default">
-                <h3 class="text-center login-title" style="color:white;padding-bottom: 10px">Sign Up</h3>
+                <h3 class="text-center login-title" style="color:white;padding-bottom: 10px">Tender Contract</h3>
                 <div class="panel-body">
                     <form action="" method="post">
 

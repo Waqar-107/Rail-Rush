@@ -4,7 +4,7 @@ body {
     background:
 
             linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
-            url("../images/b3.jpg");
+            url("../images/bg_t3.jpg");
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -51,4 +51,20 @@ a:hover{
 
 .table-dark>td,th{
     text-align: center;
+}
+
+#footer {
+    padding-top: 40px;
+    color: white;
+    height: 100px;
+    margin-top: 100px;
+    background-color: #2f3436;
+}
+
+.btn-success{
+    background-color: #02a9e0;
+}
+
+.btn-success:hover{
+    background-color: dodgerblue;
 }
