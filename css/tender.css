@@ -3,8 +3,8 @@ body {
     padding: 0;
     background:
 
-            linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),
-            url("../images/b1.jpg");
+            linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+            url("../images/b3.jpg");
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -21,6 +21,7 @@ body {
     font-family: "Comic Sans MS";
     font-size: 20px;
     color: white;
+    align-content: center;
     margin-top: 10%;
     overflow-x: hidden;
 }
@@ -33,4 +34,21 @@ a{
 a:hover{
     color: white;
     font-family: "Comic Sans MS";
+}
+
+.table-dark{
+    background-color: rgba(0,0,0,0.5);
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    color: white;
+    margin-top: 10%;
+    overflow-x: hidden;
+}
+
+.table-dark>th,td{
+    text-align: center;
+}
+
+.table-dark>td,th{
+    text-align: center;
 }

@@ -25,6 +25,14 @@ body {
     overflow-x: hidden;
 }
 
+.table-dark>th,td{
+    text-align: center;
+}
+
+.table-dark>td,th{
+    text-align: center;
+}
+
 a{
     color: white;
 }

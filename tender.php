@@ -3,17 +3,6 @@
     session_start();
     echo '<script src="js/plotly-latest.min.js" type="text/javascript"></script>';
 
-    if(empty($_SESSION['user_in']))
-    {
-        header('location: base.php');
-    }
-
-    //if not admin, send to base
-    if($_SESSION['type']==2)
-    {
-        header('Location: base.php');
-    }
-
     //---------------------------------------------------------------connect to the database
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
@@ -30,39 +19,59 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <a href="tenderCreate.php">
-                                <img src="images/add.png"/> add to tenders</a>
+                                <img src="images/add.png"/>Add to Tenders</a>
                             </div>
                          
                         </div>
                       </div>';
     //---------------------------------------------------------------add new entry
 
-    //---------------------------------------------------------------data of graph 2
-    $sql="SELECT TO_CHAR(TDATE,'YYYY-MM-DD'),SUM(COSTING)
-          FROM TENDER
-          GROUP BY TDATE
-          ORDER BY TDATE";
+    //---------------------------------------------------------------history of tenders
+    echo '<div class="container-fluid" style="margin-top: 50px">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="tenderAll.php">
+                                    <img src="images/helmet.png"/>History</a>
+                                </div>
+                             
+                            </div>
+                          </div>';
+    //---------------------------------------------------------------history of tenders
 
+
+    //---------------------------------------------------------------all upcoming tenders
+    $sql="SELECT * FROM TENDER_DES";
     $result=oci_parse($conn,$sql);
-    oci_execute($result);
-    $mtime=array();$cost=array();
-    while($row=oci_fetch_assoc($result))
+    if(oci_execute($result))
     {
-        array_push($mtime,$row['TO_CHAR(TDATE,\'YYYY-MM-DD\')']);array_push($cost,$row['SUM(COSTING)']);
-    }
-    //---------------------------------------------------------------data of graph 2
+        echo "<table class=\"table table-hover table-dark\">
+        <thead>
+        <tr>
+            <th scope=\"col\">Tender Id</th>
+            <th scope=\"col\">Description</th>
+            <th scope=\"col\">Date of Expire</th>
+        </tr>
+        </thead>
+        <tbody>";
 
-    //---------------------------------------------------------------data of graph 2
-    $sql="SELECT COMPANY, SUM(COSTING) FROM TENDER
-          GROUP BY COMPANY";
-    $result=oci_parse($conn,$sql);oci_execute($result);
-    $com=array();$comPrice=array();
-    while($row=oci_fetch_assoc($result))
-    {
-        array_push($com,$row['COMPANY']);array_push($comPrice,$row['SUM(COSTING)']);
-    }
-    //---------------------------------------------------------------data of graph 2
+        while($row=oci_fetch_assoc($result))
+        {
+            $tid=$row['TENDER_ID'];
 
+            if($_SESSION['type']==1)
+                $link='tenderIndividual.php?tenderId='.$tid;
+            else
+                $link='tenderOffer.php?tenderId='.$tid;
+
+            echo '<tr><td><a href='.$link.'>'.$tid.'</a></td><td>'.$row['DESCRIPTION'].'</td><td>'.$row['EXP_TIME'].'</td></tr>';
+        }
+
+        echo "</tbody>
+        </table>";
+    }
+    //---------------------------------------------------------------all upcoming tenders
+
+    oci_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -91,59 +100,6 @@
     </nav>
 </div>
 
-<div class="container-fluid" style="background-color: whitesmoke">
-    <div class="container" style="margin-top: 150px;width: 95%" id="timeCost"></div>
-</div>
-<script type="text/javascript">
-    var x=<?php echo json_encode($mtime);?>;
-    var y=<?php echo json_encode($cost);?>;
-    var data=[{
-        x:x,
-        y:y,
-        name:'time-cost',
-        type:'scatter'}
-    ];
-
-    var layout={
-        title:'Date-Cost',
-        xaxis:{
-            title:'Date→',
-
-        },
-
-        yaxis:{
-            title:'Cost→'
-        }
-    };
-
-    Plotly.newPlot('timeCost',data,layout);
-</script>
-
-<div class="container-fluid" style="background-color: whitesmoke">
-    <div class="container" style="margin-top: 150px ; width: 95%" id="comCost"></div>
-</div>
-<script>
-    var x=<?php echo json_encode($com);?>;
-    var y=<?php echo json_encode($comPrice);?>;
-    var trace={
-        x:x,y:y,type:'bar'
-    };
-
-    var layout={
-        title:'Company-Cost',
-        xaxis:{
-            title:'Company→',
-
-        },
-
-        yaxis:{
-            title:'Cost→'
-        }
-    };
-
-    var data=[trace];
-    Plotly.newPlot('comCost',data,layout);
-</script>
 
 </body>
 </html>
