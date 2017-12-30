@@ -39,4 +39,24 @@ END;
 
 
 /*------------------------------------------------------------------------------*/
+/*CHECKS IF THE TENDER HAS EXPIRED OR NOT*/
+CREATE OR REPLACE 
+FUNCTION "VALID_TENDER" (TID  INTEGER)
+RETURN INTEGER
+AS
+	ANS INTEGER;
+	FDATE DATE;
+BEGIN
+	SELECT EXP_TIME INTO FDATE 
+	FROM TENDER_DES
+	WHERE TENDER_ID=TID;
+
+	IF FDATE<SYSDATE THEN
+		ANS:=0;
+	ELSE
+		ANS:=1;
+	END IF;
+	RETURN ANS;
+END;
+
 /*------------------------------------------------------------------------------*/
