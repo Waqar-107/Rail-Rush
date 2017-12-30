@@ -9,7 +9,7 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                 <div class="row">
                     <div class="col-md-1">
-                        <a href="base.php">
+                        <a href="train_Create.php">
                         <img src="images/add.png"/> add</a>
                     </div>
                  
@@ -87,6 +87,8 @@
     <div class="row" style="margin-bottom: 10%">
         <nav class="navbar fixed-top navbar-light">
             <img src="images/trainLogo.png" style="margin-left: 10px">
+            <a href="admin_base.php"
+               style="font-size: 17px;font-family: 'Comic Sans MS';color: white">Home</a>
             <a href="destruction.php"
                style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
             <p id="tt"

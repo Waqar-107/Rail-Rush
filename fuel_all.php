@@ -12,52 +12,20 @@
         header('Location: base.php');
     }
 
-    //------------------------------------------------------------------------------custom search
-    /*echo '<div class="container-fluid" style="margin-top: 100px" id="manualSearch">
-            <form action="" method="post">
-                        
-                <div class="form-group" style="float: left">
-                   <label><input type="text" name="sdate" id="sdate" placeholder="dd/mm/yyyy" style="width: 100%"></label>
-                </div>
-                 
-                <div style="width: 100px;height: 100px"></div>
-                                 
-                <div class="form-group" style="float: left">
-                   <label><input type="text" name="strainId" id="strainId" placeholder="train id" style="width: 100%"></label>
-                </div>
-                    
-                <div>
-                     <input type="submit" name="goToFuelDetail" id="goToFuelDetail" class="btn btn-success btn-lg btn-block"
-                                       value="search"
-                </div>
-            </form>
-            
-          </div>';
-    //------------------------------------------------------------------------------custom search
-
-    //------------------------------------------------------------------------------custom search
-    if(isset($_POST['goToFuelDetail']))
-    {
-        $date=$_POST['sdate'];
-        $trainId=$_POST['strainId'];
-
-        if(empty($date) && empty($train_id))
-        {
-            echo '<script language="javascript">';
-            echo 'alert("FILL AT LEAST ONE OF THE CRITERIAS!!!");';
-            echo '</script>';
-        }
-
-        else
-        {
-            echo '<script language="JavaScript">location.href="base.php";</script>';
-            //echo '<script language="javascript">location.href="fuel_detailed.php?type=1&";</script>';
-        }
-    }*/
-    //------------------------------------------------------------------------------custom search
+    //---------------------------------------------------------------add new entry
+    echo '<div class="container-fluid" style="margin-top: 100px">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="fuelCreate.php">
+                                    <img src="images/add.png"/> Add to FUEL</a>
+                                </div>
+                             
+                            </div>
+                          </div>';
+    //---------------------------------------------------------------add new entry
 
 
-    //---------------------------------------------------------------connect to the database
+//---------------------------------------------------------------connect to the database
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
@@ -70,7 +38,7 @@
 
 
     //---------------------------------------------------------------get the whole table of complain
-    $sql = "SELECT TO_CHAR(REFUELING_DATE,'DD/MM/YYYY') \"REFUELING_DATE\",TRAIN_ID,EMPLOYEE_ID,QUANTITY,FCOST
+    $sql = "SELECT TO_CHAR(REFUELING_DATE,'DD/MM/YYYY') \"RE_DATE\",TRAIN_ID,EMPLOYEE_ID,QUANTITY,FCOST
             FROM FUEL
             ORDER BY REFUELING_DATE";
     $result = oci_parse($conn,$sql);
@@ -97,7 +65,7 @@
             $refueledBy=$row['EMPLOYEE_ID'];
             $quantity=$row['QUANTITY'];
             $cost=$row['FCOST'];
-            $date=$row['REFUELING_DATE'];
+            $date=$row['RE_DATE'];
 
             $sendToTrain="fuel_detailed.php?type=2&type2=2&data=".$train_id;
             $sendToDate="fuel_detailed.php?type=2&type2=1&data=".$date;

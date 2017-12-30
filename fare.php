@@ -85,7 +85,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>trains</title>
+    <title>fare</title>
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/complaint_list.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
