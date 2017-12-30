@@ -69,7 +69,7 @@
 
         $decider=0;
         //call the procedure
-        if(isset($_POST['submit'])=='final')
+        if(isset($_POST['submit']))
         {
             if($_POST['mcom']>=1)
             {
@@ -102,7 +102,6 @@
 
             else
             {
-
                 echo '<script>
                 setTimeout(function() {
                     swal({
@@ -117,7 +116,7 @@
             }
         }
 
-        if(isset($_POST['submit'])=='delete')
+        else if(isset($_POST['del']))
         {
             $sql="DELETE FROM TENDER_DES WHERE TENDER_ID='$tid'";
             $result=oci_parse($conn,$sql);
@@ -245,24 +244,13 @@
             </div>
 
             <div class="col-md-4">
-                <button class="btn btn-success btn-lg btn-block" type="submit" id="del" name="submit" value="delete">Delete</button>
+                <button class="btn btn-success btn-lg btn-block" type="submit" id="del" name="del" value="delete">Delete</button>
             </div>
         </div>
     </form>
 
 </div>
 
-<!--footer-->
-<div class="container-fluid" id="footer">
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-1">
-            <img src="images/buet.png" style="float: right">
-        </div>
-        <div class="col-md-3" style="padding-top: 10px;float: left">&copy Waqar Hassan Khan</div>
-    </div>
-</div>
-<!--footer-->
 
 </body>
 </html>

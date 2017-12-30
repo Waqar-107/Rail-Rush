@@ -220,15 +220,11 @@
 </script>
 <!--LOCATION OF THE HEADQUARTER-->
 
-<div class="container-fluid" style="height: 70px;background-color:#2f3436">
-
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"><img src="images/buet.png" style="float: right;margin-top: 7px">
-        </div>
-        <div class="col-md-4"><p class="fi" style="float:left">developed by<br>buet</p></div>
-    </div>
-</div>
+<!--footer-->
+<footer class="fixed-bottom" style="position: fixed;height: 35px;bottom: 0;width: 100%;background-color: #2f3436">
+    <p style="color: white;padding-top: 5px;padding-left: 10px">&copy CSE, BUET<p>
+</footer>
+<!--footer-->
 
 </body>
 </html>

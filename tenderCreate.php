@@ -25,6 +25,12 @@
     $row=oci_fetch_assoc($result);
     $newId=$row['NVL(MAX(TENDER_ID),0)']+1;
 
+    $sql="SELECT NVL(MAX(TENDER_ID),0) FROM TENDER_HISTORY";
+    $result=oci_parse($conn,$sql);
+    oci_execute($result);
+    $row=oci_fetch_assoc($result);
+    $newId=max($row['NVL(MAX(TENDER_ID),0)']+1,$newId);
+
     if(isset($_POST['submit']))
     {
         $des=$_POST['description'];$tdate=$_POST['tdate'];
@@ -98,6 +104,8 @@
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>

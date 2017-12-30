@@ -112,6 +112,7 @@
         <div class="row" style="margin-bottom: 10%">
             <nav class="navbar fixed-top navbar-light">
                 <img src="images/trainLogo.png" style="margin-left: 10px">
+                <a href="admin_base.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">Home</a>
                 <a href="destruction.php"
                    style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">log out</a>
 

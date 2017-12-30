@@ -53,14 +53,6 @@ a:hover{
     text-align: center;
 }
 
-#footer {
-    padding-top: 40px;
-    color: white;
-    height: 100px;
-    margin-top: 100px;
-    background-color: #2f3436;
-}
-
 .btn-success{
     background-color: #02a9e0;
 }
