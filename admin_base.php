@@ -50,7 +50,7 @@
         <div class="col-md-4">
             <div class="card">
 
-                <div class="card-body">
+                <div class="card-body" onclick="window.location.href='employeeList.php'">
                     <img src="images/employees.png" class="rounded mx-auto d-block" style="margin-top: 15px">
                     <p class="fi">employees</p>
                 </div>

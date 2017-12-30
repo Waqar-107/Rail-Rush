@@ -8,6 +8,10 @@ body{
     font-family: sans-serif;
 }
 
+.navbar-light {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .panel{
     border: 0px;
     background: rgba(0,0,0,0.5);
