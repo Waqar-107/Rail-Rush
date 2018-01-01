@@ -29,7 +29,12 @@
     }
     //---------------------------------------------------------------connect to the database
 
-    //---------------------------------------------------------------get the whole table of freight
+    echo '<div class="container-fluid">
+            <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: white;font-weight: bold">
+                <div class="col-md-5"></div><div class="col-md-4">Currently in Service</div>
+            </div>
+          </div>';
+    //---------------------------------------------------------------get the whole table of train
     $sql='SELECT T.TRAIN_ID,T.TRAIN_NAME,(E.FIRST_NAME||\' \'|| E.LAST_NAME) "NAME",T.COMPARTMENT,T.FIRST_CLASS,T.SECOND_CLASS,T.THIRD_CLASS,T.CARGO
           FROM TRAIN T
           JOIN EMPLOYEE E
@@ -56,8 +61,8 @@
 
         while ($row = oci_fetch_assoc($result))
         {
-
-            echo '<tr><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRAIN_NAME'].'</td><td>'.$row['NAME'].
+            $link='trainUpdate.php?tid='.$row['TRAIN_ID'];
+            echo '<tr><td><a href='.$link.'>'.$row['TRAIN_ID'].'</a></td><td>'.$row['TRAIN_NAME'].'</td><td>'.$row['NAME'].
                 '</td><td>'.$row['COMPARTMENT'].'</td><td>'.$row['FIRST_CLASS'].'</td><td>'.$row['SECOND_CLASS'].
                 '</td><td>'.$row['THIRD_CLASS'].'</td><td>'.$row['CARGO'].'</td></tr>';
         }
@@ -65,7 +70,47 @@
         echo "</tbody>
         </table>";
     }
-    //---------------------------------------------------------------get the whole table of freight
+    //---------------------------------------------------------------get the whole table of train
+
+    //---------------------------------------------------------------get the trains without driver
+    echo '<div class="container-fluid" style="margin-top: 100px">
+                <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: white;font-weight: bold">
+                    <div class="col-md-2"></div><div class="col-md-10">Currently Not in Service Because of Not Having Driver</div>
+                </div>
+              </div>';
+
+    $sql="SELECT T.TRAIN_ID,T.TRAIN_NAME,T.COMPARTMENT,T.FIRST_CLASS,T.SECOND_CLASS,T.THIRD_CLASS,T.CARGO
+          FROM TRAIN T 
+          WHERE T.EMPLOYEE_ID IS NULL";
+    $result=oci_parse($conn,$sql);
+
+    if(oci_execute($result))
+    {
+        echo "<table class=\"table table-hover table-dark\" style='margin-top: 50px'>
+                <thead>
+                <tr>
+                    <th scope=\"col\">Train Id</th>
+                    <th scope=\"col\">Train Name</th>
+                    <th scope=\"col\">Compartments</th>
+                    <th scope=\"col\">First Class</th>
+                    <th scope=\"col\">Second Class</th>
+                    <th scope=\"col\">Third Class</th>
+                    <th scope=\"col\">Cargo</th>
+                </tr>
+                </thead>
+                <tbody>";
+
+        while ($row = oci_fetch_assoc($result))
+        {
+            $link='trainUpdate.php?tid='.$row['TRAIN_ID'];
+            echo '<tr><td><a href='.$link.'>'.$row['TRAIN_ID'].'</a></td><td>'.$row['TRAIN_NAME'].'</td><td>'.$row['COMPARTMENT'].'</td><td>'.$row['FIRST_CLASS'].'</td><td>'.$row['SECOND_CLASS'].
+                '</td><td>'.$row['THIRD_CLASS'].'</td><td>'.$row['CARGO'].'</td></tr>';
+        }
+
+        echo "</tbody>
+            </table>";
+    }
+    //---------------------------------------------------------------get the trains without driver
 
     oci_close($conn);
 ?>

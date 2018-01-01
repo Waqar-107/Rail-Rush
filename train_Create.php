@@ -1,6 +1,136 @@
 <?php
 
+    session_start();
+    echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
 
+    if(empty($_SESSION['user_in']) || $_SESSION['type']==2)
+    {
+        header('Location: base.php');
+    }
+
+    if(isset($_POST['submit']))
+    {
+        //---------------------------------------------------------------connect to the database
+        //create connection
+        $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
+        //check connection
+        if(!$conn)
+        {
+            echo 'connection error';
+        }
+        //---------------------------------------------------------------connect to the database
+
+        $tname=$_POST['tname'];$st=$_POST['start'];$fin=$_POST['fin'];$com=$_POST['compartment'];
+        $fc=$_POST['fc'];$sc=$_POST['sc'];$tc=$_POST['tc'];$cargo=$_POST['cargo'];$did=$_POST['did'];
+
+        //check if name exists
+        $sql="SELECT TRAIN_ID FROM TRAIN WHERE TRAIN_NAME='$tname'";
+        $result=oci_parse($conn,$sql);oci_execute($result);
+
+        $decider=true;
+        if($row=oci_fetch_assoc($result))
+        {
+            $decider=false;
+            echo '<script type="text/javascript">';
+            echo 'setTimeout(function () { swal("train exists with same name","try a different name","error");';
+            echo '}, 50);</script>';
+        }
+
+        if($decider)
+        {
+            //check seat arrangement
+            if(($cargo>0 && ($fc>0 || $sc>0 || $tc>0)) || ($cargo+$tc+$sc+$fc)==0)
+            {
+                $decider=false;
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("wrong seat arrangement","cargo and passenger trains are different","error");';
+                echo '}, 50);</script>';
+            }
+        }
+
+        if($decider)
+        {
+            if($st==$fin)
+            {
+                $decider=false;
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("same departure and arrival selected","self loops are not allowed in this graph ;)","error");';
+                echo '}, 50);</script>';
+            }
+        }
+
+        //if driver is not in the employee list
+        if($decider)
+        {
+            $sql="SELECT EMPLOYEE_ID,JOB_TYPE FROM EMPLOYEE WHERE EMPLOYEE_ID='$did'";
+            $result=oci_parse($conn,$sql);oci_execute($result);
+
+            if($row=oci_fetch_assoc($result))
+            {
+                if($row['JOB_TYPE']=="DRIVER")
+                {
+                    $sql = "SELECT TRAIN_ID FROM TRAIN WHERE EMPLOYEE_ID=$did";
+
+                    $result = oci_parse($conn, $sql);
+                    oci_execute($result);
+
+                    $utid = -1;
+                    if ($row = oci_fetch_assoc($result)) {
+                        $utid = $row['TRAIN_ID'];
+                    }
+
+                    if ($utid > -1) {
+                        //update
+                        $sql = "UPDATE TRAIN
+                          SET EMPLOYEE_ID=NULL WHERE TRAIN_ID=$utid";
+                        $result = oci_parse($conn, $sql);
+                        oci_execute($result);
+                    }
+
+                    $sql = "SELECT MAX(TRAIN_ID) FROM TRAIN";
+                    $result = oci_parse($conn, $sql);
+                    oci_execute($result);
+                    $row = oci_fetch_assoc($result);
+                    $newId = $row['MAX(TRAIN_ID)'] + 1;
+
+                    echo $newId;
+                    $sql = "INSERT INTO TRAIN 
+                            VALUES('$newId','$tname','$did','$st','$fin','$com','$fc','$sc','$tc','$cargo')";
+                    $result = oci_parse($conn, $sql);
+
+                    if (oci_execute($result))
+                    {
+                        echo '<script>
+                            setTimeout(function() {
+                                swal({
+                                    title: "successfully registered",
+                                    text: "new train in the fleet!!! Add the fares",
+                                    type: "success"
+                                }, function() {
+                                    window.location = "trains.php";
+                                });
+                            }, 50);
+                            </script>';
+                    }
+                }
+
+                else
+                {
+                    echo '<script type="text/javascript">';
+                    echo 'setTimeout(function () { swal("employee doesn\'t exists","give a valid employee_id","error");';
+                    echo '}, 50);</script>';
+                }
+            }
+
+            else
+            {
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("employee doesn\'t exists","give a valid employee_id","error");';
+                echo '}, 50);</script>';
+            }
+        }
+
+    }
 
 ?>
 
@@ -34,11 +164,11 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="start" id="start" class="form-control" placeholder="departure">
+                            <input type="text" name="start" id="start" class="form-control" placeholder="departure" required>
                         </div>
 
                         <div class="form-group">
-                            <input type="text" name="fin" id="fin" class="form-control" placeholder="arrival">
+                            <input type="text" name="fin" id="fin" class="form-control" placeholder="arrival" required>
                         </div>
 
                         <div class="form-group">
