@@ -35,6 +35,7 @@
         echo $row['TRAIN_ID'];
     }
 
+
     if (isset($_POST['submit']))
     {
         $trainNo = $trains[$_POST['trainNo']-1];
@@ -53,35 +54,50 @@
 
     else
     {
-        $sql="SELECT NVL(MAX(FREIGHT_ID),0) FROM FREIGHT";
+        //check if the train is available in that date
+        $decider=1;
+        $sql="SELECT TRIP_ID FROM TRIP WHERE TRIP_DATE=TO_DATE($trip_date,'YYYY-MM-DD')";
         $result=oci_parse($conn,$sql);
         oci_execute($result);
-        $row=oci_fetch_assoc($result);
-
-        $id=$row['NVL(MAX(FREIGHT_ID),0)']+1;
-
-        $sql="INSERT INTO FREIGHT VALUES('$id','$trainNo','$tno','$company','$weight','$inside',0,TO_DATE('$trip_date','YYYY-MM-DD'))";
-        $result=oci_parse($conn,$sql);
-
-        if(oci_execute($result))
+        if($row=oci_fetch_assoc($result))
         {
-            echo '<script>
-            setTimeout(function() {
-                swal({
-                    title: "freight added",
-                    text: "that\'s heavy :(",
-                    type: "success"
-                }, function() {
-                    window.location = "freight.php";
-                });
-            }, 50);
-        </script>';
+            $sql="SELECT NVL(MAX(FREIGHT_ID),0) FROM FREIGHT";
+            $result=oci_parse($conn,$sql);
+            oci_execute($result);
+            $row=oci_fetch_assoc($result);
+
+            $id=$row['NVL(MAX(FREIGHT_ID),0)']+1;
+
+            $sql="INSERT INTO FREIGHT VALUES('$id','$trainNo','$tno','$company','$weight','$inside',0,TO_DATE('$trip_date','YYYY-MM-DD'))";
+            $result=oci_parse($conn,$sql);
+
+            if(oci_execute($result))
+            {
+                    echo '<script>
+                setTimeout(function() {
+                    swal({
+                        title: "freight added",
+                        text: "that\'s heavy :(",
+                        type: "success"
+                    }, function() {
+                        window.location = "freight.php";
+                    });
+                }, 50);
+            </script>';
+            }
+
+            else
+            {
+                echo '<script type="text/javascript">';
+                echo 'setTimeout(function () { swal("sorry something went wrong","probably database connection problem :(","error");';
+                echo '}, 50);</script>';
+            }
         }
 
         else
         {
             echo '<script type="text/javascript">';
-            echo 'setTimeout(function () { swal("sorry something went wrong","probably database connection problem :(","error");';
+            echo 'setTimeout(function () { swal("oops!! no trip available","check the schedule","error");';
             echo '}, 50);</script>';
         }
     }
@@ -105,6 +121,7 @@
 <div class="container-fluid">
     <nav class="navbar fixed-top navbar-light">
         <img src="images/trainLogo.png" style="margin-left: 10px">
+        <a href="destruction.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white";>Home</a>
         <a href="destruction.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white";>log out</a>
         <p id="tt" style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
             date</p>

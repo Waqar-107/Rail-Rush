@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    if(empty($_SESSION['user_in']))
+    if(empty($_SESSION['user_in']) || $_SESSION['type']==2)
     {
         header('location: base.php');
     }
