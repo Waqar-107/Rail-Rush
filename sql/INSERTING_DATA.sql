@@ -283,9 +283,10 @@ INSERT INTO FARE VALUES(4,'CHITTAGONG','DHAKA',115,3,300);
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*INSERT INTO TRIP*/
-INSERT INTO TRIP VALUES(1,116,TO_DATE('25-12-2017','DD-MM-YYYY'),'DHAKA','CHITTAGONG');
-INSERT INTO TRIP VALUES(3,111,TO_DATE('25-12-2017','DD-MM-YYYY'),'DHAKA','KHULNA');
-INSERT INTO TRIP VALUES(5,114,TO_DATE('25-12-2017','DD-MM-YYYY'),'DHAKA','RAJSHAHI');
+INSERT INTO TRIP VALUES(1,1,110,SYSDATE,'CHITTAGONG','DHAKA');
+BEGIN
+	ADD_RETURN_TRIP(1);
+END;
 /*------------------------------------------------------------------------------------------------------------------*/
 
 

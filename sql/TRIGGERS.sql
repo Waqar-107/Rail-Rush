@@ -1,0 +1,127 @@
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+/*SEAT _INSERTION: AFTER ADDING TO TRIP AUTOMATICALLY INSERTS SEAT*/
+DECLARE
+	SEAT_ID VARCHAR2(25);
+	TDATE DATE;
+	FC INTEGER;
+	SC INTEGER;
+	TC INTEGER;
+	CA INTEGER;
+	TID INTEGER;
+	CID INTEGER;
+	TNID INTEGER;
+	FID INTEGER;
+BEGIN
+	SELECT MAX(CALC_ID) INTO CID
+	FROM TRIP;
+
+	SELECT TRIP_ID INTO TID FROM TRIP WHERE CALC_ID=CID;
+
+	SELECT  TRAIN_ID,TRIP_DATE INTO TNID,TDATE
+	FROM TRIP
+	WHERE TRIP_ID=TID;
+
+	SELECT FIRST_CLASS,SECOND_CLASS,THIRD_CLASS,CARGO INTO  FC,SC,TC,CA
+	FROM TRAIN WHERE TRAIN_ID=TNID;
+
+	/*FIRST*/
+	IF FC >0 THEN
+		SELECT FARE_ID INTO FID FROM FARE WHERE TRAIN_ID=TNID AND STYPE=1;
+		FOR I IN 1..FC
+		LOOP
+			SEAT_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#1#')  ||  I;
+			INSERT INTO SEAT VALUES(SEAT_ID,FID,0);
+		END LOOP;
+	END IF;
+	
+
+	/*SECOND*/
+	IF SC >0 THEN
+		SELECT FARE_ID INTO FID FROM FARE WHERE TRAIN_ID=TNID AND STYPE=2;
+		FOR I IN 1..SC
+		LOOP
+			SEAT_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#2#')  ||  I;
+			INSERT INTO SEAT VALUES(SEAT_ID,FID,0);
+		END LOOP;
+	END IF;
+
+	/*THIRD*/
+	IF TC >0 THEN
+		SELECT FARE_ID INTO FID FROM FARE WHERE TRAIN_ID=TNID AND STYPE=3;
+		FOR I IN 1..TC
+		LOOP
+			SEAT_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#3#')  ||  I;
+			INSERT INTO SEAT VALUES(SEAT_ID,FID,0);
+		END LOOP;
+	END IF;
+
+	/*CARGO*/
+	IF CA>0 THEN
+		SELECT FARE_ID INTO FID FROM FARE WHERE TRAIN_ID=TNID AND STYPE=4;
+		FOR I IN 1..CA
+		LOOP
+			SEAT_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) ||  ('#4#')  ||  I;
+			INSERT INTO SEAT VALUES(SEAT_ID,FID,0);
+		END LOOP;
+	END IF;
+END;
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+/*SEAT_DELETION: DELETES SEATS AFTER  DELETING TRIP*/
+DECLARE
+	S_ID VARCHAR2(25);
+	TDATE DATE;
+	FC INTEGER;
+	SC INTEGER;
+	TC INTEGER;
+	CA INTEGER;
+	TID INTEGER;
+	TNID INTEGER;
+	FID INTEGER;
+BEGIN
+	TID := :OLD.TRIP_ID;
+	TNID := :OLD.TRAIN_ID;
+	TDATE := :OLD.TRIP_DATE;
+
+	SELECT FIRST_CLASS,SECOND_CLASS,THIRD_CLASS,CARGO INTO  FC,SC,TC,CA
+	FROM TRAIN WHERE TRAIN_ID=TNID;
+
+	/*FIRST*/
+	IF FC >0 THEN
+		FOR I IN 1..FC
+		LOOP
+			S_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#1#')  ||  I;
+			DELETE FROM SEAT WHERE SEAT_ID=S_ID;
+		END LOOP;
+	END IF;
+	
+
+	/*SECOND*/
+	IF SC >0 THEN
+		FOR I IN 1..SC
+		LOOP
+			S_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#2#')  ||  I;
+			DELETE FROM SEAT WHERE SEAT_ID=S_ID;
+		END LOOP;
+	END IF;
+
+	/*THIRD*/
+	IF TC >0 THEN
+		FOR I IN 1..TC
+		LOOP
+			S_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#3#')  ||  I;
+			DELETE FROM SEAT WHERE SEAT_ID=S_ID;
+		END LOOP;
+	END IF;
+
+	/*CARGO*/
+	IF CA>0 THEN
+		FOR I IN 1..CA
+		LOOP
+			S_ID:=TO_CHAR(TDATE,'DD-MM-YYYY') || ('#') || (TNID) || ('#4#')  ||  I;
+			DELETE FROM SEAT WHERE SEAT_ID=S_ID;
+		END LOOP;
+	END IF;
+END;
+/*-----------------------------------------------------------------------------------------------------------------------------*/

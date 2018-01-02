@@ -45,7 +45,6 @@
             <th scope=\"col\">Company</th>
             <th scope=\"col\">Weight</th>
             <th scope=\"col\">Inside</th>
-            <th scope=\"col\">Delivered</th>
             <th scope=\"col\">Trip Date</th>
         </tr>
         </thead>
@@ -53,16 +52,12 @@
 
         while ($row = oci_fetch_assoc($result))
         {
-            if($row['DELIVERY_STATUS']==1)
-                $status='yes';
-            else
-                $status='no';
 
             $tripDate=$row['TRIP_DATE'];
 
             echo '<tr><td>'.$row['FREIGHT_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRAILER_NO'].
                 '</td><td>'.$row['COMPANY_NAME'].'</td><td>'.$row['WEIGHT'].'</td><td>'.$row['INSIDE'].
-                '</td><td>'.$status.'</td><td>'.$row['TRIP_DATE'].'</td></tr>';
+                '</td><td>'.$row['TRIP_DATE'].'</td></tr>';
         }
 
         echo "</tbody>
@@ -93,6 +88,8 @@
     <div class="row" style="margin-bottom: 10%">
         <nav class="navbar fixed-top navbar-light">
             <img src="images/trainLogo.png" style="margin-left: 10px">
+            <a href="admin_base.php"
+               style="font-size: 17px;font-family: 'Comic Sans MS';color: white">Home</a>
             <a href="destruction.php"
                style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
             <p id="tt"
