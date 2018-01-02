@@ -93,7 +93,7 @@
 
         $result=oci_parse($conn,$sql);
 
-        if($isDriver)
+        if($isDriver && $jtype!='DRIVER')
         {
             $sql2="SELECT TRAIN_ID FROM TRAIN WHERE EMPLOYEE_ID='$eid'";
             $result2=oci_parse($conn,$sql2);oci_execute($result2);$row=oci_fetch_assoc($result2);
