@@ -34,7 +34,7 @@
           FROM FARE F
           JOIN  TRAIN T
           ON T.TRAIN_ID=F.TRAIN_ID
-          ORDER BY T.TRAIN_NAME';
+          ORDER BY T.TRAIN_NAME,F.STYPE';
     $result=oci_parse($conn,$sql);
 
     if(oci_execute($result))

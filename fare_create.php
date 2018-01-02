@@ -26,7 +26,11 @@
     //---------------------------------------------------------------connect to the database
 
     //get the starting or arrivals from the database
-    $sql = "SELECT DISTINCT(STARTING) FROM  TRIP ORDER BY STARTING";
+    $sql = "SELECT DEPARTURE FROM TRAIN T1
+            UNION
+            (
+                SELECT ARRIVAL FROM TRAIN T2
+            )";
     $result = oci_parse($conn, $sql);
     $place = array();
 
@@ -35,7 +39,7 @@
     {
         while ($row = oci_fetch_assoc($result))
         {
-            array_push($place, $row['STARTING']);
+            array_push($place, $row['DEPARTURE']);
         }
     }
 

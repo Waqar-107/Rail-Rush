@@ -20,17 +20,23 @@
                                     <a href="tripAddition.php">
                                     <img src="images/add.png"/>Add to Trip</a>
                                 </div>
+                                
+                                <div class="col-md-3">
+                                    <a href="#dell">
+                                    <img src="images/dustbin.png"/>Delete from Trip</a>
+                                </div>
                              
                             </div>
                           </div>';
     //---------------------------------------------------------------add new entry
 
     //---------------------------------------------------------------get the whole table of complain
-    $sql = "SELECT * FROM TRIP";
+    $sql = "SELECT * FROM TRIP ORDER BY TRIP_ID";
     $result = oci_parse($conn,$sql);
 
 
-    if (oci_execute($result)) {
+    if (oci_execute($result))
+    {
 
         echo "<table class=\"table table-hover table-dark\">
             <thead>
@@ -51,6 +57,35 @@
         }
 
         echo '</thead></table>';
+    }
+
+    if(isset($_POST['submit']))
+    {
+        $tid=$_POST['dn'];$trid=$_POST['tr'];
+
+        $sql="DELETE FROM TRIP WHERE TRIP_ID='$tid'";
+        $result=oci_parse($conn,$sql);
+
+        $sql2="BEGIN
+                DELETE_RETURN_TRIP(:TID,:TRID);
+               END;";
+        $result2=oci_parse($conn,$sql2);
+        oci_bind_by_name($result2,":TID",$tid,32);
+        oci_bind_by_name($result2,":TRID",$trid,32);
+        oci_execute($result);oci_execute($result2);
+
+        echo '<script>
+                   setTimeout(function() {
+                      swal({
+                        title: "successfully deleted",
+                        text: "",
+                        type: "success"
+                      }, function() {
+                            window.location = "admin_base.php";
+                         });
+                     }, 1000);
+                 </script>';
+
     }
 
 ?>
@@ -84,6 +119,32 @@
         </nav>
     </div>
     <!--NAVBAR-->
+</div>
+
+<div class="container-fluid" style="background-color: rgba(0, 0, 0, 0.7);height: 150px" id="dell">
+    <div class="row"></div>
+    <form method="post" style="vertical-align: middle">
+        <div class="row" style="margin-top: 40px">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="number" id="dn" name="dn" placeholder=" trip id" style="vertical-align: middle;float: right" required>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="number" id="tr" name="tr" placeholder=" train id" style="vertical-align: middle;" required>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="submit" name="submit" id="submit" class="btn btn-success btn-lg btn-block"
+                           value="delete" style="float: left">
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 </body>

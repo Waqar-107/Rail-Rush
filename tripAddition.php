@@ -75,6 +75,9 @@
                 echo '}, 50);</script>';
             }
 
+            $sql="SELECT NVL(MAX(CALC_ID),1) \"WW\" FROM TRIP";
+            $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
+            $calcId=$row['WW']+1;
 
             if($decider)
             {
@@ -86,7 +89,7 @@
                {
                    //return trip
                    $newId=$row['WW']+1;
-                   $sql="INSERT INTO TRIPS VALUES ('$newId','$train','$tdate','$en'.'$st')";
+                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$en','$st')";
                    $result=oci_parse($conn,$sql);
                    if(oci_execute($result))
                    {
@@ -123,7 +126,7 @@
                    else
                        $newId++;
 
-                   $sql="INSERT INTO TRIP VALUES ('$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$st','$en')";
+                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$st','$en')";
                    $result=oci_parse($conn,$sql);
 
                    $sql2="BEGIN
@@ -132,19 +135,29 @@
                    $result2=oci_parse($conn,$sql2);
                    oci_bind_by_name($result2,":TID",$newId,32);
 
-                   if(oci_execute($result) && oci_execute($result2))
+                   if(oci_execute($result))
                    {
-                       echo '<script>
-                         setTimeout(function() {
-                            swal({
-                             title: "successfully registered",
-                             text: "",
-                             type: "success"
-                            }, function() {
-                                 window.location = "trips.php";
-                                   });
-                         }, 50);
-                      </script>';
+                       if(oci_execute($result2))
+                       {
+                               echo '<script>
+                             setTimeout(function() {
+                                swal({
+                                 title: "successfully registered",
+                                 text: "",
+                                 type: "success"
+                                }, function() {
+                                     window.location = "trips.php";
+                                       });
+                             }, 50);
+                          </script>';
+                       }
+
+                       else
+                       {
+                           echo '<script type="text/javascript">';
+                           echo 'setTimeout(function () { swal("sorry something went wrong!!!!","probably problem in the database :(","error");';
+                           echo '}, 50);</script>';
+                       }
                    }
 
                    else
