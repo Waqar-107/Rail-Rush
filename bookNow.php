@@ -19,7 +19,11 @@
     //---------------------------------------------------------------connect to the database
 
     //get the starting or arrivals from the database
-    $sql = "SELECT DISTINCT(STARTING) FROM  TRIP ORDER BY STARTING";
+    $sql = "SELECT DEPARTURE FROM TRAIN
+            UNION
+            (
+                SELECT ARRIVAL FROM TRAIN
+            )";
     $result = oci_parse($conn, $sql);
     $arr = array();
 
@@ -28,7 +32,7 @@
     {
         while ($row = oci_fetch_assoc($result))
         {
-            array_push($arr, $row['STARTING']);
+            array_push($arr, $row['DEPARTURE']);
         }
     }
 
@@ -76,6 +80,8 @@
     <div class="row" style="margin-bottom: 10%">
         <nav class="navbar fixed-top navbar-light">
             <img src="images/trainLogo.png" style="margin-left: 10px">
+            <a href="base.php"
+               style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">Home</a>
             <a href="destruction.php"
                style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">log out</a>
             <p id="tt"
@@ -101,10 +107,10 @@
 
         <div class="row">
             <div class="col-md-4 mb-3">
-                <input type="date" class="form-control" id="mdate" name="mdate"  required>
+                <input type="date" class="form-control" id="mdate" name="mdate">
             </div>
             <div class="col-md-4 mb-3">
-                <select class="form-control" name="mstart" id="mstart">
+                <select class="form-control" name="mstart" id="mstart" style="height: 100%">
                     <?php
                         for($i=0;$i<count($arr);$i++)
                         {
@@ -115,7 +121,7 @@
             </div>
 
             <div class="col-md-4 mb-3">
-                <select class="form-control" name="mfinish" id="mfinish">
+                <select class="form-control" name="mfinish" id="mfinish" style="height: 100%">
                     <?php
                     for($i=0;$i<count($arr);$i++)
                     {

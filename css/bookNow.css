@@ -60,4 +60,29 @@ input[type=date]
     padding: 0 3px;
 }
 
+.table-dark{
+    background-color: rgba(0,0,0,0.5);
+    font-family: "Comic Sans MS";
+    font-size: 20px;
+    color: white;
+    margin-top: 10%;
+    overflow-x: hidden;
+}
 
+.table-dark>th,td{
+    text-align: center;
+}
+
+.table-dark>td,th{
+    text-align: center;
+}
+
+a{
+    color: white;
+    font-family: "Comic Sans MS";
+}
+
+a:hover{
+    color: white;
+    font-family: "Comic Sans MS";
+}

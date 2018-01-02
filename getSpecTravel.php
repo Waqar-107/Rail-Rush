@@ -1,14 +1,8 @@
 <?php
     session_start();
-    if(empty($_SESSION['user_id']))
+    if(empty($_SESSION['user_id']) || $_SESSION['type']!=2)
     {
         header('Location: admin.php');
-    }
-
-    //if not passenger, send to base
-    if($_SESSION['type']!=2)
-    {
-        header('Location: base.php');
     }
 
     $trip_date=$_GET["date"];$departure=$_GET["start"];$arrival=$_GET["end"];
@@ -31,21 +25,44 @@
     //show all departure-arrival
     if(empty($trip_date))
     {
-        $sql="";
+        $sql="SELECT T.TRIP_ID,TR.TRAIN_NAME ,T.TRIP_DATE
+              FROM TRIP T
+              JOIN TRAIN TR 
+              ON T.TRAIN_ID=TR.TRAIN_ID
+              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TR.CARGO=0";
     }
 
     else
     {
-        $sql="SELECT  TO_CHAR(T.TRIP_DATE,'DD-MM-YYYY'),TR.TRAIN_NAME 
+        $sql="SELECT T.TRIP_ID,TR.TRAIN_NAME,T.TRIP_DATE
               FROM TRIP T
-              JOIN TRAIN TR
+              JOIN TRAIN TR 
               ON T.TRAIN_ID=TR.TRAIN_ID
-              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival'";
-        $result=oci_parse($conn,$sql);
-        $row=oci_execute($result);
-
-
+              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TO_DATE('$trip_date','YYYY-MM-DD')=T.TRIP_DATE AND TR.CARGO=0";
     }
+
+    $result=oci_parse($conn,$sql);
+    oci_execute($result);
+
+    echo "<table class=\"table table-hover table-dark\">
+            <thead>
+            <tr>
+                <th scope=\"col\">Trip Id</th>
+                <th scope=\"col\">Train Name</th>
+                <th scope='\"col\"'>Trip Date</th>
+            </tr>
+            </thead>
+            <tbody>";
+
+    while($row=oci_fetch_assoc($result))
+    {
+        $link='buyTicket.php?tripId='.$row['TRIP_ID'];
+        echo '<tr><td><a href='.$link.'>'.$row['TRIP_ID'].'</a></td><td>'.$row['TRAIN_NAME'].
+            '</td><td>'.$row['TRIP_DATE'].'</td></tr>';
+    }
+
+    echo "</tbody>
+        </table>";
 
 ?>
 
@@ -57,7 +74,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script type="text/javascript" src="js/showDate.js"></script>
-    <link href="css/getSpecTravel.css" rel="stylesheet"/>
+    <link href="css/bookNow.css" rel="stylesheet"/>
 </head>
 <body>
 

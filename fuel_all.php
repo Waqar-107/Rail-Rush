@@ -16,7 +16,7 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="fuelCreate.php">
+                                    <a href="fuelCreate.php" style="color: black">
                                     <img src="images/add.png"/> Add to FUEL</a>
                                 </div>
                              

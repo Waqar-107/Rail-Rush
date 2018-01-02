@@ -79,7 +79,6 @@
     <div class="row" style="margin-top: 100px;margin-bottom: 100px">
         <div class="col-md-4">
             <div class="card">
-
                 <div class="card-body" onclick="window.location.href='tender.php'">
                     <img src="images/tender.png" class="rounded mx-auto d-block" style="margin-top: 15px">
                     <p class="fi">Tenders</p>

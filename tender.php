@@ -17,8 +17,8 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                         <div class="row">
                             <div class="col-md-3">
-                                <a href="tenderCreate.php">
-                                <img src="images/add.png"/>Add to Tenders</a>
+                                <a href="tenderCreate.php" style="color: black">
+                                <img src="images/add.png"/> Add to Tenders</a>
                             </div>
                          
                         </div>
@@ -29,8 +29,8 @@
     echo '<div class="container-fluid" style="margin-top: 50px">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="tenderAll.php">
-                                    <img src="images/helmet.png"/>History</a>
+                                    <a href="tenderAll.php" style="color: black">
+                                    <img src="images/helmet.png"/>  History</a>
                                 </div>
                              
                             </div>

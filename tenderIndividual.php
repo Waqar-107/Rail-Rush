@@ -28,7 +28,7 @@
     //---------------------------------------------tender id
 
     echo '<div class="container-fluid" style="margin-top: 100px">
-                <p style="font-size: 25px;font-family:\'Comic Sans MS\';color: white">'.$tid.': '.$des.'</p>
+                <p style="font-size: 25px;font-family:\'Comic Sans MS\';color: black">'.$tid.': '.$des.'</p>
               </div>';
     //---------------------------------------------tender id
 
