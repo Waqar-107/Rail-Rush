@@ -15,6 +15,15 @@ CREATE TABLE ADMIN
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
+/*BANK, INSERT USING TRIGGER */
+CREATE TABLE BANK
+(
+	ACCOUNT_NO VARCHAR2(60) CONSTRAINT BANK_PK  PRIMARY KEY,
+	B_PASSWORD VARCHAR2(100) NOT NULL,
+	TAKA FLOAT NOT NULL 
+);
+
+/*------------------------------------------------------------------------------------------------------------------*/
 /*BOOKING*/
 CREATE TABLE BOOKING
 (
