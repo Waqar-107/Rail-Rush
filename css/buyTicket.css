@@ -1,0 +1,30 @@
+.row {
+    margin-top: 100px;
+}
+
+h3 {
+    font-family: "Comic Sans MS";
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    url("../images/b1.jpg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: sans-serif;
+}
+
+.navbar-light {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-info{
+    background-color: #02a9e0;
+}
+.btn-info:hover{
+    background-color: dodgerblue;
+}
