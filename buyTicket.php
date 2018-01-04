@@ -85,6 +85,9 @@
                 <div class="col-md-4" align="center">second-class: '.$fr[1].'</div>
                 <div class="col-md-4" align="center">third-class: '.$fr[2].'</div>
             </div>
+            <div class="row"><div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';color: orangered;font-size: 25px">
+            you can buy atmost 4 tickets !!!</div>
+            
           </div>';
 
     //variables that will determine the button colors
@@ -114,8 +117,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/buyTicket.css" rel="stylesheet"/>
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
     <script src="js/showDate.js" type="text/javascript"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -533,6 +538,7 @@
 <script type="text/javascript">
     //-------------------------------------------------by clicking the seats will be bought
     var first=[];var second=[];
+
     $("button").click(function ()
     {
         var f=1;
@@ -542,8 +548,25 @@
             if(first[i]==this.id)
             {
                 second[i]++;f=0;
-                $(this).removeClass('btn-warning');
-                $(this).addClass('btn-danger');
+
+                //from yellow to red
+                if(second[i]%3==2) {
+                    $(this).removeClass('btn-warning');
+                    $(this).addClass('btn-danger');
+                }
+
+                //from red to green
+                else if(second[i]%3==0){
+                    $(this).removeClass('btn-danger');
+                    $(this).addClass('btn-outline-success');
+                }
+
+                //from green to yellow
+                else if(second[i]%3==1){
+                    $(this).removeClass('btn-outline-success');
+                    $(this).addClass('btn-warning');
+                }
+
                 break;
             }
         }
@@ -560,18 +583,83 @@
     //-----------------------------------------------------function to confirm
     function confirmTicket()
     {
-        var s1="",s2="";
+        var s1="";var final=[];var als="";
         for(var i=0;i<first.length;i++)
         {
-            s1+=(first[i]+'W');
-
-            if(second[i]<=1)
-                s2+=(second[i]+'W');
-            else
-                s2+=("2W");
+            if(second[i]%3==2) {
+                s1+=(first[i]+'W');als+=(first[i]+" ");
+                final.push(first[i]);
+            }
         }
 
-        window.location.href=("confirmTicket.php?data1="+s1+"&data2="+s2);
+        var tid=<?php echo json_encode($tid);?>;
+        var train_id=<?php echo json_encode($train_id);?>;
+
+        if(final.length==0)
+        {
+            setTimeout(function() {
+                swal({
+                    title: "you haven't selected yet!!!",
+                    text: "will you sit on air ;)",
+                    type: "error"
+                }, function() {
+                    window.location = "buyTicket.php?tripId="+tid;
+                });
+            }, 50);
+        }
+
+        else if(final.length>4)
+        {
+            setTimeout(function() {
+                swal({
+                    title: "you are not allowed to buy more than four!!!",
+                    text: "please select <= four :)",
+                    type: "error"
+                }, function() {
+                    window.location = "buyTicket.php?tripId="+tid;
+                });
+            }, 50);
+        }
+
+        else{
+            var link=("confirmTicket.php?data1="+s1+"&tid="+tid+"&train_id="+train_id);
+
+            //try a warning
+            setTimeout(function () {
+                swal({
+                        title: "you have selected "+final.length+" seats",
+                        text: "are you sure about them? we refund less than half :)",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#02a9e0",
+                        confirmButtonText: "Yes, buy them!",
+                        cancelButtonText: "No, cancel please!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function(isConfirm)
+                    {
+                        if (isConfirm)
+                        {
+                            window.location.href=link;    // submitting the form when user press yes
+                        }
+
+                        else {
+                            setTimeout(function() {
+                                swal({
+                                    title: "decide again !!!",
+                                    text: "please select carefully :)",
+                                    type: "success"
+                                }, function() {
+                                    window.location = "buyTicket.php?tripId="+tid;
+                                });
+                            }, 50);
+                        }
+                    });
+            },50);
+
+
+        }
     }
     //-----------------------------------------------------function to confirm
 </script>
