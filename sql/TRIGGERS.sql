@@ -125,3 +125,24 @@ BEGIN
 	END IF;
 END;
 /*-----------------------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+/*UPDATE REVENUE*/
+DECLARE
+	RDATE VARCHAR2(20);
+	PRICE FLOAT;
+	F FLOAT;
+BEGIN
+	RDATE:=TO_CHAR(SYSDATE,'DD-MM-YYYY');
+	PRICE:= :NEW.PRICE;
+
+	SELECT EARNING INTO F FROM REVENUE WHERE RDAY=RDATE;
+
+	/*INSERT*/
+	IF F IS NOT NULL THEN
+		UPDATE REVENUE SET EARNING=(F+PRICE) WHERE RDAY=RDATE;
+	END IF;
+EXCEPTION
+	WHEN NO_DATA_FOUND THEN
+		INSERT INTO REVENUE VALUES(RDATE,PRICE);
+END;
