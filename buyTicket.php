@@ -442,10 +442,8 @@
 <script type="text/javascript">
 
     var stype=<?php echo json_encode($type);?>;
-    var sno=<?php echo json_encode($sno);?>;
-    var sold=<?php echo json_encode($sold);?>;
 
-    var uno=0,dus=0,tres=0;
+    var uno=0,dos=0,tres=0;
     for(var i=0;i<stype.length;i++)
     {
         if(stype[i-1]==1 && stype[i]==2)
