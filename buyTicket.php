@@ -4,6 +4,7 @@
     session_start();
     echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
 
+
     if (empty($_SESSION['user_in']) || $_SESSION['type'] != 2)
     {
         header('location: base.php');
@@ -20,6 +21,8 @@
     }
     //---------------------------------------------------------------connect to the database
 
+    //----------------------------------------------------------------------
+    //trip id, train-id and date
     $tid=$_GET['tripId'];
     $sql="SELECT TO_CHAR(TRIP_DATE,'DD-MM-YYYY') \"DT\" ,TRAIN_ID 
           FROM TRIP
@@ -27,45 +30,57 @@
     $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
 
     $train_id=$row['TRAIN_ID'];
-    $sid=$row['DT'].'#'.$train_id.'%';
-    $sql="SELECT SEAT_ID,SOLD 
-          FROM SEAT
-          WHERE SEAT_ID LIKE '$sid'";
+    $sid=$row['DT'].'#'.$train_id.'#';
+    //----------------------------------------------------------------------
+
+
+    //----------------------------------------------------------------------
+    //variables that will determine the button colors
+    $first_class;$second_class;$third_class;
+    $temp1=0;$temp2=0;$temp3=0;
+
+    $sql="SELECT FIRST_CLASS,SECOND_CLASS,THIRD_CLASS FROM TRAIN WHERE TRAIN_ID='$train_id'";
     $result=oci_parse($conn,$sql);oci_execute($result);
+    $row=oci_fetch_assoc($result);
+    $first_class=$row['FIRST_CLASS']; $second_class=$row['SECOND_CLASS'];$third_class=$row['THIRD_CLASS'];
+    //----------------------------------------------------------------------
 
-    //three arrays. one for class,one for seat no. and one for the id of the passenger who has it
-    $type=array();$sno=array();$sold=array();
-    while ($row=oci_fetch_assoc($result))
+    //----------------------------------------------------------------------sold array
+    $sold=array();
+
+    //first-class
+    for($i=1;$i<=$first_class;$i++)
     {
-        $temp=$row['SEAT_ID'];array_push($sold,$row['SOLD']);
+        $temp=$sid.'1#'.$i;
 
-        $i=strlen($temp)-1;
-        $x=0;$k=1;
-        while ($i>=0)
-        {
-            if($temp[$i]=='#')
-            {
-                $i--;break;
-            }
+        $sql="SELECT SOLD FROM SEAT WHERE SEAT_ID='$temp'";
+        $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
 
-            $x+=($temp[$i]*$k);$k*=10;$i--;
-        }
-
-        array_push($sno,$x);
-
-        $x=0;$k=1;
-        while ($i>=0)
-        {
-            if($temp[$i]=='#')
-            {
-                $i--;break;
-            }
-
-            $x+=($temp[$i]*$k);$k*=10;$i--;
-        }
-
-        array_push($type,$x);
+        array_push($sold,$row['SOLD']);
     }
+
+    //second-class
+    for($i=1;$i<=$second_class;$i++)
+    {
+        $temp=$sid.'2#'.$i;
+
+        $sql="SELECT SOLD FROM SEAT WHERE SEAT_ID='$temp'";
+        $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
+
+        array_push($sold,$row['SOLD']);
+    }
+
+    //third-class
+    for($i=1;$i<=$third_class;$i++)
+    {
+        $temp=$sid.'3#'.$i;
+
+        $sql="SELECT SOLD FROM SEAT WHERE SEAT_ID='$temp'";
+        $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
+
+        array_push($sold,$row['SOLD']);
+    }
+    //----------------------------------------------------------------------sold array
 
     //show fares
     $fr=array();
@@ -90,22 +105,6 @@
             
           </div>';
 
-    //variables that will determine the button colors
-    $first_class;$second_class;$third_class;
-    $temp1=0;$temp2=0;$temp3=0;
-
-    for($i=0;$i<count($type);$i++)
-    {
-        if($type[$i]==2 && $type[$i-1]==1)
-            $first_class=$i;
-
-        if($type[$i]==3 && $type[$i-1]==2)
-        {
-            $second_class=$i-$first_class;
-            $third_class=count($type)-$second_class-$first_class;
-            break;
-        }
-    }
 ?>
 
 <!DOCTYPE html>
@@ -441,21 +440,10 @@
 <!--TO MAKE INVISIBLE THOSE DIVS THAT ARE OUT OF RANGE OF  SEAT NUMBER-->
 <script type="text/javascript">
 
-    var stype=<?php echo json_encode($type);?>;
-
-    var uno=0,dos=0,tres=0;
-    for(var i=0;i<stype.length;i++)
-    {
-        if(stype[i-1]==1 && stype[i]==2)
-            uno=i;
-
-        if(stype[i-1]==2 && stype[i]==3)
-            dos=i-uno;
-    }
-
-    tres=stype.length-uno-dos;
-    //document.writeln(uno+' '+dos+' '+tres+'</br>');
-
+    var uno=<?php echo json_encode($first_class);?>;
+    var dos=<?php echo json_encode($second_class);?>;
+    var tres=<?php echo json_encode($third_class);?>;
+    console.log(uno+' '+dos+' '+tres);
     //-------------------------------------------------FIRST CLASS REMOVAL
     var ID;
     var fr,fc;
