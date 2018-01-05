@@ -31,6 +31,14 @@
     if(isset($_POST['submit']))
     {
         //check if date is valid
+        $h=$_POST['hid'];$m=$_POST['mid'];
+        if($_POST['hid']<=9)
+            $h='0'.$_POST['hid'];
+
+        if($_POST['mid']<=9)
+            $m='0'.$_POST['mid'];
+
+        $ETIME=$h.':'.$m;
         $tdate=$_POST['tdate'];$train=$trains[$_POST['tid']-1];
         $decider=0;
 
@@ -89,7 +97,7 @@
                {
                    //return trip
                    $newId=$row['WW']+1;
-                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$en','$st')";
+                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$ETIME','$en','$st')";
                    $result=oci_parse($conn,$sql);
                    if(oci_execute($result))
                    {
@@ -126,7 +134,7 @@
                    else
                        $newId++;
 
-                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$st','$en')";
+                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$ETIME','$st','$en')";
                    $result=oci_parse($conn,$sql);
 
                    $sql2="BEGIN
@@ -211,6 +219,30 @@
 
                         <div class="form-group">
                             <input type="date" name="tdate" id="tdate" class="form-control" placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="hid" id="hid" required>
+                                <option value="-1">hour</option>
+                                <?php
+                                for($i=0;$i<24;$i++)
+                                {
+                                    echo '<option value='.($i).'>'.$i.'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" name="mid" id="mid" required>
+                                <option value="-1">minute</option>
+                                <?php
+                                for($i=0;$i<60;$i++)
+                                {
+                                    echo '<option value='.($i).'>'.$i.'</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
 
                         <div class="form-group" style="margin-top: 50px">

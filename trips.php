@@ -44,6 +44,7 @@
                 <th scope=\"col\">Trip Id</th>
                 <th scope=\"col\">Train Id</th>
                 <th scope=\"col\">Trip Date</th>
+                <th scope='\"col\"'>Time</th>
                 <th scope=\"col\">Departure</th>
                 <th scope=\"col\">Arrival</th>
             </tr>
@@ -53,7 +54,7 @@
         while ($row = oci_fetch_assoc($result))
         {
             echo '<tr><td>'.$row['TRIP_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRIP_DATE'].
-            '</td><td>'.$row['STARTING'].'</td><td>'.$row['DESTINATION'].'</td></tr>';
+            '</td><td>'.$row['TRIP_TIME'].'</td><td>'.$row['STARTING'].'</td><td>'.$row['DESTINATION'].'</td></tr>';
         }
 
         echo '</thead></table>';
@@ -83,7 +84,7 @@
                       }, function() {
                             window.location = "admin_base.php";
                          });
-                     }, 1000);
+                     }, 50);
                  </script>';
 
     }

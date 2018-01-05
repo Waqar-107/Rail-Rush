@@ -25,7 +25,7 @@
     //show all departure-arrival
     if(empty($trip_date))
     {
-        $sql="SELECT T.TRIP_ID,TR.TRAIN_NAME ,T.TRIP_DATE
+        $sql="SELECT T.TRIP_ID,TR.TRAIN_NAME ,T.TRIP_DATE,T.TRIP_TIME
               FROM TRIP T
               JOIN TRAIN TR 
               ON T.TRAIN_ID=TR.TRAIN_ID
@@ -34,7 +34,7 @@
 
     else
     {
-        $sql="SELECT T.TRIP_ID,TR.TRAIN_NAME,T.TRIP_DATE
+        $sql="SELECT T.TRIP_ID,TR.TRAIN_NAME,T.TRIP_DATE,T.TRIP_TIME
               FROM TRIP T
               JOIN TRAIN TR 
               ON T.TRAIN_ID=TR.TRAIN_ID
@@ -51,6 +51,7 @@
                 <th scope=\"col\">Trip Id</th>
                 <th scope=\"col\">Train Name</th>
                 <th scope='\"col\"'>Trip Date</th>
+                <th scope='\"col\"'>Trip Time</th>
             </tr>
             </thead>
             <tbody>";
@@ -59,7 +60,7 @@
     {
         $link='buyTicket.php?tripId='.$row['TRIP_ID'];
         echo '<tr><td><a href='.$link.'>'.$row['TRIP_ID'].'</a></td><td>'.$row['TRAIN_NAME'].
-            '</td><td>'.$row['TRIP_DATE'].'</td></tr>';
+            '</td><td>'.$row['TRIP_DATE'].'</td><td>'.$row['TRIP_TIME'].'</td></tr>';
     }
 
     echo "</tbody>
