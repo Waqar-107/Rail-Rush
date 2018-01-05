@@ -9,8 +9,8 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                     <div class="row">
                         <div class="col-md-3">
-                            <a href="fare_create.php">
-                            <img src="images/add.png"/> add new fare</a>
+                            <a href="fare_create.php" style="color: black;font-size: 20px;font-family: \'Comic Sans MS\'">
+                            <img src="images/add.png"/>  add new fare</a>
                         </div>
                      
                     </div>

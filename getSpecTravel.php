@@ -29,7 +29,7 @@
               FROM TRIP T
               JOIN TRAIN TR 
               ON T.TRAIN_ID=TR.TRAIN_ID
-              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TR.CARGO=0";
+              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TR.CARGO=0 AND T.TRIP_DATE>=SYSDATE";
     }
 
     else
@@ -38,7 +38,8 @@
               FROM TRIP T
               JOIN TRAIN TR 
               ON T.TRAIN_ID=TR.TRAIN_ID
-              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TO_DATE('$trip_date','YYYY-MM-DD')=T.TRIP_DATE AND TR.CARGO=0";
+              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TO_DATE('$trip_date','YYYY-MM-DD')=T.TRIP_DATE 
+              AND TR.CARGO=0 AND TO_DATE('$trip_date','YYYY-MM-DD')>=SYSDATE";
     }
 
     $result=oci_parse($conn,$sql);

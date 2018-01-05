@@ -9,7 +9,7 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                 <div class="row">
                     <div class="col-md-1">
-                        <a href="train_Create.php">
+                        <a href="train_Create.php" style="color: black;font-size: 20px;font-family: \'Comic Sans MS\'">
                         <img src="images/add.png"/> add</a>
                     </div>
                  
@@ -30,7 +30,7 @@
     //---------------------------------------------------------------connect to the database
 
     echo '<div class="container-fluid">
-            <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: white;font-weight: bold">
+            <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: black;font-weight: bold">
                 <div class="col-md-5"></div><div class="col-md-4">Currently in Service</div>
             </div>
           </div>';
@@ -74,7 +74,7 @@
 
     //---------------------------------------------------------------get the trains without driver
     echo '<div class="container-fluid" style="margin-top: 100px">
-                <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: white;font-weight: bold">
+                <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: black;font-weight: bold">
                     <div class="col-md-2"></div><div class="col-md-10">Currently Not in Service Because of Not Having Driver</div>
                 </div>
               </div>';

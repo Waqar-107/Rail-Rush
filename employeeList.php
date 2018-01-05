@@ -20,7 +20,7 @@
     echo '<div class="container-fluid" style="margin-top: 100px">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <a href="employeeCreate.php">
+                                    <a href="employeeCreate.php" style="color: black;font-size: 20px;font-family: \'Comic Sans MS\'">
                                     <img src="images/add.png"/>Add to Employees</a>
                                 </div>
                              

@@ -26,15 +26,15 @@
     $Date=$row['dt'];
 
     $seatId=explode('W',$data1);
-    for($i=0;$i<count($seatId);$i++)
+    for($i=0;$i<count($seatId)-1;$i++)
     {
         $sid=0;$k=1;
-        for($j=strlen($seatId[$i]);$j>1;$j--)
+        for($j=strlen($seatId[$i])-1;$j>1;$j--)
         {
             $sid+=($seatId[$i][$j]*$k);$k*=10;
         }
 
-        if($seatId[$i][0]=='F')
+        if($seatId[$i][$j]=='F')
             $x=1;
         else if($seatId[$i][0]=='S')
             $x=2;
@@ -42,6 +42,8 @@
             $x=3;
 
         $actual=$Date.'#'.$train_id.'#'.$x.'#'.$sid;
+
+
     }
 
 ?>

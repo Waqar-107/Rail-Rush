@@ -1,7 +1,11 @@
 body{
     margin: 0;
     padding: 0;
-    background: url("../images/NorthBenningtonTrainStation.jpg");
+    background:
+
+            linear-gradient(rgba(255,255,255,0.8),rgba(255,255,255,0.8)),
+            url("../images/NorthBenningtonTrainStation.jpg");
+
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
