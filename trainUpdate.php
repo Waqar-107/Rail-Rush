@@ -31,7 +31,7 @@
         $did=$row['NM'];
     }
 
-    echo '<div class="container-fluid" style="margin-top: 100px;font-family: \'Comic Sans MS\';font-size: 20px;color: white">
+    echo '<div class="container-fluid" style="margin-top: 100px;font-family: \'Comic Sans MS\';font-size: 20px;color:black">
             <div class="row">
                 <div class="col-md-8">Train Id: '.$tid.'</div>
             </div>

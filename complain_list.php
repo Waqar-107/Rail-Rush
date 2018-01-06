@@ -19,7 +19,11 @@
 
 
     //---------------------------------------------------------------get the whole table of complain
-    $sql = "SELECT * FROM COMPLAINT";
+    $sql = "SELECT C.COMPLAINT_ID,(P.FIRST_NAME||' '||P.LAST_NAME) \"CM\",TR.TRAIN_NAME,
+            C.RESPONDENT,C.STATUS,C.REPLY,C.TRIP_DATE,C.MESSAGE
+            FROM COMPLAINT C
+            JOIN  PASSENGER P ON P.PASSENGER_ID=C.COMPLAINANT
+            JOIN TRAIN TR ON TR.TRAIN_ID=C.TRAIN_ID";
     $result = oci_parse($conn,$sql);
 
 
@@ -30,7 +34,7 @@
         <thead>
         <tr>
             <th scope=\"col\">Complain Id</th>
-            <th scope=\"col\">Train Id</th>
+            <th scope=\"col\">Train</th>
             <th scope=\"col\">Complainant</th>
             <th scope=\"col\">Complaint</th>
             <th scope=\"col\">Respondent</th>
@@ -57,7 +61,9 @@
                     $rep = substr($rep, 0, 20) . "...(more)";
 
                 $linkToReadReply = "readReply.php?data=" . $row['COMPLAINT_ID'];
-                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td>".$text."</td>Replied<td>".$row["RESPONDENT"]."</td><td><a href=$linkToReadReply>".$rep."</a></td><td>".$tripDate."</td></tr>";
+                echo '<tr><td>' . $row["COMPLAINT_ID"] . '</td><td>' . $row["TRAIN_NAME"] .
+                    '</td><td> ' . $row["CM"] . '</td><td>'.$text.'<td>'.$row["RESPONDENT"].'
+                    </td><td><a href='.$linkToReadReply.'>'.$rep.'</a></td><td>'.$tripDate.'</td></tr>';
 
             }
 
@@ -70,7 +76,9 @@
                     $text = substr($text, 0, 20) . "...(more)";
 
                 $linkToReply = "reply.php?data=" . $row['COMPLAINT_ID'];
-                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " . $row["COMPLAINANT"] . "</td><td><a href=$linkToReply>" . $text . "</a></td><td>null</td><td>null</td><td>".$tripDate."</td></tr>";
+                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " .
+                    $row["CM"] . "</td><td><a href=$linkToReply>" . $text . "
+                    </a></td><td>null</td><td>null</td><td>".$tripDate."</td></tr>";
 
             }
 
