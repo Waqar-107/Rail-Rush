@@ -87,11 +87,11 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card">
+            <div class="card" onclick="window.location.href='myBookings.php'">
 
                 <div class="card-body">
-                    <img src="images/schedule.png" class="rounded mx-auto d-block" style="margin-top: 15px">
-                    <p class="fi">Schedule and Fares</p>
+                    <img src="images/portfolio.png" class="rounded mx-auto d-block" style="margin-top: 15px">
+                    <p class="fi">My Bookings</p>
                 </div>
             </div>
         </div>
