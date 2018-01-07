@@ -35,7 +35,7 @@
             </div>
           </div>';
     //---------------------------------------------------------------get the whole table of train
-    $sql='SELECT T.TRAIN_ID,T.TRAIN_NAME,(E.FIRST_NAME||\' \'|| E.LAST_NAME) "NAME",T.COMPARTMENT,T.FIRST_CLASS,T.SECOND_CLASS,T.THIRD_CLASS,T.CARGO
+    $sql='SELECT T.TRAIN_ID,T.DEPARTURE,T.ARRIVAL,T.TRAIN_NAME,(E.FIRST_NAME||\' \'|| E.LAST_NAME) "NAME",T.COMPARTMENT,T.FIRST_CLASS,T.SECOND_CLASS,T.THIRD_CLASS,T.CARGO
           FROM TRAIN T
           JOIN EMPLOYEE E
           ON T.EMPLOYEE_ID=E.EMPLOYEE_ID
@@ -50,6 +50,8 @@
                 <th scope=\"col\">Train Id</th>
                 <th scope=\"col\">Train Name</th>
                 <th scope=\"col\">Driver</th>
+                <th scope=\"col\">Departure</th>
+                <th scope=\"col\">Arrival</th>
                 <th scope=\"col\">Compartments</th>
                 <th scope=\"col\">First Class</th>
                 <th scope=\"col\">Second Class</th>
@@ -62,7 +64,7 @@
         while ($row = oci_fetch_assoc($result))
         {
             $link='trainUpdate.php?tid='.$row['TRAIN_ID'];
-            echo '<tr><td><a href='.$link.'>'.$row['TRAIN_ID'].'</a></td><td>'.$row['TRAIN_NAME'].'</td><td>'.$row['NAME'].
+            echo '<tr><td><a href='.$link.'>'.$row['TRAIN_ID'].'</a></td><td>'.$row['TRAIN_NAME'].'</td><td>'.$row['NAME'].'</td><td>'.$row['DEPARTURE'].'</td><td>'.$row['ARRIVAL'].
                 '</td><td>'.$row['COMPARTMENT'].'</td><td>'.$row['FIRST_CLASS'].'</td><td>'.$row['SECOND_CLASS'].
                 '</td><td>'.$row['THIRD_CLASS'].'</td><td>'.$row['CARGO'].'</td></tr>';
         }
@@ -75,7 +77,7 @@
     //---------------------------------------------------------------get the trains without driver
     echo '<div class="container-fluid" style="margin-top: 100px">
                 <div class="row" style="font-size: 30px;font-family: \'Comic Sans MS\';color: black;font-weight: bold">
-                    <div class="col-md-2"></div><div class="col-md-10">Currently Not in Service Because of Not Having Driver</div>
+                   <div class="col-md-12" align="center">Currently Not in Service Because of Not Having Driver</div>
                 </div>
               </div>';
 
