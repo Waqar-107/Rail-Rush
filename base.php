@@ -50,11 +50,11 @@
         <ul class="navbar-nav">
 
             <li>
-                <a class="nav-link" href="#">Trains</a>
+                <a class="nav-link" href="trainForGuest.php">Train and Fares</a>
             </li>
 
             <li>
-                <a class="nav-link" href="#">Schedule and Fares</a>
+                <a class="nav-link" href="scheduleForGuest.php">Schedule</a>
             </li>
 
             <li>
