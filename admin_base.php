@@ -159,6 +159,31 @@
     <!--THIRD ROW-->
 </div>
 
+<!--FOURTH ROW-->
+<div class="container">
+    <div class="row" style="margin-top: 100px;margin-bottom: 100px">
+        <div class="col-md-4">
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+
+                <div class="card-body" onclick="window.location.href='tender.php'">
+                    <img src="images/tender.png" class="rounded mx-auto d-block" style="margin-top: 15px">
+                    <p class="fi">tender</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+
+    </div>
+    <!--FOURTH ROW-->
+</div>
+
 <!--footer-->
 <footer class="fixed-bottom" style="position: fixed;height: 35px;bottom: 0;width: 100%;background-color:#2f3436">
     <p style="color: white;padding-top: 5px;padding-left: 10px">&copy CSE, BUET<p>

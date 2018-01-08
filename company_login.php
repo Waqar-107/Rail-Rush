@@ -35,7 +35,7 @@
             //---------------------------------------------------------------connect to the database
 
             //---------------------------------------------------------------get password using id
-            $sql="SELECT P_PASSWORD, FIRST_NAME FROM PASSENGER WHERE PASSENGER_ID=$id";
+            $sql="SELECT P_PASSWORD,CNAME FROM COMPANY WHERE COMPANY_ID=$id";
             $result = oci_parse($conn,$sql);
             oci_execute($result);
             $row=oci_fetch_assoc($result);
@@ -46,8 +46,8 @@
                 {
                     $_SESSION['user_in']=true;
                     $_SESSION['user_id']=$id;
-                    $_SESSION['type']=2;
-                    $_SESSION['uname']="user-".$row['FIRST_NAME'];
+                    $_SESSION['type']=3;
+                    $_SESSION['uname']="company-".$row['CNAME'];
                 }
 
                 echo '<script language="javascript">location.href="base.php";</script>';
@@ -91,11 +91,11 @@
         <div class="col-md-4">
 
             <div class="panel panel-default">
-                <h3 class="text-center login-title" style="color:white;padding-bottom: 10px">Sign In</h3>
+                <h3 class="text-center login-title" style="color:white;padding-bottom: 10px">Sign In To Offer Tender</h3>
                 <div class="panel-body">
                     <form action="" method="post">
                         <div class="form-group">
-                            <input type="text" name="id" id="id" class="form-control" placeholder="user_id">
+                            <input type="text" name="id" id="id" class="form-control" placeholder="company_id">
                         </div>
 
                         <div class="form-group" style="margin-top: 10px">
@@ -107,10 +107,7 @@
                         </div>
 
                         <!--forget password and sign-up-->
-                        <a class="su" href="sign_up.php">sign up</a>
-
-                        <a class="fp" href="getPassword.php">forgot password</a>
-                        <!--forget password and sign-up-->
+                        <a class="su" href="comSignUp.php">sign up</a>
 
                     </form>
                 </div>

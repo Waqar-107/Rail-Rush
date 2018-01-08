@@ -62,7 +62,7 @@
             </li>
 
             <li>
-                <a class="nav-link" href="#">F.A.Q</a>
+                <a class="nav-link" href="company_login.php">Company login</a>
             </li>
 
             <li>

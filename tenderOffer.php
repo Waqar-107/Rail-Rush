@@ -3,6 +3,11 @@
     session_start();
     echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
 
+    if(empty($_SESSION['user_in']) || $_SESSION['type']!=3)
+    {
+        header('location: base.php');
+    }
+
     $tid=$_GET['tenderId'];
     //---------------------------------------------------------------connect to the database
     //create connection
@@ -42,13 +47,11 @@
 
     if(isset($_POST['submit']) && $ans)
     {
-        $com=$_POST['cname'];
-        $e1=$_POST['e1'];$p1=$_POST['p1'];
-        $e2=$_POST['e2'];$p2=$_POST['p2'];
+        $com=$_SESSION['user_id'];
         $cost=$_POST['costing'];
 
         //check if same company has proposed tenders for the id
-        $sql="SELECT TENDER_ID FROM TENDER_OFFER WHERE TENDER_ID='$tid' AND COMPANY='$com'";
+        $sql="SELECT TENDER_ID FROM TENDER_OFFER WHERE TENDER_ID='$tid' AND C_ID='$com'";
         $result=oci_parse($conn,$sql);
         oci_execute($result);
 
@@ -69,7 +72,7 @@
 
         else
         {
-            $sql="INSERT INTO TENDER_OFFER VALUES('$tid','$com','$e1','$e2','$p1','$p2','$cost')";
+            $sql="INSERT INTO TENDER_OFFER VALUES('$tid','$com','$cost')";
             $result=oci_parse($conn,$sql);
 
             if(oci_execute($result))

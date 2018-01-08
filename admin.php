@@ -34,7 +34,7 @@
             //---------------------------------------------------------------connect to the database
 
             //get password from database
-            $sql="SELECT A_PASSWORD FROM ADMIN WHERE ADMIN_ID=$id";
+            $sql="SELECT A_PASSWORD,FIRST_NAME FROM ADMIN WHERE ADMIN_ID=$id";
             $result = oci_parse($conn,$sql);
             oci_execute($result);
             $row=oci_fetch_assoc($result);
@@ -47,6 +47,7 @@
                 $_SESSION['user_in']=true;
                 $_SESSION['user_id']=$id;
                 $_SESSION['type']=1;
+                $_SESSION['uname']="admin-".$row['FIRST_NAME'];
 
                 header('Location: admin_base.php');
             }

@@ -2,6 +2,8 @@
 
     session_start();
 
+
+
     //---------------------------------------------------------------connect to the database
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
