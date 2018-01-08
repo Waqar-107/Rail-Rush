@@ -169,9 +169,9 @@
         <div class="col-md-4">
             <div class="card">
 
-                <div class="card-body" onclick="window.location.href='tender.php'">
-                    <img src="images/tender.png" class="rounded mx-auto d-block" style="margin-top: 15px">
-                    <p class="fi">tender</p>
+                <div class="card-body" onclick="window.location.href='companyList.php'">
+                    <img src="images/factory.png" class="rounded mx-auto d-block" style="margin-top: 15px">
+                    <p class="fi">company</p>
                 </div>
             </div>
         </div>

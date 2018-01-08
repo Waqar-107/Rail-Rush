@@ -2,8 +2,6 @@
 
     session_start();
 
-
-
     //---------------------------------------------------------------connect to the database
     //create connection
     $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
@@ -59,7 +57,7 @@
         {
             $tid=$row['TENDER_ID'];
 
-            if(empty($_SESSION['user_in']))
+            if(isset($_SESSION['user_in']) && $_SESSION['type']==3)
                 $link='tenderOffer.php?tenderId='.$tid;
             else
                 $link='tenderIndividual.php?tenderId='.$tid;

@@ -21,27 +21,6 @@
     }
     //---------------------------------------------------------------connect to the database
 
-    //---------------------------------------------------------------check if the company is validate
-    $user=$_SESSION['user_id'];
-    $sql="SELECT VALID FROM COMPANY WHERE COMPANY_ID='$user'";
-    $result=oci_parse($conn,$sql);oci_execute($result);
-
-    if($row=oci_fetch_assoc($result))
-    {
-        echo '<script>
-                setTimeout(function() {
-                    swal({
-                        title: "you haven\'t validate your company yet!!!",
-                        text: "communicate with the office",
-                        type: "error"
-                    }, function() {
-                        window.location = "base.php";
-                    });
-                }, 50);
-                </script>';
-    }
-    //---------------------------------------------------------------check if the company is validate
-
     $tid=$_GET['tenderId'];
     $sql="SELECT DESCRIPTION FROM TENDER_DES WHERE TENDER_ID='$tid'";
     $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
@@ -84,14 +63,14 @@
         //-----------------------------------------------finalize
         //-----------------------------------------------company options
         $companies=array();
-        $sql="SELECT COMPANY 
+        $sql="SELECT CNAME
               FROM TENDER_OFFER 
               JOIN COMPANY ON C_ID=COMPANY_ID
               WHERE TENDER_ID='$tid'";
         $result=oci_parse($conn,$sql);oci_execute($result);
         while($row=oci_fetch_assoc($result))
         {
-            array_push($companies,$row['COMPANY']);
+            array_push($companies,$row['CNAME']);
         }
 
         $decider=0;

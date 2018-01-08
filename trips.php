@@ -82,7 +82,7 @@
                         text: "",
                         type: "success"
                       }, function() {
-                            window.location = "admin_base.php";
+                            window.location.href = "admin_base.php";
                          });
                      }, 50);
                  </script>';
