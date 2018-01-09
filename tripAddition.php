@@ -97,7 +97,7 @@
                {
                    //return trip
                    $newId=$row['WW']+1;
-                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$ETIME','$en','$st')";
+                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$ETIME','$en','$st',0)";
                    $result=oci_parse($conn,$sql);
                    if(oci_execute($result))
                    {
@@ -134,7 +134,7 @@
                    else
                        $newId++;
 
-                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$ETIME','$st','$en')";
+                   $sql="INSERT INTO TRIP VALUES ('$calcId','$newId','$train',TO_DATE('$tdate','YYYY-MM-DD'),'$ETIME','$st','$en',0)";
                    $result=oci_parse($conn,$sql);
 
                    $sql2="BEGIN

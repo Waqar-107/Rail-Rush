@@ -53,8 +53,10 @@
 
         while ($row = oci_fetch_assoc($result))
         {
-            echo '<tr><td>'.$row['TRIP_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td>'.$row['TRIP_DATE'].
-            '</td><td>'.$row['TRIP_TIME'].'</td><td>'.$row['STARTING'].'</td><td>'.$row['DESTINATION'].'</td></tr>';
+            $timeLink='updateTime.php?tid='.$row['TRIP_ID'];
+            $datelink='updateDate.php?tid='.$row['TRIP_ID'];
+            echo '<tr><td>'.$row['TRIP_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td><a href='.$datelink.'>'.$row['TRIP_DATE'].
+            '</a></td><td><a href='.$timeLink.'>'.$row['TRIP_TIME'].'</a></td><td>'.$row['STARTING'].'</td><td>'.$row['DESTINATION'].'</td></tr>';
         }
 
         echo '</thead></table>';
