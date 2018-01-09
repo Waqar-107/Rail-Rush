@@ -1,1 +1,0 @@
-INSERT INTO "TENDER_DES" VALUES (3, 'we need chicken supply from next month onward. we will take about 300 pieces per month. we are looking forward for your tenders!!', TO_DATE('20180110000000', 'YYYYMMDDHH24MISS'));

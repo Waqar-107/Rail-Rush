@@ -40,6 +40,21 @@ CREATE TABLE BOOKING
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
+/*COMPANY*/
+CREATE TABLE COMPANY
+(
+
+	COMPANY_ID INTEGER CONSTRAINT COMPANY_PK PRIMARY KEY, 
+	CNAME VARCHAR2(60) NOT NULL,
+	EMAIL_ID VARCHAR2(60) NOT NULL ,
+	PHONE VARCHAR2(11) NOT NULL,
+	P_PASSWORD VARCHAR(25) NOT NULL,
+	VALID INTEGER DEFAULT 0
+);
+/*------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------*/
 /*TABLE TO STORE COMPLAINTS  AND THEIR REPLIES*/
 CREATE TABLE COMPLAINT
 (
@@ -134,8 +149,9 @@ CREATE TABLE PASSENGER
 /*REVENUE*/
 CREATE TABLE REVENUE
 (
-	RDAY VARCHAR2(20) CONSTRAINT REVENUE_PK PRIMARY KEY,
-	EARNING FLOAT
+	RDAY VARCHAR2(20),
+	EARNING FLOAT,
+	TRAIN_ID INTEGER
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
@@ -173,11 +189,7 @@ CREATE TABLE  TENDER_DES
 CREATE TABLE TENDER_OFFER
 (
 	TENDER_ID INTEGER,
-	COMPANY VARCHAR2(50) NOT NULL,
-	EMAIL1 VARCHAR2(50) UNIQUE NOT NULL,
-	EMAIL2 VARCHAR2(50) UNIQUE NOT NULL,
-	PHONE1 VARCHAR2(50) UNIQUE NOT NULL,
-	PHONE2 VARCHAR2(50) UNIQUE NOT NULL,
+	C_ID INTEGER NOT NULL,
 	COSTING INTEGER NOT NULL,
 
 	FOREIGN KEY(TENDER_ID) REFERENCES TENDER_DES(TENDER_ID) ON DELETE CASCADE
@@ -213,8 +225,9 @@ CREATE TABLE TRIP
 	TRIP_DATE DATE NOT NULL,
 	TRIP_TIME VARCHAR2(20) NOT NULL,
 	STARTING VARCHAR2(60) NOT NULL,
-	DESTINATION VARCHAR2(60) NOT NULL
-)
+	DESTINATION VARCHAR2(60) NOT NULL,
+	UPDATED INTEGER DEFAULT 0 
+);
 /*------------------------------------------------------------------------------------------------------------------*/
 
 
