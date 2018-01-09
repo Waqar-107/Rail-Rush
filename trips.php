@@ -1,20 +1,19 @@
 <?php
 
-    session_start();
+session_start();
 
-    //---------------------------------------------------------------connect to the database
-    //create connection
-    $conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
+//---------------------------------------------------------------connect to the database
+//create connection
+$conn = oci_connect('ANONYMOUS', '1505107', 'localhost/orcl');
 
-    //check connection
-    if(!$conn)
-    {
-        echo 'connection error';
-    }
-    //---------------------------------------------------------------connect to the database
+//check connection
+if (!$conn) {
+    echo 'connection error';
+}
+//---------------------------------------------------------------connect to the database
 
-    //---------------------------------------------------------------add new entry
-    echo '<div class="container-fluid" style="margin-top: 100px">
+//---------------------------------------------------------------add new entry
+echo '<div class="container-fluid" style="margin-top: 100px">
                             <div class="row">
                                 <div class="col-md-3">
                                     <a href="tripAddition.php" style="color: black;font-size: 20px;font-family: \'Comic Sans MS\'">
@@ -28,17 +27,16 @@
                              
                             </div>
                           </div>';
-    //---------------------------------------------------------------add new entry
+//---------------------------------------------------------------add new entry
 
-    //---------------------------------------------------------------get the whole table of complain
-    $sql = "SELECT * FROM TRIP ORDER BY TRIP_ID";
-    $result = oci_parse($conn,$sql);
+//---------------------------------------------------------------get the whole table of complain
+$sql = "SELECT * FROM TRIP ORDER BY TRIP_DATE";
+$result = oci_parse($conn, $sql);
 
 
-    if (oci_execute($result))
-    {
+if (oci_execute($result)) {
 
-        echo "<table class=\"table table-hover table-dark\">
+    echo "<table class=\"table table-hover table-dark\">
             <thead>
             <tr>
                 <th scope=\"col\">Trip Id</th>
@@ -51,33 +49,34 @@
             </thead>
             <tbody>";
 
-        while ($row = oci_fetch_assoc($result))
-        {
-            $timeLink='updateTime.php?tid='.$row['TRIP_ID'];
-            $datelink='updateDate.php?tid='.$row['TRIP_ID'];
-            echo '<tr><td>'.$row['TRIP_ID'].'</td><td>'.$row['TRAIN_ID'].'</td><td><a href='.$datelink.'>'.$row['TRIP_DATE'].
-            '</a></td><td><a href='.$timeLink.'>'.$row['TRIP_TIME'].'</a></td><td>'.$row['STARTING'].'</td><td>'.$row['DESTINATION'].'</td></tr>';
-        }
-
-        echo '</thead></table>';
+    while ($row = oci_fetch_assoc($result)) {
+        $timeLink = 'updateTime.php?tid=' . $row['TRIP_ID'];
+        $datelink = 'updateDate.php?tid=' . $row['TRIP_ID'];
+        echo '<tr><td>' . $row['TRIP_ID'] . '</td><td>' . $row['TRAIN_ID'] . '</td><td><a href=' . $datelink . '>' . $row['TRIP_DATE'] .
+            '</a></td><td><a href=' . $timeLink . '>' . $row['TRIP_TIME'] . '</a></td><td>' . $row['STARTING'] . '</td><td>' . $row['DESTINATION'] . '</td></tr>';
     }
 
-    if(isset($_POST['submit']))
-    {
-        $tid=$_POST['dn'];$trid=$_POST['tr'];
+    echo '</thead></table>';
+}
 
-        $sql="DELETE FROM TRIP WHERE TRIP_ID='$tid'";
-        $result=oci_parse($conn,$sql);
+if (isset($_POST['submit'])) {
+    $tid = $_POST['dn'];
+    $trid = $_POST['tr'];
 
-        $sql2="BEGIN
+
+    $sql = "DELETE FROM TRIP WHERE TRIP_ID='$tid'";
+    $result = oci_parse($conn, $sql);
+
+    $sql2 = "BEGIN
                 DELETE_RETURN_TRIP(:TID,:TRID);
                END;";
-        $result2=oci_parse($conn,$sql2);
-        oci_bind_by_name($result2,":TID",$tid,32);
-        oci_bind_by_name($result2,":TRID",$trid,32);
-        oci_execute($result);oci_execute($result2);
+    $result2 = oci_parse($conn, $sql2);
+    oci_bind_by_name($result2, ":TID", $tid, 32);
+    oci_bind_by_name($result2, ":TRID", $trid, 32);
+    oci_execute($result);
+    oci_execute($result2);
 
-        echo '<script>
+    echo '<script>
                    setTimeout(function() {
                       swal({
                         title: "successfully deleted",
@@ -89,7 +88,8 @@
                      }, 50);
                  </script>';
 
-    }
+
+}
 
 ?>
 
@@ -110,7 +110,8 @@
     <div class="row" style="margin-bottom: 10%">
         <nav class="navbar fixed-top navbar-light">
             <img src="images/trainLogo.png" style="margin-left: 10px">
-            <a href="admin_base.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">Home</a>
+            <a href="admin_base.php"
+               style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">Home</a>
             <a href="destruction.php"
                style="font-size: 17px;font-family: 'Comic Sans MS';color: white">log out</a>
             <p id="tt"
@@ -130,13 +131,15 @@
         <div class="row" style="margin-top: 40px">
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="number" id="dn" name="dn" placeholder=" trip id" style="vertical-align: middle;float: right" required>
+                    <input type="number" id="dn" name="dn" placeholder=" trip id"
+                           style="vertical-align: middle;float: right" required>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="number" id="tr" name="tr" placeholder=" train id" style="vertical-align: middle;" required>
+                    <input type="number" id="tr" name="tr" placeholder=" train id" style="vertical-align: middle;"
+                           required>
                 </div>
             </div>
 

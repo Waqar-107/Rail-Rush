@@ -129,6 +129,8 @@
     <div class="row" style="margin-bottom: 10%">
         <nav class="navbar fixed-top navbar-light">
             <img src="images/trainLogo.png" style="margin-left: 10px">
+            <p style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
+                <?PHP echo $_SESSION['uname'];?> </p>
             <a href="base.php"
                style="font-size: 17px;font-family: 'Comic Sans MS';color: white;margin-left: 100px">Home</a>
             <a href="destruction.php"

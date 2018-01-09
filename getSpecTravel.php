@@ -29,7 +29,8 @@
               FROM TRIP T
               JOIN TRAIN TR 
               ON T.TRAIN_ID=TR.TRAIN_ID
-              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TR.CARGO=0 AND T.TRIP_DATE>=SYSDATE";
+              WHERE T.STARTING='$departure' AND T.DESTINATION='$arrival' AND TR.CARGO=0 AND T.TRIP_DATE>=SYSDATE
+              ORDER BY TRIP_DATE";
     }
 
     else
@@ -83,6 +84,8 @@
 <div class="container-fluid">
     <nav class="navbar fixed-top navbar-light">
         <img src="images/trainLogo.png" style="margin-left: 10px">
+        <p style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">
+            <?PHP echo $_SESSION['uname'];?> </p>
         <a href="base.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">home</a>
         <a href="destruction.php" style="font-size: 17px;margin-left: 100px;font-family: 'Comic Sans MS';color: white">log out</a>
         <p id="tt" style="color: white;font-size: 17px;font-family: 'Comic Sans MS';margin-right: 10px;margin-top: 5px">

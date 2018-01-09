@@ -22,13 +22,18 @@
         $bookingID=$_GET['bookingID'];
         $acc=$_POST['acc'];
 
-        $sql="SELECT B.PRICE,B.SEAT_NO,TO_CHAR(B.BDATE,'DD-MM-YYYY')
-              FROM BOOKING B
+        $sql="SELECT T.UPDATED, B.PRICE,B.SEAT_NO,TO_CHAR(B.BDATE,'DD-MM-YYYY')
+              FROM BOOKING B JOIN TRIP T ON T.TRIP_ID=B.TRIP_ID
               WHERE BOOKING_ID='$bookingID'";
         $result=oci_parse($conn,$sql);oci_execute($result);
         $row=oci_fetch_assoc($result);
 
-        $refund=$row['PRICE']/2;$seat=$row['SEAT_NO'];
+        if($row['UPDATED']==0)
+            $refund=$row['PRICE']/2;
+        else
+            $refund=$row['PRICE'];
+
+        $seat=$row['SEAT_NO'];
         $dt=$row['TO_CHAR(B.BDATE,\'DD-MM-YYYY\')'];
 
         //echo $refund.'  '.$seat.'  '.$dt.'</br>';

@@ -46,7 +46,8 @@
           FROM BOOKING B
           JOIN TRIP T1 ON T1.TRIP_ID=B.TRIP_ID
           JOIN TRAIN T2 ON T1.TRAIN_ID=T2.TRAIN_ID
-          WHERE PASSENGER_ID='$user'";
+          WHERE PASSENGER_ID='$user'
+          ORDER BY T1.TRIP_DATE";
     $result=oci_parse($conn,$sql);oci_execute($result);
 
     echo "<table class=\"table table-hover table-dark\">

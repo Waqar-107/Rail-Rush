@@ -140,7 +140,7 @@
                     $sql="UPDATE SEAT SET SOLD='$XU' WHERE SEAT_ID='$actual'";
                     $result=oci_parse($conn,$sql);oci_execute($result);
 
-                    $sql="INSERT INTO BOOKING VALUES('$bookid','$user',SYSDATE,'$updatedSeat[$i]','$prices[$i]','$tid')";
+                    $sql="INSERT INTO BOOKING VALUES('$bookid','$user',SYSDATE,'$updatedSeat[$i]','$prices[$i]','$tid','$bank_id')";
                     $result=oci_parse($conn,$sql);
                     oci_execute($result);
 
