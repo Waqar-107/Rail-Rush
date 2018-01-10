@@ -184,6 +184,7 @@
 <!--CURRENT YEAR-->
 
 <!--PREV YEARS-->
+<div class="col-md-12" align="center" style="font-family: 'Comic Sans MS';font-size: 25px;color: black;margin-top: 100px">Earned From Ticket in The Prev. Years</div>
 <div class="container-fluid" style="background-color: whitesmoke">
     <div class="container" style="width: 95%;margin-top: 100px" id="one">
     </div>
