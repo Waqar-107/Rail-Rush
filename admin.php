@@ -11,7 +11,7 @@
     if(isset($_POST['submit']))
     {
         $id=$_POST['id'];
-        $pass=$_POST['pass'];
+        $pass=$_POST['pass']; $pass=md5($pass);
 
         if(empty($id) || empty($pass))
         {
@@ -106,7 +106,7 @@
                         </div>
 
                         <!--forget password-->
-                        <a class="fp" href="getPassword.php" id="forgot_password" name="forgot_password">forgot password</a>
+                        <a class="fp" href="getPassword.php?t=1" id="forgot_password" name="forgot_password">forgot password</a>
                         <!--forget password and sign-up-->
 
                     </form>

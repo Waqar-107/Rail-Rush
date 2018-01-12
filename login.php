@@ -12,7 +12,7 @@
     if(isset($_POST['submit']))
     {
         $id=$_POST['id'];
-        $pass=$_POST['pass'];
+        $pass=$_POST['pass'];$pass=md5($pass);
 
         if(empty($id) || empty($pass))
         {
@@ -109,7 +109,7 @@
                         <!--forget password and sign-up-->
                         <a class="su" href="sign_up.php">sign up</a>
 
-                        <a class="fp" href="getPassword.php">forgot password</a>
+                        <a class="fp" href="getPassword.php?t=2">forgot password</a>
                         <!--forget password and sign-up-->
 
                     </form>
