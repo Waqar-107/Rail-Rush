@@ -16,11 +16,14 @@
     }
     //---------------------------------------------------------------connect to the database
 
-
-    
+    if(isset($_POST['submit']))
+    {
+        $year=$_POST['prev'];$link='location: detailedRevenue.php?year='.$year;
+        header($link);
+    }
 
     echo '<div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;margin-top: 100px">
-        <a href="detailedRevenue.php?year=-1" style="color: black">Previous Year Stats</a></div>';
+        <a href="#dell" style="color: black">Previous Year Stats</a></div>';
 
     echo '<div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;color: black;margin-top: 100px">Current Year</div>';
     $sql = "SELECT R.TRAIN_ID,SUM(R.EARNING) \"WW\", TR.TRAIN_NAME,MIN(R.EARNING) \"MN\", MAX(R.EARNING) \"MX\", ROUND(AVG(R.EARNING),2) \"AV\"
@@ -217,6 +220,28 @@
         };
         Plotly.newPlot('one',data,layout);
     </script>
+</div>
+
+<div class="container-fluid" style="background-color: rgba(0, 0, 0, 0.7);height: 150px" id="dell">
+    <div class="row"></div>
+    <form method="post" style="vertical-align: middle">
+        <div class="row" style="margin-top: 40px">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="number" id="prev" name="prev" placeholder=" year"
+                           style="vertical-align: middle;float: right" required>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="submit" name="submit" id="submit" class="btn btn-success btn-lg btn-block"
+                           value="submit" style="float: left">
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 </body>

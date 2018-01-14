@@ -16,14 +16,17 @@
     }
     //---------------------------------------------------------------connect to the database
 
+    $yst=$_GET['year'].'-01-01';
+    $end=$_GET['year'].'-12-31';
 
     echo '<div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;color: black;margin-top: 100px">'.$_GET['year'].'</div>';
     $sql = "SELECT R.TRAIN_ID,SUM(R.EARNING) \"WW\", TR.TRAIN_NAME,MIN(R.EARNING) \"MN\", MAX(R.EARNING) \"MX\", ROUND(AVG(R.EARNING),2) \"AV\"
-                FROM REVENUE R
-                JOIN TRAIN TR ON TR.TRAIN_ID=R.TRAIN_ID
-                WHERE TO_DATE(R.RDAY,'YYYY-MM-DD')>=(SELECT TRUNC(SYSDATE,'YEAR') FROM DUAL)
-                GROUP BY R.TRAIN_ID,TR.TRAIN_NAME
-                ORDER BY R.TRAIN_ID";
+            FROM REVENUE R
+            JOIN TRAIN TR ON TR.TRAIN_ID=R.TRAIN_ID
+            WHERE TO_DATE(R.RDAY,'YYYY-MM-DD')>=TO_DATE('$yst','YYYY-MM-DD') AND 
+            TO_DATE(R.RDAY,'YYYY-MM-DD')<=TO_DATE('$end','YYYY-MM-DD')
+            GROUP BY R.TRAIN_ID,TR.TRAIN_NAME
+            ORDER BY R.TRAIN_ID";
 
 
     $result=oci_parse($conn,$sql);
@@ -64,43 +67,6 @@
                 <div class="row">
                 <div class="col-md-12" align="center">The Graphs Shows earning of Each Train</div></div>
              </div>';
-
-
-    //GRAPH FOR PREV
-    $sql="SELECT TO_CHAR(MIN(TO_DATE(RDAY,'YYYY-MM-DD')),'YYYY-MM-DD') \"WW\" FROM REVENUE";
-    $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
-
-    $ch=$row["WW"];$st='';$en='';
-    for($i=0;$i<4;$i++)
-    {
-        $st=$st.$ch[$i];
-    }
-
-    $sql="SELECT TO_CHAR(ROUND(SYSDATE,'YEAR')-1,'YYYY-MM-DD') \"WW\" FROM DUAL";
-    $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
-
-    $ch=$row["WW"];
-    $ch=$row["WW"];
-    for($i=0;$i<4;$i++)
-    {
-        $en=$en.$ch[$i];
-    }
-
-    $prevYears=array();$prevTot=array();
-    for($i=$st;$i<=$en;$i++)
-    {
-        array_push($prevYears,$i);
-
-        $sd='01-01-'.$i;$ed='31-12-'.$i;
-        $sql="SELECT SUM(EARNING) \"fin\" FROM REVENUE
-                  WHERE TO_DATE(RDAY,'YYYY-MM-DD')>=TO_DATE('$sd','DD-MM-YYYY') AND 
-                  TO_DATE(RDAY,'YYYY-MM-DD')<=TO_DATE('$ed','DD-MM-YYYY')";
-        $result=oci_parse($conn,$sql);oci_execute($result);
-        $row=oci_fetch_assoc($result);
-
-        array_push($prevTot,$row['fin']);
-    }
-
 
 ?>
 
