@@ -38,6 +38,15 @@ CREATE TABLE BOOKING
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
+/*------------------------------------------------------------------------------------------------------------------*/
+/*BOOKING HISTORY TO SHOW IN REPORT*/
+CREATE TABLE BOOKING_HISTORY
+(
+	PASSENGER_ID INTEGER NOT NULL, 
+	TRAIN_ID INTEGER NOT NULL,
+	CNT INTEGER NOT NULL
+);
+/*------------------------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------------------------*/
 /*COMPANY*/
@@ -48,7 +57,7 @@ CREATE TABLE COMPANY
 	CNAME VARCHAR2(60) NOT NULL,
 	EMAIL_ID VARCHAR2(60) NOT NULL ,
 	PHONE VARCHAR2(11) NOT NULL,
-	P_PASSWORD VARCHAR(25) NOT NULL,
+	P_PASSWORD VARCHAR(100) NOT NULL,
 	VALID INTEGER DEFAULT 0
 );
 /*------------------------------------------------------------------------------------------------------------------*/
@@ -140,7 +149,7 @@ CREATE TABLE PASSENGER
 	LAST_NAME VARCHAR2(60) NOT NULL,
 	EMAIL_ID VARCHAR2(60) NOT NULL ,
 	PHONE VARCHAR2(11) NOT NULL,
-	P_PASSWORD VARCHAR(25) NOT NULL
+	P_PASSWORD VARCHAR(100) NOT NULL
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
@@ -230,6 +239,14 @@ CREATE TABLE TRIP
 );
 /*------------------------------------------------------------------------------------------------------------------*/
 
-
-
+/*------------------------------------------------------------------------------------------------------------------*/
+/*TRIP HISTORY*/
+CREATE TABLE TRIP_HISTORY
+(
+	TRAIN_ID INTEGER NOT NULL,
+	TRIP_DATE DATE NOT NULL,
+	TRIP_TIME VARCHAR2(20) NOT NULL,
+	STARTING VARCHAR2(60) NOT NULL,
+	DESTINATION VARCHAR2(60) NOT NULL
+);
 /*------------------------------------------------------------------------------------------------------------------*/
