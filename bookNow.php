@@ -5,7 +5,7 @@
 
     if (empty($_SESSION['user_in']) || $_SESSION['type'] != 2)
     {
-        header('location: base.php');
+        header('location: login.php');
     }
 
     //---------------------------------------------------------------connect to the database

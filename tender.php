@@ -37,6 +37,17 @@
                           </div>';
     //---------------------------------------------------------------history of tenders
 
+    //---------------------------------------------------------------my tenders
+    echo '<div class="container-fluid" style="margin-top: 50px">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <a href="myPendingTenders.php" style="color: black">
+                                    <img src="images/law.png"/>  My Pending Bids</a>
+                                </div>
+                             
+                            </div>
+                          </div>';
+    //---------------------------------------------------------------my tenders
 
     //---------------------------------------------------------------all upcoming tenders
     $sql="SELECT * FROM TENDER_DES";

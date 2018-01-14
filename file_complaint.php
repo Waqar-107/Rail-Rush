@@ -8,8 +8,8 @@
         header('Location: login.php');
     }
 
-    //if not admin, send to base
-    if($_SESSION['type']==1)
+    //if not passenger, send to base
+    if($_SESSION['type']!=2)
     {
         header('Location: base.php');
     }
