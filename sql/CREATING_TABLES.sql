@@ -33,6 +33,7 @@ CREATE TABLE BOOKING
 	SEAT_NO VARCHAR2(25) NOT NULL,
 	PRICE FLOAT NOT NULL,
 	TRIP_ID INTEGER NOT NULL,
+	ACC_NO VARCHAR2(50) NOT NULL,
 
 	FOREIGN KEY(TRIP_ID) REFERENCES TRIP(TRIP_ID) ON DELETE CASCADE
 );
@@ -91,7 +92,7 @@ CREATE TABLE EMPLOYEE
 	JOIN_DATE DATE NOT NULL,
 	SALARY FLOAT NOT NULL,
 	JOB_TYPE VARCHAR2(30) NOT NULL
-)
+);
 /*------------------------------------------------------------------------------------------------------------------*/
 
 
@@ -105,7 +106,7 @@ CREATE TABLE FARE
 	TRAIN_ID INTEGER NOT NULL,
 	STYPE INTEGER NOT NULL,
 	PRICE FLOAT NOT NULL
-)
+);
 /*------------------------------------------------------------------------------------------------------------------*/
 
 
