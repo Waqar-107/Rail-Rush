@@ -144,6 +144,15 @@
                     $result=oci_parse($conn,$sql);
                     oci_execute($result);
 
+                    $sql="BEGIN
+                            BHISTORY(:a,:b);
+                          END;";
+                    $result=oci_parse($conn,$sql);
+                    oci_bind_by_name($result,':a',$user,32);
+                    oci_bind_by_name($result,':b',$train_id,32);
+
+                    oci_execute($result);
+
                     $bookid++;
                 }
 

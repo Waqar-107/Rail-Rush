@@ -30,7 +30,7 @@ echo '<div class="container-fluid" style="margin-top: 100px">
 //---------------------------------------------------------------add new entry
 
 //---------------------------------------------------------------get the whole table of complain
-$sql = "SELECT * FROM TRIP ORDER BY TRIP_DATE";
+$sql = "SELECT * FROM TRIP ORDER BY TRIP_DATE,TRIP_ID";
 $result = oci_parse($conn, $sql);
 
 

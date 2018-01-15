@@ -24,27 +24,27 @@
           FROM EMPLOYEE WHERE EMPLOYEE_ID='$eid'";
     $result=oci_parse($conn,$sql);oci_execute($result);$row=oci_fetch_assoc($result);
 
-    echo '<div class="container-fluid" style="margin-top: 100px;font-family: \'Comic Sans MS\';font-size: 20px;color: white">
+    echo '<div class="container-fluid" style="margin-top: 100px;font-family: \'Comic Sans MS\';font-size: 20px;color: black">
             <div class="row">
-                <div class="col-md-8">Employee Id: '.$row['EMPLOYEE_ID'].'</div>
+                <div class="col-md-12" align="center">Employee Id: '.$row['EMPLOYEE_ID'].'</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Name: '.$row['NM'].'</div>
+                <div class="col-md-12" align="center">Name: '.$row['NM'].'</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Email: '.$row['EMAIL'].'</div>
+                <div class="col-md-12" align="center">Email: '.$row['EMAIL'].'</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Phone: '.$row['PHONE'].'</div>
+                <div class="col-md-12" align="center">Phone: '.$row['PHONE'].'</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Join Date: '.$row['JOIN_DATE'].'</div>
+                <div class="col-md-12" align="center">Join Date: '.$row['JOIN_DATE'].'</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Salary: '.$row['SALARY'].'</div>
+                <div class="col-md-12" align="center">Salary: '.$row['SALARY'].'</div>
             </div>
             <div class="row">
-                <div class="col-md-8">Job Type: '.$row['JOB_TYPE'].'</div>
+                <div class="col-md-12" align="center">Job Type: '.$row['JOB_TYPE'].'</div>
             </div>
         </div>';
 

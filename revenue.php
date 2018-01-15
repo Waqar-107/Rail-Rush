@@ -22,8 +22,14 @@
         header($link);
     }
 
-    echo '<div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;margin-top: 100px">
-        <a href="#dell" style="color: black">Previous Year Stats</a></div>';
+    echo '
+        <div class="row">
+            <div class="col-md-6" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;margin-top: 100px">
+            <a href="#dell" style="color: black">Previous Year Stats</a></div>
+            
+            <div class="col-md-6" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;margin-top: 100px">
+            <a href="revMisc.php" style="color: black">Miscellaneous Stats</a></div>
+        </div>';
 
     echo '<div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;color: black;margin-top: 100px">Current Year</div>';
     $sql = "SELECT R.TRAIN_ID,SUM(R.EARNING) \"WW\", TR.TRAIN_NAME,MIN(R.EARNING) \"MN\", MAX(R.EARNING) \"MX\", ROUND(AVG(R.EARNING),2) \"AV\"
