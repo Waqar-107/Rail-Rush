@@ -24,6 +24,11 @@ echo '<div class="container-fluid" style="margin-top: 100px">
                                     <a href="#dell" style="color: black;font-size: 20px;font-family: \'Comic Sans MS\'">
                                     <img src="images/dustbin.png"/>Delete from Trip</a>
                                 </div>
+                                
+                                <div class="col-md-3">
+                                    <a href="tripHistory.php" style="color: black;font-size: 20px;font-family: \'Comic Sans MS\'">
+                                    <img src="images/helmet.png"/>Trip History</a>
+                                </div>
                              
                             </div>
                           </div>';

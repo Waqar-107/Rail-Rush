@@ -88,7 +88,15 @@
             $sql="INSERT INTO FREIGHT VALUES('$newId','$trainNo','$ftrailer','$company','$weight','$inside','0',TO_DATE('$trip_date','YYYY-MM-DD'))";
             $result=oci_parse($conn,$sql);
 
-            if(oci_execute($result))
+            $sql2="BEGIN 
+                    ADD_FREIGHT_REV(:B); 
+                   END;";
+
+            $result2=oci_parse($conn,$sql2);
+            //oci_bind_by_name($result2,":A",$trip_date,32);
+            oci_bind_by_name($result2,":B",$trainNo,32);
+
+            if(oci_execute($result) && oci_execute($result2))
             {
                 echo '<script>
                             setTimeout(function() {

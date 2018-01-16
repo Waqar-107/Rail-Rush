@@ -31,7 +31,7 @@
     //---------------------------------------------------------------connect to the database
 
     //---------------------------------------------------------------get the whole table of freight
-    $sql='SELECT * FROM FREIGHT';
+    $sql='SELECT * FROM FREIGHT ORDER BY FREIGHT_ID';
     $result=oci_parse($conn,$sql);
 
     if(oci_execute($result))
