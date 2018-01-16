@@ -5,7 +5,7 @@
     echo '<script src="sweetalert/sweetalert.min.js" type="text/javascript"></script>';
 
 
-    if(empty($_SESSION['user_in']) || $_SESSION['type']==2)
+    if(empty($_SESSION['user_in']) || $_SESSION['type']!=1)
     {
         header('location: base.php');
     }
@@ -89,21 +89,21 @@
                 oci_bind_by_name($result, ":TID", $tid, 32);
                 oci_bind_by_name($result, ":COM", $com, 32);
 
-                oci_execute($result);
-
                 $decider = 0;
 
-                    echo '<script>
-                setTimeout(function() {
-                    swal({
-                        title: "moved to history!!!",
-                        text: "",
-                        type: "success"
-                    }, function() {
-                        window.location = "tender.php";
-                    });
-                }, 50);
-                </script>';
+                if (oci_execute($result)){
+                        echo '<script>
+                    setTimeout(function() {
+                        swal({
+                            title: "moved to history!!!",
+                            text: "",
+                            type: "success"
+                        }, function() {
+                            window.location = "tender.php";
+                        });
+                    }, 50);
+                    </script>';
+                }
             }
 
             else
@@ -175,6 +175,7 @@
                      }, 50);
                   </script>';
     }
+
 
     //---------------------------------------------------------------query and show table
 ?>

@@ -18,7 +18,7 @@
     //---------------------------------------------------------------connect to the database
 
     echo '<div class="col-md-12" align="center" style="font-family: \'Comic Sans MS\';font-size: 25px;margin-top: 100px">
-            Top Routes</a></div>';
+            Top Trains</a></div>';
 
     $sql="SELECT B.TRAIN_ID,SUM(CNT),T.TRAIN_NAME,T.DEPARTURE, T.ARRIVAL
           FROM BOOKING_HISTORY B

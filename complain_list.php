@@ -76,7 +76,7 @@
                     $text = substr($text, 0, 20) . "...(more)";
 
                 $linkToReply = "reply.php?data=" . $row['COMPLAINT_ID'];
-                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_ID"] . "</td><td> " .
+                echo "<tr><td>" . $row["COMPLAINT_ID"] . "</td><td>" . $row["TRAIN_NAME"] . "</td><td> " .
                     $row["CM"] . "</td><td><a href=$linkToReply>" . $text . "
                     </a></td><td>null</td><td>null</td><td>".$tripDate."</td></tr>";
 

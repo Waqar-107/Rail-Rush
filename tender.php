@@ -50,7 +50,7 @@
     //---------------------------------------------------------------my tenders
 
     //---------------------------------------------------------------all upcoming tenders
-    $sql="SELECT * FROM TENDER_DES";
+    $sql="SELECT * FROM TENDER_DES ORDER BY  EXP_TIME";
     $result=oci_parse($conn,$sql);
     if(oci_execute($result))
     {
